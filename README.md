@@ -3,7 +3,7 @@
 ## Environment
 Setting up venv on windows
 
-> python -m venv vevn
+> python -m venv venv
 
 and activating the venv on windows
 
