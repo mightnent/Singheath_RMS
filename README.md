@@ -11,11 +11,16 @@ and activating the venv on windows
 
 Setting up venv on linux/unix
 
-> python -m venv venv
+> python3 -m venv venv
 
-and activating
+Note: You might need to install the python3-venv package. Just follow the command in the terminal
+
+And activating
 
 > source venv/bin/activate
+
+Installing dependencies
+> pip install -r requirements.txt
 
 ## Starting the app
 Make sure you see (venv) infront of the user in the terminal
