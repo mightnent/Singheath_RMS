@@ -33,3 +33,15 @@ Make sure you see (venv) infront of the user in the terminal
 > python manage.py runserver
 
 Go to localhost:8000 to see if the app is running
+
+## Accessing admin panel
+Go to http://localhost:8000/admin/login/?next=/admin/
+You can login with tester:password1.1
+
+## Changelog for 02 March 2021
+1. Refined permission for side bar such that only auditors who are logged in can access it
+2. Created 2 permission groups : "tenant" and "auditor". 
+3. Removed registration page. Only super_user can add users now
+4. created a decorator file in authentication app to simplify permission assigning and checking for auth for individual views
+5. Refactored urls.py and view.py for app app. Split each urls and views out for refined control
+
