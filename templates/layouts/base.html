@@ -27,7 +27,7 @@
   <link rel="icon" type="image/png"          href="{% static 'assets/img/favicon.png'    %}">
 
   <title>
-    Black Dashboard Django - {% block title %}{% endblock %} | Creative-Tim
+    SingHealth RMS - {% block title %}{% endblock %}
   </title>
 
   <!--     Fonts and icons     -->
@@ -48,8 +48,9 @@
 
 <body class="">
   <div class="wrapper">
-
+    {% if user.is_authenticated %}
     {% include 'includes/sidebar.html' %}
+    {% endif %}
 
     <div class="main-panel">
 
