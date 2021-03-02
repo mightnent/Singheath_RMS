@@ -12,32 +12,29 @@ from django.contrib.auth.models import User
 from django.forms.utils import ErrorList
 from django.http import HttpResponse
 from .forms import LoginForm
+from . import decorators
 
-
+@decorators.unauthenticated_user
 def login_view(request):
-    #so user cannot go back to login page once logged in
-    if request.user.is_authenticated:
-        return redirect("/")
-    else:
-        form = LoginForm(request.POST or None)
+    form = LoginForm(request.POST or None)
 
-        msg = None
+    msg = None
 
-        if request.method == "POST":
+    if request.method == "POST":
 
-            if form.is_valid():
-                username = form.cleaned_data.get("username")
-                password = form.cleaned_data.get("password")
-                user = authenticate(username=username, password=password)
-                if user is not None:
-                    login(request, user)
-                    return redirect("/")
-                else:    
-                    msg = 'Invalid credentials'    
-            else:
-                msg = 'Error validating the form'    
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("/")
+            else:    
+                msg = 'Invalid credentials'    
+        else:
+            msg = 'Error validating the form'    
 
-        return render(request, 'accounts/login.html', {"form": form, "msg" : msg})
+    return render(request, 'accounts/login.html', {"form": form, "msg" : msg})
 
 # def register_user(request):
 
