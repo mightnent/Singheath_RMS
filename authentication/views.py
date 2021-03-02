@@ -9,8 +9,6 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from django.forms.utils import ErrorList
-from django.http import HttpResponse
 from .forms import LoginForm
 from . import decorators
 
@@ -28,7 +26,13 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                group = None
+                if request.user.groups.exists():
+                    group = request.user.groups.all()[0].name
+                if group == "auditor":
+                    return redirect("/")
+                else:
+                    return render(request,'tenant.html')
             else:    
                 msg = 'Invalid credentials'    
         else:
