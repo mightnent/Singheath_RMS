@@ -1,0 +1,71 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} FnB Checklist {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="{% static 'assets/css/checklist.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div>
+            <h1>
+                Professionalism & Staff Hygiene (10%)
+            </h1>
+            <h2>
+                Professionalism
+            </h2>
+        </div>
+        <div class="card">
+            
+            <div class="card-header">
+                <p class="question">Question 1</p>
+            </div>
+            <div class="card-body">
+                <p class="question-text">Shop is open and ready to service patients/visitors according to operating hours.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            
+            <div class="card-header">
+                <p class="comment-inactive">comment</p>
+            </div>
+            <div class="card-body">
+                <input/>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card button">
+            Upload Photo
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-4">
+        <button class="button bg-danger bw">FAIL</button>
+    </div>
+    <div class="col-4">
+        <button class="button bg-neutral">N.A.</button>
+    </div>
+    <div class="col-4">
+        <button class="button bg-success bw">PASS</button>
+    </div>
+</div>
+{% endblock content %}
