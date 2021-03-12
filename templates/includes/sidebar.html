@@ -3,37 +3,47 @@
     <div class="sidebar">
       <div class="sidebar-wrapper">
         
-        <!-- <div class="logo">
+        <div class="logo">
           <a target="_blank" 
              href="https://www.creative-tim.com/product/black-dashboard-django" class="simple-text logo-mini">
-            BD
+            <img src= "/core/static/assets/img/images/Singhealth-logo.png" alt="Singhealth Logo">
           </a>
           <a target="_blank" 
              href="https://www.creative-tim.com/product/black-dashboard-django" class="simple-text logo-normal">
             Django Dashboard
           </a>
-        </div> -->
+        </div>
 
         <ul class="nav">
         {% if request.user.is_authenticated %}
           <li class="{% if '/' == request.path %} active {% endif %} ">
-            <a href="{%url 'home'%}">
-              <i class="tim-icons icon-chart-pie-36"></i>
-              <p>Dashboard</p>
+            <a href="{%url 'newAudit' %}">
+              <img src = "/images/add_circle_outline-24px.svg" alt="New Audit">
+              <p>New Audit</p>
             </a>
           </li>
           <li class="{% if 'audit' in request.path %} active {% endif %}">
-            <a href="{%url 'audit'%}">
+            <a href="{%url 'manageAudit' %}">
               <i class="tim-icons icon-atom"></i>
-              <p>Audit</p>
+              <p>Manage Audit</p>
             </a>
           </li>
-        
-
+          <li>
+            <a href="{%url 'manageTenant' %}" >
+              <i class="tim-icons icon-user-run"></i>
+              <p>Manage Tenants</p>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}" >
+              <i class="tim-icons icon-chart-bar-32"></i>
+              <p>Performance</p>
+            </a>
+          </li>
           <li>
             <a href="{% url 'logout' %}" >
               <i class="tim-icons icon-user-run"></i>
-              <p>Logout</p>
+              <p>Request</p>
             </a>
           </li>
          

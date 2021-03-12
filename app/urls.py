@@ -15,4 +15,9 @@ urlpatterns = [
     # re_path(r'^.*\.*', views.pages, name='pages'),
     path('audit',views.audit,name='audit'),
 
+    path('manageTenant',views.manageTenantView, name="manageTenant"),
+
+    path('newAudit', views.newAuditView, name='newAudit'),
+
+    path('manageAudit', views.manageAuditView, name='manageAudit'),
 ]
