@@ -1,16 +1,16 @@
+{% load static %}
 
+{% block stylesheets %}
+<link href="{% static 'assets/css/sidebar.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
 
+{%load static %}
     <div class="sidebar">
       <div class="sidebar-wrapper">
         
         <div class="logo">
-          <a target="_blank" 
-             href="https://www.creative-tim.com/product/black-dashboard-django" class="simple-text logo-mini">
-            <img src= "/core/static/assets/img/images/Singhealth-logo.png" alt="Singhealth Logo">
-          </a>
-          <a target="_blank" 
-             href="https://www.creative-tim.com/product/black-dashboard-django" class="simple-text logo-normal">
-            Django Dashboard
+          <a target="_blank">
+            <img src= "{% static '/assets/img/images/Singhealth-logo.png' %}" alt="Singhealth Logo" class="sidebarLogo">
           </a>
         </div>
 
@@ -18,31 +18,31 @@
         {% if request.user.is_authenticated %}
           <li class="{% if '/' == request.path %} active {% endif %} ">
             <a href="{%url 'newAudit' %}">
-              <img src = "/images/add_circle_outline-24px.svg" alt="New Audit">
+              <img src = "{% static '/assets/img/images/add_circle_outline-24px.svg' %}" alt="New Audit" class="sidebarIcon">
               <p>New Audit</p>
             </a>
           </li>
           <li class="{% if 'audit' in request.path %} active {% endif %}">
             <a href="{%url 'manageAudit' %}">
-              <i class="tim-icons icon-atom"></i>
+              <img src = "{% static '/assets/img/images/edit-24px.svg' %}" alt="Manage Audit" class="sidebarIcon">
               <p>Manage Audit</p>
             </a>
           </li>
           <li>
             <a href="{%url 'manageTenant' %}" >
-              <i class="tim-icons icon-user-run"></i>
+              <img src = "{% static '/assets/img/images/switch_account-24px.svg' %}" alt="Manage Tenant" class="sidebarIcon">
               <p>Manage Tenants</p>
             </a>
           </li>
           <li>
             <a href="{% url 'logout' %}" >
-              <i class="tim-icons icon-chart-bar-32"></i>
+              <img src = "{% static '/assets/img/images/insights-24px.svg' %}" alt="Performance" class="sidebarIcon">
               <p>Performance</p>
             </a>
           </li>
           <li>
             <a href="{% url 'logout' %}" >
-              <i class="tim-icons icon-user-run"></i>
+              <img src = "{% static '/assets/img/images/notification_important-24px.svg' %}" alt="Request" class="sidebarIcon">
               <p>Request</p>
             </a>
           </li>

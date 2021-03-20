@@ -1,1 +1,76 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} New Audit {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<!-- <link href="{% static 'assets/css/black-dashboard.css' %}" rel="stylesheet" /> -->
+<link href="{% static 'assets/css/newAudit.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block content %}
+
 <h1>New audit</h1>
+
+<div class="SelectInstitution">
+    <h2>Select Institution</h2>
+    <hr class= "solidDivider">
+    <div class="custom-sel" style="width:100%;">
+        <select>
+            <option value="0">Choose Institution... </option>
+            <option value="1">SGH</option>
+            <option value="2">CGH</option>
+            <option value="3">KKH</option>
+            <option value="4">SKH</option>
+            <option value="5">NCCS</option>
+            <option value="6">NHCS</option>
+            <option value="7">BVH</option>
+            <option value="8">OCH</option>
+            <option value="9">Academia</option>
+        </select>
+    </div>
+</div>
+
+<div class="SelectTenant">
+    <h2>Select Tenant</h2>
+    <hr class= "solidDivider">
+    <div class="custom-sel" style="width:100%;">
+        <select>
+            <option value="0">Choose Tenant...</option>
+            <option value="1">SGH</option>
+            <option value="2">CGH</option>
+            <option value="3">KKH</option>
+            <option value="4">SKH</option>
+            <option value="5">NCCS</option>
+            <option value="6">NHCS</option>
+            <option value="7">BVH</option>
+            <option value="8">OCH</option>
+            <option value="9">Academia</option>
+        </select>
+    </div>
+</div>
+
+<div class="SelectChecklist">
+    <h2>Select Audit Checklist</h2>
+    <hr class= "solidDivider">
+    <div class="custom-sel" style="width:100%;">
+        <select>
+            <option value="0">Choose Checklist...</option>
+            <option value="1">F&B Audit Checklist</option>
+            <option value="2">Non F&B Audit Checklist</option>
+            <option value="3">Safe Management Measures Checklist</option>
+        </select>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}
+
+
+{% block javascripts %}
+<script src={% static "assets/js/custom-sel.js" %}></script>
+{% endblock javascripts %}
