@@ -17,17 +17,17 @@
     <h2>Select Institution</h2>
     <hr class= "solidDivider">
     <div class="custom-sel" style="width:100%;">
-        <select>
-            <option value="0">Choose Institution... </option>
-            <option value="1">SGH</option>
-            <option value="2">CGH</option>
-            <option value="3">KKH</option>
-            <option value="4">SKH</option>
-            <option value="5">NCCS</option>
-            <option value="6">NHCS</option>
-            <option value="7">BVH</option>
-            <option value="8">OCH</option>
-            <option value="9">Academia</option>
+        <select id="institution">
+            <option selected disabled>Choose Institution... </option>
+            <option value="0">SGH</option>
+            <option value="1">CGH</option>
+            <option value="2">KKH</option>
+            <option value="3">SKH</option>
+            <option value="4">NCCS</option>
+            <option value="5">NHCS</option>
+            <option value="6">BVH</option>
+            <option value="7">OCH</option>
+            <option value="8">Academia</option>
         </select>
     </div>
 </div>
@@ -36,9 +36,9 @@
     <h2>Select Tenant</h2>
     <hr class= "solidDivider">
     <div class="custom-sel" style="width:100%;">
-        <select>
-            <option value="0">Choose Tenant...</option>
-            <option value="1">SGH</option>
+        <select id="tenants">
+            <option selected disabled>Choose Tenant...</option>
+            <!-- <option value="1">SGH</option>
             <option value="2">CGH</option>
             <option value="3">KKH</option>
             <option value="4">SKH</option>
@@ -46,7 +46,7 @@
             <option value="6">NHCS</option>
             <option value="7">BVH</option>
             <option value="8">OCH</option>
-            <option value="9">Academia</option>
+            <option value="9">Academia</option> -->
         </select>
     </div>
 </div>
@@ -64,7 +64,7 @@
     </div>
 </div>
 
-
+<button class="createBtn" type="button">Create</button>
 
 
 
@@ -73,4 +73,28 @@
 
 {% block javascripts %}
 <script src={% static "assets/js/custom-sel.js" %}></script>
+
+<script>
+$(document).ready(function() {
+
+    $("#institution").change(function() {
+        var val = $(this).val();
+        $("#tenants").html(options[val]);
+    });
+
+
+    var options = [
+        "<option value='SGH'>item1: test 1</option><option value='test2'>item1: test 2</option>",
+        "<option value='CGH'>item2: test 1</option><option value='test2'>item2: test 2</option>",
+        "<option value='KKH'>item3: test 1</option><option value='test2'>item3: test 2</option>",
+        "<option value='SKH'>Koufu</option><option value='SKH2'>dcd</option>",
+        "<option value='NCCS'>Koufunccs</option><option value='SKH2'>ds</option>",
+        "<option value='NHCS'>Koufu</option><option value='SKH2'>gj</option>",
+        "<option value='BVH'>Koufu</option><option value='SKH2'>tr</option>",
+        "<option value='OCH'>Koufu</option><option value='SKH2'>rtw</option>",
+        "<option value='Academia'>Koufu</option><option value='SKH2'>0p79</option>"
+    ];
+
+});
+</script>
 {% endblock javascripts %}
