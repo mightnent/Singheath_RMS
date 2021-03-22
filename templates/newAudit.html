@@ -1,6 +1,7 @@
 {% extends "layouts/base.html" %}
 {% load static %}
 
+
 {% block title %} New Audit {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
@@ -64,7 +65,7 @@
     </div>
 </div>
 
-<button class="createBtn" type="button">Create</button>
+<button class="createBtn" type="button" id='b1'>Create</button>
 
 
 
@@ -97,4 +98,13 @@ $(document).ready(function() {
 
 });
 </script>
+
+<script>
+    $(document).ready(function(){
+  $(".select-selected").change(function(){
+    alert("The text has been changed.");
+  });
+});
+</script>
+
 {% endblock javascripts %}

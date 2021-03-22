@@ -7316,7 +7316,7 @@ button.bg-default:focus {
 }
 
 .bg-white {
-  background-color: #ffffff !important;
+  background-color: #F36F38 !important;
 }
 
 a.bg-white:hover,
@@ -7349,7 +7349,7 @@ button.bg-darker:focus {
 }
 
 .bg-white {
-  background-color: #ffffff !important;
+  background-color: #F36F38 !important;
 }
 
 .bg-transparent {
@@ -14567,6 +14567,7 @@ fieldset[disabled] .btn-link.active {
     border-right: .3em solid transparent;
     border-bottom: 0;
     border-left: .3em solid transparent;
+    color: #ffffff;
   }
 }
 
@@ -15828,12 +15829,12 @@ img {
 }
 
 .navbar.bg-white .navbar-nav a.nav-link p {
-  color: #222a42;
+  color: #ffffff;
 }
 
 .navbar.bg-white .navbar-text,
 .navbar.bg-white .navbar-brand {
-  color: #222a42;
+  color: #FFFFFF;
 }
 
 .navbar.bg-white .form-control {
@@ -15999,7 +16000,7 @@ img {
   }
 
   .navbar .dropdown .dropdown-menu li a {
-    color: #222a42;
+    color: #ffffff;
   }
 
   .navbar .dropdown.show .dropdown-menu,
@@ -16062,9 +16063,9 @@ img {
     transition: width .2s linear;
   }
 
-  .navbar.bg-white:not(.navbar-transparent) .navbar-toggler-bar {
+  /* .navbar.bg-white:not(.navbar-transparent) .navbar-toggler-bar {
     background-color: #344675;
-  }
+  } */
 
   .navbar .toggled .navbar-toggler-bar {
     width: 24px;
@@ -16556,7 +16557,7 @@ h6,
 }
 
 p {
-  color: rgba(255, 255, 255, 0.8);
+  color: #000000;
   margin-bottom: 5px;
 }
 
@@ -17337,11 +17338,11 @@ table.tablesorter thead tr .headerSortDown {
 
 .sidebar,
 .off-canvas-sidebar {
-  background: #ba54f5;
-  background: -webkit-linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
-  background: -o-linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
-  background: -moz-linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
-  background: linear-gradient(0deg, #ba54f5 0%, #e14eca 100%);
+  background: #ffffff;
+  /* background: -webkit-linear-gradient(0deg, #ba54f5 0%, #ffffff 100%);
+  background: -o-linear-gradient(0deg, #ba54f5 0%, #ffffff 100%);
+  background: -moz-linear-gradient(0deg, #ba54f5 0%, #ffffff 100%);
+  background: linear-gradient(0deg, #ba54f5 0%, #ffffff 100%); */
   height: calc(100vh - 90px);
   width: 230px;
   position: fixed;
@@ -17536,7 +17537,7 @@ table.tablesorter thead tr .headerSortDown {
 .sidebar .nav li.active>a:not([data-toggle="collapse"]) p,
 .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]) i,
 .off-canvas-sidebar .nav li.active>a:not([data-toggle="collapse"]) p {
-  color: white;
+  color: #000000;
 }
 
 .sidebar .nav li.active>a:not([data-toggle="collapse"]):before,
