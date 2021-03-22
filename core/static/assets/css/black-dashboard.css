@@ -16659,7 +16659,7 @@ hr {
 }
 
 .table>tbody>tr>td {
-  color: rgba(255, 255, 255, 0.7) !important;
+  color: #000000 !important;
 }
 
 .table>tbody>tr>td .photo {
@@ -16747,7 +16747,7 @@ hr {
   text-transform: uppercase;
   font-weight: 700;
   border: 0;
-  color: rgba(255, 255, 255, 0.7);
+  color: #000000;
 }
 
 .table .radio,
@@ -17352,7 +17352,7 @@ table.tablesorter thead tr .headerSortDown {
   background-size: cover;
   background-position: center center;
   display: block;
-  box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0px 0px 35px 0px rgba(0, 0, 0, 0.3);
   margin-top: 80px;
   margin-left: 20px;
   border-radius: 5px;
@@ -17806,12 +17806,12 @@ table.tablesorter thead tr .headerSortDown {
   float: right;
   width: 100%;
   min-height: 100vh;
-  border-top: 2px solid #e14eca;
-  background: linear-gradient(#1e1e2f, #1e1e24);
-  -webkit-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+  /* border-top: 2px solid #e14eca; */
+  background: #ffffff;
+  /* -webkit-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
   -moz-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
   -o-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
-  -ms-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
+  -ms-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1); */
   transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
 }
 
@@ -19933,7 +19933,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .card {
-  background: #27293d;
+  background: #ffffff;
   border: 0;
   position: relative;
   width: 100%;
@@ -19981,12 +19981,12 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .card .card-header .card-title {
-  color: #ffffff;
+  color: #000000;
   font-weight: 100;
 }
 
 .card .card-header .card-category {
-  color: #9A9A9A;
+  color: #000000;
   margin-bottom: 5px;
   font-weight: 300;
 }
