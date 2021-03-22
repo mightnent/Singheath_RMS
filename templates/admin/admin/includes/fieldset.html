@@ -15,12 +15,17 @@
                         {{ field.label_tag }}
                         {% if field.is_readonly %}
                             <div class="readonly">{{ field.contents }}</div>
+                        {% elif field.field.name == "password" %}
                         {% else %}
                             {{ field.field }}
                         {% endif %}
                     {% endif %}
                     {% if field.field.help_text %}
-                        <div class="help">{{ field.field.help_text|safe }}</div>
+                        {% if field.field.name == "password" %}
+                            <div class="help" style="font-size:13px; color:black; clear:none;">{{ field.field.help_text|safe }}</div>
+                        {% else %}
+                            <div class="help">{{ field.field.help_text|safe }}</div>
+                        {% endif %}
                     {% endif %}
                 </div>
             {% endfor %}
