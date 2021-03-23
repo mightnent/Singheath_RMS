@@ -9,7 +9,7 @@
       <div class="sidebar-wrapper">
         
         <div class="logo">
-          <a target="_blank">
+          <a href="{%url 'home' %}">
             <img src= "{% static '/assets/img/images/Singhealth-logo.png' %}" alt="Singhealth Logo" class="sidebarLogo">
           </a>
         </div>
@@ -41,7 +41,7 @@
             </a>
           </li>
           <li>
-            <a href="{% url 'logout' %}" >
+            <a href="{% url 'testSel' %}" >
               <img src = "{% static '/assets/img/images/notification_important-24px.svg' %}" alt="Request" class="sidebarIcon">
               <p>Request</p>
             </a>

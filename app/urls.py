@@ -20,4 +20,6 @@ urlpatterns = [
     path('newAudit', views.newAuditView, name='newAudit'),
 
     path('manageAudit', views.manageAuditView, name='manageAudit'),
+
+    path('testSel', views.testSel, name='testSel'),
 ]

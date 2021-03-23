@@ -24,3 +24,6 @@ def newAuditView(request):
 
 def manageAuditView(request):
     return render(request,"manageAudit.html")
+
+def testSel(request):
+    return render(request,"testSel.html")

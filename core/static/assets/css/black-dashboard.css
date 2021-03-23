@@ -15901,11 +15901,11 @@ img {
 }
 
 .notification {
-  background: #fd5d93;
+  background: #26E317;
   color: #ffffff;
   border-radius: 0.875rem;
-  height: 6px;
-  width: 6px;
+  height: 9px;
+  width: 9px;
   position: absolute;
   text-align: center;
   font-size: 12px;

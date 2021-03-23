@@ -1,3 +1,7 @@
+h1, h2{
+    color: #000;
+}
+
 .solidDivider{
     border-top: 3px solid #F36F38;
     margin-top: -25px;
@@ -14,7 +18,7 @@
 }
 
 .select-selected {
-  background-color: rgb(255, 255, 255);
+  background-color: #dadada;
 }
 
 
@@ -49,7 +53,7 @@
 /* Style items (options): */
 .select-items {
   position: absolute;
-  background-color: #FFFFFF;
+  background-color: #cccccc;
   top: 100%;
   left: 0;
   right: 0;
