@@ -10,6 +10,8 @@
 <link href="{% static 'assets/css/newAudit.css' %}" rel="stylesheet" />
 {% endblock stylesheets %}
 
+
+
 {% block content %}
 
 <h1>New Audit</h1>
@@ -33,21 +35,13 @@
     </div>
 </div>
 
+
 <div class="SelectTenant">
     <h2>Select Tenant</h2>
     <hr class= "solidDivider">
     <div class="custom-sel" style="width:100%;">
         <select id="tenants">
             <option selected disabled>Choose Tenant...</option>
-            <!-- <option value="1">SGH</option>
-            <option value="2">CGH</option>
-            <option value="3">KKH</option>
-            <option value="4">SKH</option>
-            <option value="5">NCCS</option>
-            <option value="6">NHCS</option>
-            <option value="7">BVH</option>
-            <option value="8">OCH</option>
-            <option value="9">Academia</option> -->
         </select>
     </div>
 </div>
@@ -73,7 +67,7 @@
 
 
 {% block javascripts %}
-<script src={% static "assets/js/custom-sel.js" %}></script>
+<!-- <script src={% static "assets/js/custom-sel.js" %}></script> -->
 
 <script>
 $(document).ready(function() {
@@ -96,14 +90,6 @@ $(document).ready(function() {
         "<option value='Academia'>Koufu</option><option value='SKH2'>0p79</option>"
     ];
 
-});
-</script>
-
-<script>
-    $(document).ready(function(){
-  $(".select-selected").change(function(){
-    alert("The text has been changed.");
-  });
 });
 </script>
 
