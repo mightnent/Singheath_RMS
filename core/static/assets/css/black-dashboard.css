@@ -16239,7 +16239,7 @@ img {
   padding: 10px 30px 10px 15px;
   width: 100%;
   z-index: 1050;
-  background: #1a1e34;
+  background: #F36F38;
 }
 
 .navbar .photo {
@@ -16273,9 +16273,9 @@ img {
   z-index: 1050;
 }
 
-.navbar.navbar-transparent {
+/* .navbar.navbar-transparent {
   background: transparent !important;
-}
+} */
 
 .navbar.bg-white .navbar-nav .search-bar.input-group i {
   color: #222a42;
