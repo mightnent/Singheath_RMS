@@ -45,3 +45,13 @@ You can login with tester:password1.1
 4. created a decorator file in authentication app to simplify permission assigning and checking for auth for individual views
 5. Refactored urls.py and view.py for app app. Split each urls and views out for refined control
 
+## Changelog for 13 March 2021
+1. Did up HTML,CSS (frontend) skeleton template for fnb-checklist
+
+## Changelog for 22 March 2021
+1. Created a checklist app so that master admin can do up a new checklist. In other words, the each checklist is dynamic, you can create different checklist, different sections, different subsections and different questions
+2. Integrated front and backend to dynamically displaying checklist questions on the fnb-checklist
+
+## Changelog for 23 March 2021
+1. Created an audit app, including database models, so to receive new audit checklist instances as categorised by tenant location, institution
+2. Created institution security group for future use, so can limit what a normal auditor can see based on institution he is from

@@ -11,4 +11,5 @@ urlpatterns = [
     path("", include("authentication.urls")), # Auth routes - login / register
     path("", include("app.urls")),             # UI Kits Html files
     path("audit/",include("checklist.urls")),
+    path("audit/",include("audit.urls")),
 ]

@@ -4,6 +4,7 @@ from datetime import datetime
 # Create your models here.
 class TenantLocation(models.Model):
     name = models.CharField(max_length=200)
+    institution = models.CharField(max_length=500)
     def __str__(self):
         return self.name
 
