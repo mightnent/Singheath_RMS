@@ -1,1 +1,81 @@
-<h1>Manage Tenants</h1>
+{% extends "layouts/base.html" %}
+{% load static %}
+
+
+{% block title %} New Audit {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<!-- <link href="{% static 'assets/css/black-dashboard.css' %}" rel="stylesheet" /> -->
+<link href="{% static 'assets/css/manageTenant.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
+
+
+{% block content %}
+
+<h1>Manage Tenant</h1>
+
+<div class="ExistingTenant">
+    <h2>Existing Tenants</h2>
+    <hr class= "solidDivider">
+    <div class="custom-sel" style="width:100%;">
+        <select id="tenants">
+            <option selected disabled>Choose Tenant... </option>
+            <option value="0">SGH</option>
+            <option value="1">CGH</option>
+            <option value="2">KKH</option>  
+            <option value="3">SKH</option>
+            <option value="4">NCCS</option>
+            <option value="5">NHCS</option>
+            <option value="6">BVH</option>
+            <option value="7">OCH</option>
+            <option value="8">Academia</option>
+        </select>
+    </div>
+</div>
+<button class="Btn" type="button" id='b1'>Search</button>
+
+
+<div class="NewTenant">
+    <h2>New Tenant</h2>
+    <hr class= "solidDivider">
+    <form action="/action_page.php">
+        <div class="row">
+          <div class="col-25">
+            <label for="Cname">Company Name</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="Cname" name="companyname" placeholder="Company name...">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="Owner Name">Owner Name</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="oname" name="ownername" placeholder="Owner name..">
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+              <label for="Contact Number">Contact Number</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="cNum" name="cNum" placeholder="Contact Number...">
+            </div>
+          </div>
+        <!-- <div class="row">
+          <input type="submit" value="Create">
+        </div> -->
+        </form>
+    
+</div>
+<button class="Btn" type="button" id='b1'>Create</button>
+
+{% endblock content %}
+
+
+{% block javascripts %}
+
+{% endblock javascripts %}

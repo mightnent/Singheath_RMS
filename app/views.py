@@ -27,6 +27,3 @@ def manageAuditView(request):
 
 def performance(request):
     return render(request,"performanceGraph.html")
-
-def testSel(request):
-    return render(request,"testSel.html")

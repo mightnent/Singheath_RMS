@@ -22,6 +22,4 @@ urlpatterns = [
     path('manageAudit', views.manageAuditView, name='manageAudit'),
 
     path('performance', views.performance, name='performance'),
-
-    path('testSel', views.testSel, name='testSel'),
 ]
