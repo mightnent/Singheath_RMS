@@ -6,7 +6,7 @@
     font-size: 15px !important;
 }
 
-button{
+.audit{
     width: 80px;
     height:40px;
     font-size: 20px;
@@ -16,4 +16,45 @@ button{
 
 .bw{
     color: white;
+}
+
+label {
+    background-color: #27293D;
+    color: white;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    margin-top:-10px;
+    height: 2em;
+    padding-top: 10px;
+    padding-bottom: 30px;
+
+}
+
+.comment{
+    width: 100%;
+    min-height: 2em;
+}
+
+.previous{
+    text-align: left;
+    color: white;
+}
+
+.next{
+    text-align: right;
+    float: right;
+    color: white;
+}
+
+.left-right{
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+    font-size: 1.5em;
+    
+}
+
+.gray{
+    color: rgb(73, 73, 73);
 }

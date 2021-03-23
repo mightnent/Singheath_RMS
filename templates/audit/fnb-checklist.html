@@ -10,22 +10,36 @@
 
 {% block content %}
 <div class="row">
+    {% if page_obj %}
+    {% for obj in page_obj %}
     <div class="col-12">
-        <div>
-            <h1>
-                Professionalism & Staff Hygiene (10%)
-            </h1>
-            <h2>
-                Professionalism
-            </h2>
+        <div>                               
+             {% comment %} {% with a=obj.level_id|add:"-1" %}
+            {{a}}
+            {{fnb_subsection.[a]}}
+            {% endwith %}  {% endcomment %}
+            {% for sub in fnb_subsection %}
+                {% if obj.level_id == sub.id %}
+                    {% for section in fnb_section %}
+                        {% if sub.level_id == section.id %}
+                            <h1>
+                            {{section.title}}
+                            </h1>
+                        {% endif %}
+                    {% endfor %}
+                    <h2>
+                    {{sub.title}}
+                    </h2>
+                {% endif %}
+            {% endfor %}            
         </div>
         <div class="card">
             
-            <div class="card-header">
+            {% comment %} <div class="card-header">
                 <p class="question">Question 1</p>
-            </div>
+            </div> {% endcomment %}
             <div class="card-body">
-                <p class="question-text">Shop is open and ready to service patients/visitors according to operating hours.</p>
+                <p class="question-text">{{obj.qn_text}}</p>
             </div>
 
         </div>
@@ -40,7 +54,7 @@
                 <p class="comment-inactive">comment</p>
             </div>
             <div class="card-body">
-                <input/>
+                <input class="comment"/>
             </div>
 
         </div>
@@ -49,23 +63,41 @@
 </div>
 
 <div class="row">
-    <div class="col-12">
-        <div class="card button">
-            Upload Photo
-        </div>
+    <div class="col-12" style="height:40px;">
+        <input type="file" id="actual-btn" hidden/>
+        <label for="actual-btn">Upload Photo</label>
     </div>
 
 </div>
 
+
 <div class="row">
     <div class="col-4">
-        <button class="button bg-danger bw">FAIL</button>
+        <button class="button bg-danger bw audit">FAIL</button>
     </div>
     <div class="col-4">
-        <button class="button bg-neutral">N.A.</button>
+        <button class="button bg-neutral audit">N.A.</button>
     </div>
     <div class="col-4">
-        <button class="button bg-success bw">PASS</button>
+        <button class="button bg-success bw audit">PASS</button>
     </div>
+</div>
+
+{% endfor %}
+{% endif %}
+
+<div class="container left-right">
+
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="previous">&laquo; previous</a>
+        {% else %}
+            <a class="previous gray" >&laquo; previous</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="next">next &raquo;</a>
+
+        {% endif %}
+  
 </div>
 {% endblock content %}
