@@ -1,0 +1,96 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+
+{% block title %} New Audit {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<!-- <link href="{% static 'assets/css/black-dashboard.css' %}" rel="stylesheet" /> -->
+<link href="{% static 'assets/css/newAudit.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
+
+
+{% block content %}
+
+<h1>New Audit</h1>
+
+<div class="SelectInstitution">
+    <h2>Select Institution</h2>
+    <hr class= "solidDivider">
+    <div class="custom-sel" style="width:100%;">
+        <select id="institution">
+            <option selected disabled>Choose Institution... </option>
+            <option value="0">SGH</option>
+            <option value="1">CGH</option>
+            <option value="2">KKH</option>
+            <option value="3">SKH</option>
+            <option value="4">NCCS</option>
+            <option value="5">NHCS</option>
+            <option value="6">BVH</option>
+            <option value="7">OCH</option>
+            <option value="8">Academia</option>
+        </select>
+    </div>
+</div>
+
+
+<div class="SelectTenant">
+    <h2>Select Tenant</h2>
+    <hr class= "solidDivider">
+    <div class="custom-sel" style="width:100%;">
+        <select id="tenants">
+            <option selected disabled>Choose Tenant...</option>
+        </select>
+    </div>
+</div>
+
+<div class="SelectChecklist">
+    <h2>Select Audit Checklist</h2>
+    <hr class= "solidDivider">
+    <div class="custom-sel" style="width:100%;">
+        <select>
+            <option value="0">Choose Checklist...</option>
+            <option value="1">F&B Audit Checklist</option>
+            <option value="2">Non F&B Audit Checklist</option>
+            <option value="3">Safe Management Measures Checklist</option>
+        </select>
+    </div>
+</div>
+
+<button class="createBtn" type="button" id='b1'>Create</button>
+
+
+
+{% endblock content %}
+
+
+{% block javascripts %}
+<!-- <script src={% static "assets/js/newAudit.js" %}></script> -->
+
+<script>
+$(document).ready(function() {
+
+    $("#institution").change(function() {
+        var val = $(this).val();
+        $("#tenants").html(options[val]);
+    });
+
+
+    var options = [
+        "<option value='SGH'>item1: test 1</option><option value='test2'>item1: test 2</option>",
+        "<option value='CGH'>item2: test 1</option><option value='test2'>item2: test 2</option>",
+        "<option value='KKH'>item3: test 1</option><option value='test2'>item3: test 2</option>",
+        "<option value='SKH'>Koufu</option><option value='SKH2'>dcd</option>",
+        "<option value='NCCS'>Koufunccs</option><option value='SKH2'>ds</option>",
+        "<option value='NHCS'>Koufu</option><option value='SKH2'>gj</option>",
+        "<option value='BVH'>Koufu</option><option value='SKH2'>tr</option>",
+        "<option value='OCH'>Koufu</option><option value='SKH2'>rtw</option>",
+        "<option value='Academia'>Koufu</option><option value='SKH2'>0p79</option>"
+    ];
+
+});
+</script>
+
+{% endblock javascripts %}
