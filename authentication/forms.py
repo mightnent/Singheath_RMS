@@ -17,7 +17,10 @@ class LoginForm(forms.Form):
                 "class": "form-control"
             }
         ))
-
+        
+class AuditForm(forms.Form):
+    CHOICES = [(1, 'F&B'), (2, 'Non F&B'), (3, 'COVID-19')]
+    checklist_type = forms.ChoiceField(choices = CHOICES, widget = forms.RadioSelect(attrs={'class': 'form-check-inline'}))
 # class SignUpForm(UserCreationForm):
 #     username = forms.CharField(
 #         widget=forms.TextInput(

@@ -8,6 +8,10 @@ from django.urls import path, include  # add this
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+admin.site.site_header = "SingHealth RMS Admin";
+admin.site.site_title = "SingHealth RMS Admin";
+
 urlpatterns = [
     path('admin/', admin.site.urls),          # Django admin route
     path("", include("authentication.urls")), # Auth routes - login / register

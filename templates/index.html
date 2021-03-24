@@ -7,15 +7,56 @@
 
 {% block content %}
 
-    <div class="row">
+<div class="col-lg-12 col-md-12">
+  <div class="card ">
+    <div class="card-header">
+      <h2 class="card-title"> Non - Compliance</h2>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table tablesorter " id="">
+          
+          <thead class=" text-primary">
+            <tr>
+              <th class="text-center">
+                Tenant
+              </th>
+              <th class="text-center">
+                Due Date
+              </th>
+            </tr>
+          </thead>
 
+          <tbody>
+            <tr>
+              <td class="text-center">
+                Kopitiam
+              <td class="text-center">
+                2 Mar
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center">
+                Subway
+              <td class="text-center">
+                25 Mar
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="row">
       <div class="col-12">
         <div class="card card-chart">
           <div class="card-header ">
             <div class="row">
               <div class="col-sm-6 text-left">
-                <h5 class="card-category">Total Shipments</h5>
-                <h2 class="card-title">Performance</h2>
+                <h5 class="card-category">Score</h5>
+                <a href="{% url 'performance' %}" ><h2 class="card-title">Institution Performance</h2></a>
               </div>
               <div class="col-sm-6">
                 <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -51,14 +92,14 @@
           </div>
         </div>
       </div>
-
     </div>
+
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-12">
         <div class="card card-chart">
           <div class="card-header">
-            <h5 class="card-category">Total Shipments</h5>
-            <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i> 763,215</h3>
+            <h5 class="card-category">Score</h5>
+            <a href="{% url 'performance' %}" ><h2 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>Tenant Performance</h2></a>
           </div>
           <div class="card-body">
             <div class="chart-area">
@@ -67,7 +108,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4">
+      <!-- <div class="col-lg-4">
         <div class="card card-chart">
           <div class="card-header">
             <h5 class="card-category">Daily Sales</h5>
@@ -79,7 +120,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="col-lg-4">
         <div class="card card-chart">
           <div class="card-header">
@@ -94,7 +135,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-6 col-md-12">
         <div class="card card-tasks">
           <div class="card-header ">
@@ -375,7 +416,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
 {% endblock content %}
