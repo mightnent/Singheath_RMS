@@ -9,6 +9,10 @@
 {% endblock stylesheets %}
 
 {% block content %}
+<form action='{% url 'audit' %}' method="POST">
+{% csrf_token %}
+<input type="hidden" name="checklist_type" value = "fnb"/>
+<input type="hidden" name="tenant_location" value = "{{tenant.name}}"/>
 <div class="row">
     {% if page_obj %}
     {% for obj in page_obj %}
@@ -25,11 +29,13 @@
                             <h1>
                             {{section.title}}
                             </h1>
+                            <input type="hidden" name="section_title" value = "{{section.title}}"/>
                         {% endif %}
                     {% endfor %}
                     <h2>
                     {{sub.title}}
                     </h2>
+                    <input type="hidden" name="subsection_title" value = "{{sub.title}}"/>
                 {% endif %}
             {% endfor %}            
         </div>
@@ -40,6 +46,8 @@
             </div> {% endcomment %}
             <div class="card-body">
                 <p class="question-text">{{obj.qn_text}}</p>
+                <input type="hidden" name="question" value = "{{obj.qn_text}}"/>
+                <input type="hidden" name="question_id" value = "{{obj.id}}"/>
             </div>
 
         </div>
@@ -54,7 +62,7 @@
                 <p class="comment-inactive">comment</p>
             </div>
             <div class="card-body">
-                <input class="comment"/>
+                <input name = "comment" class="comment"/>
             </div>
 
         </div>
@@ -64,7 +72,7 @@
 
 <div class="row">
     <div class="col-12" style="height:40px;">
-        <input type="file" id="actual-btn" hidden/>
+        <input name="photo" type="file" id="actual-btn" hidden/>
         <label for="actual-btn">Upload Photo</label>
     </div>
 
@@ -73,18 +81,19 @@
 
 <div class="row">
     <div class="col-4">
-        <button class="button bg-danger bw audit">FAIL</button>
+        <button class="button bg-danger bw audit" type="submit" name="submit" value="FAIL">FAIL</button>
     </div>
     <div class="col-4">
-        <button class="button bg-neutral audit">N.A.</button>
+        <button class="button bg-neutral audit" type="submit" name="submit" value="NA">N.A.</button>
     </div>
     <div class="col-4">
-        <button class="button bg-success bw audit">PASS</button>
+        <button class="button bg-success bw audit" type="submit" name="submit" value="PASS">PASS</button>
     </div>
 </div>
 
 {% endfor %}
 {% endif %}
+</form>
 
 <div class="container left-right">
 

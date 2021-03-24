@@ -15,7 +15,8 @@ class ChecklistInstance(models.Model):
     question = models.CharField(max_length=1000)
     question_id = models.IntegerField()
     score = models.IntegerField()
-    tenant_location = models.ForeignKey(TenantLocation, on_delete=models.DO_NOTHING)
+    tenant_location = models.CharField(max_length=50)
+    comment = models.CharField(max_length=2000,blank=True)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d', height_field=None, width_field=None, max_length=None,blank=True)
 
     
