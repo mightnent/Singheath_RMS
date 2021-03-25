@@ -80,7 +80,10 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'mikesun97',
         'HOST': 'localhost'
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME'  : 'db.sqlite3',
+    # }
 }
 
 # Password validation

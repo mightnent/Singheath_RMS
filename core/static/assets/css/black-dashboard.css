@@ -88,7 +88,7 @@ body {
   line-height: 1.5;
   color: #525f7f;
   text-align: left;
-  background-color: #1e1e2f;
+  background-color: #ffffff;
 }
 
 [tabindex="-1"]:focus {
@@ -2101,7 +2101,7 @@ pre code {
 }
 
 .form-control:focus {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.8);
   background-color: #ffffff;
   border-color: rgba(50, 151, 211, 0.25);
   outline: 0;
@@ -17980,14 +17980,14 @@ table.tablesorter thead tr .headerSortDown {
 .off-canvas-sidebar .nav li:hover:not(.active)>a i,
 .off-canvas-sidebar .nav li:focus:not(.active)>a p,
 .off-canvas-sidebar .nav li:focus:not(.active)>a i {
-  color: #ffffff;
+  background-color: #ffffff;
 }
 
 .sidebar .nav li:hover:not(.active)>a i,
 .sidebar .nav li:focus:not(.active)>a i,
 .off-canvas-sidebar .nav li:hover:not(.active)>a i,
 .off-canvas-sidebar .nav li:focus:not(.active)>a i {
-  color: #ffffff;
+  background-color: #ffffff;
 }
 
 .sidebar .nav li.active>a:not([data-toggle="collapse"]),
