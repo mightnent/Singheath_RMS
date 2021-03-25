@@ -3,9 +3,6 @@ from checklist import views
 
 urlpatterns = [
 
-    # The home page
-    path('', views.index, name='audit'),
-
     path('fnb-checklist',views.fnb,name='fnb-checklist'),
 
 ]

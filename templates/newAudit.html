@@ -16,7 +16,7 @@
 
 <h1>New Audit</h1>
 
-<div class="SelectInstitution">
+{% comment %} <div class="SelectInstitution">
     <h2>Select Institution</h2>
     <hr class= "solidDivider">
     <div class="custom-sel" style="width:100%;">
@@ -33,15 +33,18 @@
             <option value="8">Academia</option>
         </select>
     </div>
-</div>
+</div> {% endcomment %}
 
-
+<form action="{%url 'create'%}">
 <div class="SelectTenant">
     <h2>Select Tenant</h2>
     <hr class= "solidDivider">
     <div class="custom-sel" style="width:100%;">
-        <select id="tenants">
-            <option selected disabled>Choose Tenant...</option>
+        <select class="tenants">
+            <option selected="true" disabled="disabled">Tenants</option>
+            {% for tenant in tenants %}
+                <option value={{tenant.name}}>{{tenant.name}}</option>
+            {% endfor %}
         </select>
     </div>
 </div>
@@ -51,13 +54,14 @@
     <hr class= "solidDivider">
     <div class="custom-sel" style="width:100%;">
         <select>
-            <option value="0">Choose Checklist...</option>
-            <option value="1">F&B Audit Checklist</option>
-            <option value="2">Non F&B Audit Checklist</option>
-            <option value="3">Safe Management Measures Checklist</option>
+            <option selected="true" disabled="disabled">Checklists</option>
+            {% for checklist in checklists %}
+            <option value="{{checklist.title}}">{{checklist.title}}</option>
+            {% endfor %}
         </select>
     </div>
 </div>
+</form>
 
 <button class="createBtn" type="button" id='b1'>Create</button>
 

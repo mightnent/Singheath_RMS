@@ -27,3 +27,6 @@ def audit(request):
         
         checklistInstance.save()
         return redirect('/audit/fnb-checklist?page=2')
+
+def create(request):
+    pass

@@ -5,10 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from audit.models import *
 
-@login_required(login_url="/login/")
-@allowed_user(allowed_roles=['auditor'])
-def index(request):
-    return render(request,'audit/audit.html')
+
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])

@@ -22,12 +22,12 @@
               <p>New Audit</p>
             </a>
           </li>
-          <li class="{% if 'audit' in request.path %} active {% endif %}">
+          {% comment %} <li class="{% if 'audit' in request.path %} active {% endif %}">
             <a href="{%url 'manageAudit' %}">
               <img src = "{% static '/assets/img/images/edit-24px.svg' %}" alt="Manage Audit" class="sidebarIcon">
               <p>Manage Audit</p>
             </a>
-          </li>
+          </li> {% endcomment %}
           <li>
             <a href="{%url 'manageTenant' %}" >
               <img src = "{% static '/assets/img/images/switch_account-24px.svg' %}" alt="Manage Tenant" class="sidebarIcon">
