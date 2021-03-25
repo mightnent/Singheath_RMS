@@ -7,7 +7,8 @@ from authentication.decorators import allowed_user
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from authentication.forms import AuditForm
-from audit.models import Tenant
+from django.contrib.auth.models import User,Group
+from .models import Tenant
 from checklist.models import CheckList
 
 
@@ -34,6 +35,7 @@ def newAuditView(request):
         'tenants':tenants,
         'checklists':checklists
     }
+    
     return render(request,"newAudit.html",context)
 
 def manageAuditView(request):
@@ -47,7 +49,31 @@ def manageTenantView(request):
     context = {
         'tenants':tenants,       
     }
+    
     return render(request,"manage-tenant.html",context)
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor'])
+def createTenantView(request):
+    if(request.method == 'POST'):
+        data = request.POST
+        name = data['name']
+        institution = data['institution']
+        business_name = data['business_name']
+        lease_end_date = data['lease_end_date']
+        UEN = data['uen']
+        contact = data['contact']  
+        email = data['email']
+        try:
+            User.objects.get(username=business_name)
+            return redirect('/manage-tenant')
+        except User.DoesNotExist:
+            new_tenant = Tenant(name=name,institution=institution,business_name=business_name,lease_end_date=lease_end_date,UEN=UEN,contact=contact,email=email)
+            new_tenant.save()
+            new_user = User(email=email,username=business_name,password='password1.1')            
+            new_user.save()
+            new_user.groups.add(Group.objects.get(name='tenant'))
+            return redirect('/manage-tenant')
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])

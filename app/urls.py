@@ -21,6 +21,8 @@ urlpatterns = [
 
     path('manage-tenant',views.manageTenantView, name="manageTenant"),
 
+    path('create-tenant',views.createTenantView, name='createTenant'),
+
     path('performance', views.performance, name='performance'),
 
     path('request', views.request, name='request'),

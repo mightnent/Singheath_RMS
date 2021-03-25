@@ -19,6 +19,7 @@ div{
     border-radius: 5px;
     float: right;
     padding: 5px 15px;
+    margin-top: 20px;
 }
 .Btn:hover{
     background-color: #26E317;
@@ -47,6 +48,9 @@ select{
   label {
     padding: 12px 12px 12px 0;
     display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    color: #F36F38;
   }
   
   input[type=submit] {
@@ -88,6 +92,8 @@ select{
     display: table;
     clear: both;
   }
+
+ 
   
   /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 600px) {

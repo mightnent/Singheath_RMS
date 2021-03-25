@@ -30,17 +30,18 @@
 </div>
 <button class="Btn" type="button" id='b1'>Search</button>
 
-<form action="{%url 'audit'%%}">
+
 <div class="NewTenant">
     <h2>New Tenant</h2>
     <hr class= "solidDivider">
-    <form action="/action_page.php">
+    <form action="{%url 'createTenant'%}" method="POST">
+        {% csrf_token %}
         <div class="row">
           <div class="col-25">
             <label for="Cname">Company Name</label>
           </div>
           <div class="col-75">
-            <input type="text" id="Cname" name="business_name" placeholder="Company name...">
+            <input type="text" name="business_name" placeholder="Company name...">
           </div>
         </div>
         <div class="row">
@@ -48,25 +49,48 @@
             <label for="Owner Name">Owner Name</label>
           </div>
           <div class="col-75">
-            <input type="text" id="oname" name="name" placeholder="Owner name..">
+            <input type="text" name="name" placeholder="Owner name..">
           </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+              <label for="UEN">UEN</label>
+            </div>
+            <div class="col-75">
+              <input type="text" name="uen" placeholder="UEN...">
+            </div>
         </div>
         <div class="row">
             <div class="col-25">
               <label for="Contact Number">Contact Number</label>
             </div>
             <div class="col-75">
-              <input type="text" id="cNum" name="contact" placeholder="Contact Number...">
+              <input type="text" name="contact" placeholder="Contact Number...">
             </div>
-          </div>
-        <!-- <div class="row">
-          <input type="submit" value="Create">
-        </div> -->
-        </form>
-    
+        </div>
+        <div class="row">
+            <div class="col-25">
+              <label for="Email">Email</label>
+            </div>
+            <div class="col-75">
+              <input type="text" name="email" placeholder="Email...">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+              <label for="lease_end_date">Please Enter Lease End Date</label>
+            </div>
+            <div class="col-75">
+              <input type="date" name="lease_end_date" placeholder="Please Enter Lease End Date">
+            </div>
+        </div>
+        {% comment %} NEED TO MAKE THIS DYNAMIC {% endcomment %}
+        <input type="hidden" name="institution" value = "CGH"/>
+              
+      <button class="Btn" type="submit" id='b1'>Create</button>
+    </form>
 </div>
-<button class="Btn" type="button" id='b1'>Create</button>
-</form>
+
 
 {% endblock content %}
 
