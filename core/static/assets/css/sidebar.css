@@ -32,3 +32,8 @@
 .off-canvas-sidebar .nav li:focus:not(.active)>a i {
     background-color:#f3703844;
 }
+
+
+html, body{
+    margin: 0; height: 100%; overflow: hidden;
+}
