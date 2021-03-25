@@ -26,6 +26,8 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+                if user.is_staff:
+                    return redirect("/admin")
                 group = None
                 if request.user.groups.exists():
                     group = request.user.groups.all()[0].name
