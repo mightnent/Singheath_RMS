@@ -16269,7 +16269,7 @@ img {
 }
 
 .navbar.navbar-absolute {
-  position: absolute;
+  /* position: absolute; */
   z-index: 1050;
 }
 
@@ -18290,7 +18290,7 @@ table.tablesorter thead tr .headerSortDown {
 }
 
 .main-panel>.content {
-  padding: 78px 30px 30px 280px;
+  padding: 40px 30px 30px 280px;
   min-height: calc(100vh - 70px);
 }
 
