@@ -1,11 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import TenantLocation
+from .models import Tenant
 
-class TenantLocationAdmin(admin.ModelAdmin):
-    list_display = ('id','name','institution',)
-    list_display_links = ('id','name',)
-    search_fields = ('name',)
+class TenantAdmin(admin.ModelAdmin):
+    list_display = ('id','business_name','institution',)
+    list_display_links = ('id','business_name',)
+    search_fields = ('business_name',)
     list_per_page = 25
-admin.site.register(TenantLocation,TenantLocationAdmin)
+admin.site.register(Tenant,TenantAdmin)

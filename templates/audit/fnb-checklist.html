@@ -12,7 +12,7 @@
 <form action='{% url 'audit' %}' method="POST">
 {% csrf_token %}
 <input type="hidden" name="checklist_type" value = "fnb"/>
-<input type="hidden" name="tenant_location" value = "{{tenant.name}}"/>
+<input type="hidden" name="tenant" value = "{{tenant.name}}"/>
 <div class="row">
     {% if page_obj %}
     {% for obj in page_obj %}

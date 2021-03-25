@@ -22,21 +22,15 @@
     <div class="custom-sel" style="width:100%;">
         <select id="tenants">
             <option selected disabled>Choose Tenant... </option>
-            <option value="0">SGH</option>
-            <option value="1">CGH</option>
-            <option value="2">KKH</option>  
-            <option value="3">SKH</option>
-            <option value="4">NCCS</option>
-            <option value="5">NHCS</option>
-            <option value="6">BVH</option>
-            <option value="7">OCH</option>
-            <option value="8">Academia</option>
+            {% for tenant in tenants %}
+            <option value = "{{tenant.business_name}}">{{tenant.business_name}}</option>
+            {% endfor %}
         </select>
     </div>
 </div>
 <button class="Btn" type="button" id='b1'>Search</button>
 
-
+<form action="{%url 'audit'%%}">
 <div class="NewTenant">
     <h2>New Tenant</h2>
     <hr class= "solidDivider">
@@ -46,7 +40,7 @@
             <label for="Cname">Company Name</label>
           </div>
           <div class="col-75">
-            <input type="text" id="Cname" name="companyname" placeholder="Company name...">
+            <input type="text" id="Cname" name="business_name" placeholder="Company name...">
           </div>
         </div>
         <div class="row">
@@ -54,7 +48,7 @@
             <label for="Owner Name">Owner Name</label>
           </div>
           <div class="col-75">
-            <input type="text" id="oname" name="ownername" placeholder="Owner name..">
+            <input type="text" id="oname" name="name" placeholder="Owner name..">
           </div>
         </div>
         <div class="row">
@@ -62,7 +56,7 @@
               <label for="Contact Number">Contact Number</label>
             </div>
             <div class="col-75">
-              <input type="text" id="cNum" name="cNum" placeholder="Contact Number...">
+              <input type="text" id="cNum" name="contact" placeholder="Contact Number...">
             </div>
           </div>
         <!-- <div class="row">
@@ -72,6 +66,7 @@
     
 </div>
 <button class="Btn" type="button" id='b1'>Create</button>
+</form>
 
 {% endblock content %}
 

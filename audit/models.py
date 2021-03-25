@@ -2,11 +2,17 @@ from django.db import models
 from datetime import datetime
 
 # Create your models here.
-class TenantLocation(models.Model):
+class Tenant(models.Model):
     name = models.CharField(max_length=200)
     institution = models.CharField(max_length=500)
+    business_name = models.CharField(max_length=500)
+    lease_end_date = models.DateField(blank=True)
+    UEN = models.CharField(max_length=50,blank=True)
+    contact = models.CharField(max_length=50)    
+    email = models.EmailField(max_length=254)
+
     def __str__(self):
-        return self.name
+        return self.business_name
 
 class ChecklistInstance(models.Model):
     checklist_type = models.CharField(max_length=500)

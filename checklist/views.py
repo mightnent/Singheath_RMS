@@ -14,7 +14,7 @@ def fnb(request):
     fnb_section = Section.objects.filter(level_id=1)
     fnb_subsection = Subsection.objects.filter(id__in=fnb_section)
     fnb_question = Question.objects.filter(level_id__in=fnb_subsection)
-    tenant = TenantLocation.objects.get(id=1)
+    tenant = Tenant.objects.get(id=1)
     paginator = Paginator(fnb_question,1)
     
     page_number = request.GET.get('page')

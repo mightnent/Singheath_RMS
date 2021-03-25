@@ -7,7 +7,7 @@ from authentication.decorators import allowed_user
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from authentication.forms import AuditForm
-from audit.models import TenantLocation
+from audit.models import Tenant
 from checklist.models import CheckList
 
 
@@ -28,7 +28,7 @@ def audit(request):
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])    
 def newAuditView(request):
-    tenants = TenantLocation.objects.all()
+    tenants = Tenant.objects.all()
     checklists = CheckList.objects.all()
     context = {
         'tenants':tenants,
@@ -37,12 +37,17 @@ def newAuditView(request):
     return render(request,"newAudit.html",context)
 
 def manageAuditView(request):
+    
     return render(request,"manageAudit.html")
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
 def manageTenantView(request):
-    return render(request,"manage-tenant.html")
+    tenants = Tenant.objects.all()
+    context = {
+        'tenants':tenants,       
+    }
+    return render(request,"manage-tenant.html",context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
