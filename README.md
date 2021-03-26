@@ -55,3 +55,18 @@ You can login with tester:password1.1
 ## Changelog for 23 March 2021
 1. Created an audit app, including database models, so to receive new audit checklist instances as categorised by tenant location, institution
 2. Created institution security group for future use, so can limit what a normal auditor can see based on institution he is from
+
+## Changelog for 25 March 2021
+1. Merged various branch
+    1. Admin css
+    2. Templates for audit
+    3. Templates for new audits
+    4. Templates for manage tenant
+    5. Template for performance graph
+2. Reroute admin login to backend dashboard
+3. Integrate backend to manage tenant page, ability to create a tenant from front end. 
+4. When tenant created, auto create user and assign tenant user group to the user
+5. Fixed scroll issue on physical mobile device
+6. Created model for tenant, checklistinstance
+7. Migrated to psql
+8. Hosted on AWS
