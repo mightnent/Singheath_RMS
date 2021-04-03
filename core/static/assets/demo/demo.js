@@ -374,7 +374,7 @@ demo = {
         pointHoverRadius: 4,
         pointHoverBorderWidth: 15,
         pointRadius: 4,
-        data: [80, 100, 70, 80, 120, 80],
+        data: [60, 100, 70, 80, 120, 80],
       }]
     };
 
@@ -385,49 +385,50 @@ demo = {
     });
 
 
-    var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
+    // var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
 
-    var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+    // var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
-    gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
-    gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
+    // gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
+    // gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
+    // gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
 
-    var data = {
-      labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
-      datasets: [{
-        label: "My First dataset",
-        fill: true,
-        backgroundColor: gradientStroke,
-        borderColor: '#00d6b4',
-        borderWidth: 2,
-        borderDash: [],
-        borderDashOffset: 0.0,
-        pointBackgroundColor: '#00d6b4',
-        pointBorderColor: 'rgba(255,255,255,0)',
-        pointHoverBackgroundColor: '#00d6b4',
-        pointBorderWidth: 20,
-        pointHoverRadius: 4,
-        pointHoverBorderWidth: 15,
-        pointRadius: 4,
-        data: [90, 27, 60, 12, 80],
-      }]
-    };
+    // var data = {
+    //   labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
+    //   datasets: [{
+    //     label: "My First dataset",
+    //     fill: true,
+    //     backgroundColor: gradientStroke,
+    //     borderColor: '#00d6b4',
+    //     borderWidth: 2,
+    //     borderDash: [],
+    //     borderDashOffset: 0.0,
+    //     pointBackgroundColor: '#00d6b4',
+    //     pointBorderColor: 'rgba(255,255,255,0)',
+    //     pointHoverBackgroundColor: '#00d6b4',
+    //     pointBorderWidth: 20,
+    //     pointHoverRadius: 4,
+    //     pointHoverBorderWidth: 15,
+    //     pointRadius: 4,
+    //     data: [90, 27, 60, 12, 80],
+    //   }]
+    // };
 
-    var myChart = new Chart(ctxGreen, {
-      type: 'line',
-      data: data,
-      options: gradientChartOptionsConfigurationWithTooltipGreen
+    // var myChart = new Chart(ctxGreen, {
+    //   type: 'line',
+    //   data: data,
+    //   options: gradientChartOptionsConfigurationWithTooltipGreen
 
-    });
+    // });
 
 
 
+    // Institution Performance
     var chart_labels = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-    var chart_data = [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100];
+    var chart_data = [70, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100];
 
 
-    var ctx = document.getElementById("chartBig1").getContext('2d');
+    var ctx = document.getElementById("institutionChart").getContext('2d');
 
     var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
@@ -439,7 +440,7 @@ demo = {
       data: {
         labels: chart_labels,
         datasets: [{
-          label: "My First dataset",
+          label: "Institution One",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: '#d346b1',
