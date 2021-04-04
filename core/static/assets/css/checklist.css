@@ -39,13 +39,13 @@ label {
 
 .previous{
     text-align: left;
-    color: white;
+    color: #27293D;
 }
 
 .next{
     text-align: right;
     float: right;
-    color: white;
+    color: #27293D;
 }
 
 .left-right{

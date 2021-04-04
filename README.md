@@ -34,6 +34,29 @@ Make sure you see (venv) infront of the user in the terminal
 
 Go to localhost:8000 to see if the app is running
 
+## Working with AWS
+Use the video resource in the group on how to access the AWS instance via winSCP, a SFTP program. 
+Then use it to open the terminal (or you can use putty directly. Having winscp just gives a better idea visually)
+
+In the terminal, go to pyapps (you can see it when you ls)
+You can activate the venv along the way
+
+Go to Singhealth_RMS folder
+
+Do your standard git fetch, checkout, pull etc. 
+
+Then open up my screen program. 
+> screen -r main
+
+This is where the django is running. You can ctrl+c to stop it and do your typical django python manage.py stuff. 
+
+When you are ready, you can run it using 
+> python manage.py runserver 0.0.0.0:8000
+(or you can just use the up arrow to find this command)
+
+### Side note on the AWS
+You can just use the aws instance like any linux ssh. So you can execute anything in it normally. 
+
 ## Accessing admin panel
 Go to http://localhost:8000/admin/login/?next=/admin/
 You can login with tester:password1.1
