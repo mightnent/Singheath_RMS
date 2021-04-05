@@ -54,6 +54,7 @@ When you are ready, you can run it using
 > python manage.py runserver 0.0.0.0:8000
 (or you can just use the up arrow to find this command)
 
+Exit the screen by Crtl + A, then press D
 ### Side note on the AWS
 You can just use the aws instance like any linux ssh. So you can execute anything in it normally. 
 
