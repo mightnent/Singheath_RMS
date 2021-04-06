@@ -16,6 +16,7 @@ class Tenant(models.Model):
     UEN = models.CharField(max_length=50,blank=True)
     contact = models.CharField(max_length=50)    
     email = models.EmailField(max_length=254)
+    score = models.IntegerField(default=0)
 
     def __str__(self):
         return self.business_name
