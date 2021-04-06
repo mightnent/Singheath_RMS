@@ -3,6 +3,7 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
+from django.db import connection
 from authentication.decorators import allowed_user
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
@@ -10,7 +11,7 @@ from authentication.forms import AuditForm
 from django.contrib.auth.models import User,Group
 from .models import Tenant
 from checklist.models import CheckList
-
+from .email_handler import EmailHandler
 
 @login_required(login_url="/login/")
 def index(request):
@@ -70,9 +71,12 @@ def createTenantView(request):
         except User.DoesNotExist:
             new_tenant = Tenant(name=name,institution=institution,business_name=business_name,lease_end_date=lease_end_date,UEN=UEN,contact=contact,email=email)
             new_tenant.save()
-            new_user = User(email=email,username=business_name,password='password1.1')            
+            gen_password = User.objects.make_random_password()
+            new_user = User(email=email,username=business_name)
+            new_user.set_password(gen_password)            
             new_user.save()
             new_user.groups.add(Group.objects.get(name='tenant'))
+            EmailHandler.send_new_tenant_email(email, request.build_absolute_uri("/login"), gen_password, name, business_name)
             return redirect('/manage-tenant')
 
 @login_required(login_url="/login/")
