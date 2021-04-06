@@ -128,8 +128,8 @@ EMAIL_FROM = 'testshrms@outlook.com'
 EMAIL_HOST_USER = 'testshrms@outlook.com'
 EMAIL_HOST_PASSWORD = 'testsinghealth_rms1.1'
 
-CRON_JOBS = [
-    ('0 0 * * *', 'app.notify_service.handle')
+CRONJOBS = [
+    ('0 0 * * *', 'app.notify_service.handle'),
 ]
 
 #############################################################
