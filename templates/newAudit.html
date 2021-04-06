@@ -16,31 +16,13 @@
 
 <h1>New Audit</h1>
 
-{% comment %} <div class="SelectInstitution">
-    <h2>Select Institution</h2>
-    <hr class= "solidDivider">
-    <div class="custom-sel" style="width:100%;">
-        <select id="institution">
-            <option selected disabled>Choose Institution... </option>
-            <option value="0">SGH</option>
-            <option value="1">CGH</option>
-            <option value="2">KKH</option>
-            <option value="3">SKH</option>
-            <option value="4">NCCS</option>
-            <option value="5">NHCS</option>
-            <option value="6">BVH</option>
-            <option value="7">OCH</option>
-            <option value="8">Academia</option>
-        </select>
-    </div>
-</div> {% endcomment %}
-
-<form action="{%url 'create'%}">
+<form action="{%url 'createNewAudit'%}" method="POST">
+{% csrf_token %}
 <div class="SelectTenant">
     <h2>Select Tenant</h2>
     <hr class= "solidDivider">
     <div class="custom-sel" style="width:100%;">
-        <select class="tenants">
+        <select class="tenants" name="tenant">
             <option selected="true" disabled="disabled">Tenants</option>
             {% for tenant in tenants %}
                 <option value={{tenant.business_name}}>{{tenant.business_name}}</option>
@@ -53,7 +35,7 @@
     <h2>Select Audit Checklist</h2>
     <hr class= "solidDivider">
     <div class="custom-sel" style="width:100%;">
-        <select>
+        <select name="checklist">
             <option selected="true" disabled="disabled">Checklists</option>
             {% for checklist in checklists %}
             <option value="{{checklist.title}}">{{checklist.title}}</option>
@@ -61,40 +43,10 @@
         </select>
     </div>
 </div>
+
+
+<button class="createBtn" type="submit" id='b1'>Create</button>
 </form>
-
-<a href="/new-audit/fnb-checklist" class="createBtn" type="button" id='b1'>Create</a>
-
 
 
 {% endblock content %}
-
-
-{% block javascripts %}
-<!-- <script src={% static "assets/js/newAudit.js" %}></script> -->
-
-<script>
-$(document).ready(function() {
-
-    $("#institution").change(function() {
-        var val = $(this).val();
-        $("#tenants").html(options[val]);
-    });
-
-
-    var options = [
-        "<option value='SGH'>item1: test 1</option><option value='test2'>item1: test 2</option>",
-        "<option value='CGH'>item2: test 1</option><option value='test2'>item2: test 2</option>",
-        "<option value='KKH'>item3: test 1</option><option value='test2'>item3: test 2</option>",
-        "<option value='SKH'>Koufu</option><option value='SKH2'>dcd</option>",
-        "<option value='NCCS'>Koufunccs</option><option value='SKH2'>ds</option>",
-        "<option value='NHCS'>Koufu</option><option value='SKH2'>gj</option>",
-        "<option value='BVH'>Koufu</option><option value='SKH2'>tr</option>",
-        "<option value='OCH'>Koufu</option><option value='SKH2'>rtw</option>",
-        "<option value='Academia'>Koufu</option><option value='SKH2'>0p79</option>"
-    ];
-
-});
-</script>
-
-{% endblock javascripts %}

@@ -4,12 +4,18 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from authentication.decorators import allowed_user
+from django.core.paginator import EmptyPage,PageNotAnInteger,Paginator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from authentication.forms import AuditForm
 from django.contrib.auth.models import User,Group
 from .models import Tenant
-from checklist.models import CheckList
+from checklist.models import *
+from audit.models import *
+import checklist.views as checkListViews
+from django.urls import reverse
+from urllib.parse import urlencode
+from django.db.models import Avg, Max, Min
 
 
 @login_required(login_url="/login/")
@@ -37,6 +43,31 @@ def newAuditView(request):
     }
     
     return render(request,"newAudit.html",context)
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor']) 
+def createNewAudit(request):
+    if(request.method=='POST'):
+        last_id = ChecklistInstance.objects.all().aggregate(Max('checklist_id'))
+        print()
+        new_id = last_id.get('checklist_id__max') + 1
+        data = request.POST
+        tenant = data['tenant']
+        if data['checklist'] == 'FnB':
+            base_url = reverse('fnb-checklist')
+            query_string =  urlencode({'tenant': tenant,'id':new_id})
+            url = "{}?{}".format(base_url,query_string)
+            return redirect(url)
+        elif data['checklist'] == 'Covid':
+            base_url = reverse('covid-checklist')
+            query_string =  urlencode({'tenant': tenant,'id':new_id})
+            url = "{}?{}".format(base_url,query_string)
+            return redirect(url)
+        elif data['checklist'] == 'Non-FnB':
+            base_url = reverse('non-fnb-checklist')
+            query_string =  urlencode({'tenant': tenant,'id':new_id})
+            url = "{}?{}".format(base_url,query_string)
+            return redirect(url)
 
 def manageAuditView(request):
     

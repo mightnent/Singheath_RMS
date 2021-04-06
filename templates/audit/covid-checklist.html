@@ -11,7 +11,7 @@
 {% block content %}
 <form action='{% url 'audit' %}' method="POST" enctype="multipart/form-data">
 {% csrf_token %}
-<input type="hidden" name="checklist_type" value = "FnB"/>
+<input type="hidden" name="checklist_type" value = "Covid"/>
 <input type="hidden" name="tenant" value = "{{tenant}}"/>
 <input type="hidden" name="page" value = "{{request.GET.page}}"/>
 <input type="hidden" name="checklist_id" value = "{{checklist_id}}"/>

@@ -58,3 +58,18 @@ label {
 .gray{
     color: rgb(73, 73, 73);
 }
+
+.done{
+    background: #F36F38;
+    margin-top: 40px;
+    font-size: 2em;
+    color: white;
+    border: none;
+    width: 100%;
+    height: 3em;
+    font-weight: bold;
+    border-radius: 10px;
+    display: block;
+    text-align: center;
+    padding-top: 0.8em;
+}

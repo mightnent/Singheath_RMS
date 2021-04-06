@@ -4,5 +4,7 @@ from checklist import views
 urlpatterns = [
 
     path('fnb-checklist',views.fnb,name='fnb-checklist'),
+    path('covid-checklist',views.covid,name='covid-checklist'),
+    path('non-fnb-checklist',views.nonfnb,name='non-fnb-checklist')
 
 ]
