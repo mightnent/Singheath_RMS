@@ -16,6 +16,7 @@ import checklist.views as checkListViews
 from django.urls import reverse
 from urllib.parse import urlencode
 from django.db.models import Avg, Max, Min
+from .email_handler import EmailHandler
 
 
 @login_required(login_url="/login/")
@@ -101,9 +102,12 @@ def createTenantView(request):
         except User.DoesNotExist:
             new_tenant = Tenant(name=name,institution=institution,business_name=business_name,lease_end_date=lease_end_date,UEN=UEN,contact=contact,email=email)
             new_tenant.save()
-            new_user = User(email=email,username=business_name,password='password1.1')            
+            gen_password = User.objects.make_random_password()
+            new_user = User(email=email,username=business_name)
+            new_user.set_password(gen_password)           
             new_user.save()
             new_user.groups.add(Group.objects.get(name='tenant'))
+            EmailHandler.send_new_tenant_email(email=email, login_link=request.build_absolute_uri("/login"), gen_password=gen_password, owner_name=name, username=business_name)
             return redirect('/manage-tenant')
 
 @login_required(login_url="/login/")
