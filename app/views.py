@@ -120,3 +120,8 @@ def request(request):
 @allowed_user(allowed_roles=['tenant'])
 def tenant(request):
     return render(request,'tenant.html')
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['tenant'])
+def notifications(request):
+    return render(request,'notifications.html')

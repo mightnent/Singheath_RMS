@@ -31,5 +31,7 @@ urlpatterns = [
 
     path('tenant', views.tenant, name='tenant'),
 
+    path('notifications', views.notifications, name='notifications')
+
 
 ]
