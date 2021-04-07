@@ -1,0 +1,43 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+
+{% block title %} Manange Tenant {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<!-- <link href="{% static 'assets/css/black-dashboard.css' %}" rel="stylesheet" /> -->
+<link href="{% static 'assets/css/manageTenant.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
+
+
+{% block content %}
+
+<h1>Broadcast</h1>
+
+
+
+<div class="SendNotif">
+    <h2>Send Notification</h2>
+    <hr class= "solidDivider">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-12">
+            {{ form }}
+          </div>
+        </div>
+        
+              
+      <input type = "submit" value="Broadcast" >
+    </form>
+</div>
+
+
+{% endblock content %}
+
+
+{% block javascripts %}
+
+{% endblock javascripts %}

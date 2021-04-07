@@ -17,13 +17,13 @@
         <ul class="nav">
         {% if request.user.is_authenticated %}
            <li class="{% if 'audit' in request.path %} active {% endif %}">
-            <a href="{%url 'manageAudit' %}">
+            <a href="{%url 'managenoncompliance' %}">
               <img src = "{% static '/assets/img/images/edit-24px.svg' %}" alt="Manage Audit" class="sidebarIcon">
               <p>Manage Non-compliance</p>
             </a>
           </li> 
           <li>
-            <a href="{%url 'manageTenant' %}" >
+            <a href="{%url 'viewaudit' %}" >
               <img src = "{% static '/assets/img/images/switch_account-24px.svg' %}" alt="Manage Tenant" class="sidebarIcon">
               <p>View Audits</p>
             </a>

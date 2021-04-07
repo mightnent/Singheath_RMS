@@ -5,6 +5,7 @@ Copyright (c) 2019 - present AppSeed.us
 
 from django.urls import path, re_path
 from app import views
+import notifications
 
 urlpatterns = [
 
@@ -31,7 +32,9 @@ urlpatterns = [
 
     path('tenant', views.tenant, name='tenant'),
 
-    path('notifications', views.notifications, name='notifications')
+    path('viewaudit', views.viewaudit, name='viewaudit'),
+
+    path("managenonompliance", views.managenoncompliance, name='managenoncompliance')
 
 
 ]

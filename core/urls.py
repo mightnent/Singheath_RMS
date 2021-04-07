@@ -18,6 +18,7 @@ urlpatterns = [
     path("", include("app.urls")),             # UI Kits Html files
     path("new-audit/",include("checklist.urls")),
     path("audit/",include("audit.urls")),
+    path("notifications/",include("notifications.urls"))
 ]
 
 if settings.DEBUG:
