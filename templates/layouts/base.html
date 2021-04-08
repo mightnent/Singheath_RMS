@@ -41,8 +41,16 @@
     {% endif %}
 
     <div class="main-panel">
+      {% if user.is_authenticated %}
+        {% load has_group %}
+        {% if request.user|has_group:"tenant" %}
+          {% include 'includes/navigation-tenant.html' %}
+        {% else %}
+          {% include 'includes/navigation.html' %}
+        {% endif %}
+      {% endif %}
 
-      {% include 'includes/navigation.html' %}
+      <!-- {% include 'includes/navigation.html' %} -->
 
       <div class="content">
 
