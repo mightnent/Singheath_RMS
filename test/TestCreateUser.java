@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,7 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class TestUserAdminFunctions {
+public class TestCreateUser {
     final String admin_username = "admin";
     final String admin_password = "password1.1";
     String auditor_user = "testAuditor1";
@@ -26,8 +27,10 @@ public class TestUserAdminFunctions {
 
     @Before
     public void createDriver() {
-        System.setProperty("webdriver.gecko.driver", "C:\\Users\\Heriuma\\AndroidStudioProjects\\geckodriver.exe\\");
-        driver = new FirefoxDriver();
+        // System.setProperty("webdriver.gecko.driver", "C:\\Users\\Heriuma\\AndroidStudioProjects\\geckodriver.exe\\");
+        // driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver","D:/Joon Kang/chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
 
         driver.get("http://13.250.116.16:8000/");
         // maximize the browser window
