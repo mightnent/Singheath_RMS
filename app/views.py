@@ -49,9 +49,11 @@ def newAuditView(request):
 @allowed_user(allowed_roles=['auditor']) 
 def createNewAudit(request):
     if(request.method=='POST'):
-        last_id = ChecklistInstance.objects.all().aggregate(Max('checklist_id'))
-        print()
-        new_id = last_id.get('checklist_id__max') + 1
+        try:
+            last_id = ChecklistInstance.objects.all().aggregate(Max('checklist_id'))
+            new_id = last_id.get('checklist_id__max') + 1
+        except :
+            new_id = 1
         data = request.POST
         tenant = data['tenant']
         if data['checklist'] == 'FnB':
