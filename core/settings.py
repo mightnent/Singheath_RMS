@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'checklist',
     'nested_inline',
     'audit',
+    'notifications'
 ]
 
 MIDDLEWARE = [

@@ -127,5 +127,10 @@ def tenant(request):
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['tenant'])
-def notifications(request):
-    return render(request,'notifications.html')
+def viewaudit(request):
+    return render(request,'viewaudit.html')
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['tenant'])
+def managenoncompliance(request):
+    return render(request,'managenoncompliance.html')

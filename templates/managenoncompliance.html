@@ -1,0 +1,93 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Audits {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="row">
+      
+      <div class="col-12">
+        <div class="card ">
+          <div class="card-header">
+            <h4 class="card-title"> Non-compliances</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table tablesorter " id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>
+                      Title
+                    </th>
+                    <th>
+                      Auditor
+                    </th>
+                    <th class="text-center">
+                      Type
+                    </th>
+                    <th class="text-center">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for a in audits %}
+                  <tr>
+                    <td>
+                      {{ a.tenant }}
+                    </td>
+                    <td>
+                      {{ a.auditor }}
+                    </td>
+                    <td class="text-center">
+                      {{ a.type }}
+                    </td>
+                    <td class="text-center">
+                        {% if a.status == 1 %}
+                        <div class="offset-5 col-2" style="background-color: green; border-radius: 25%; color: green;">
+                            O
+                        </div>
+                        {% elif a.status == 2 %}
+                        <div class="offset-5 col-2" style="background-color: red; border-radius: 25%;color: red;">
+                            O
+                        </div>
+                        {% elif a.status == 3 %}
+                        <div class="offset-5 col-2" style="background-color: yellow; border-radius: 25%; color: yellow;">
+                            O
+                        </div>
+                        {% elif a.status == 4 %}
+                        <div class="offset-5 col-2" style="background-color: orange; border-radius: 25%; color: orange;">
+                            O
+                        </div>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <center><button class="btn btn-fill btn-primary"> Edit </button></center>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      demo.initDashboardPageCharts();
+
+    });
+  </script>
+
+{% endblock javascripts %}
