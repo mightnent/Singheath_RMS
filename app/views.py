@@ -49,6 +49,7 @@ def newAuditView(request):
 @allowed_user(allowed_roles=['auditor']) 
 def createNewAudit(request):
     if(request.method=='POST'):
+        
         try:
             last_id = ChecklistInstance.objects.all().aggregate(Max('checklist_id'))
             new_id = last_id.get('checklist_id__max') + 1
