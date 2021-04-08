@@ -22,9 +22,11 @@
     <div class="custom-sel" style="width:100%;">
         <select id="tenants">
             <option selected disabled>Choose Tenant... </option>
+            {% if tenants %}
             {% for tenant in tenants %}
             <option value = "{{tenant.business_name}}">{{tenant.business_name}}</option>
             {% endfor %}
+            {% endif %}
         </select>
     </div>
 </div>

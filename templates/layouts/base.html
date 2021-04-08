@@ -49,7 +49,12 @@
 <body class="">
   <div class="wrapper">
     {% if user.is_authenticated %}
-    {% include 'includes/sidebar.html' %}
+      {% load has_group %}
+      {% if request.user|has_group:"tenant" %}
+        {% include 'includes/sidebar-tenant.html' %}
+      {% else %}
+        {% include 'includes/sidebar.html' %}
+      {% endif %}
     {% endif %}
 
     <div class="main-panel">

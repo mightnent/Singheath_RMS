@@ -17,6 +17,8 @@ urlpatterns = [
     
     path('new-audit', views.newAuditView, name='newAudit'),
 
+    path('create-new-audit',views.createNewAudit,name='createNewAudit'),
+
     path('manage-audit', views.manageAuditView, name='manageAudit'),
 
     path('manage-tenant',views.manageTenantView, name="manageTenant"),
@@ -28,6 +30,8 @@ urlpatterns = [
     path('request', views.request, name='request'),
 
     path('tenant', views.tenant, name='tenant'),
+
+    path('notifications', views.notifications, name='notifications')
 
 
 ]

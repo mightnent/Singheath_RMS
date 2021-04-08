@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab',
     'app',  # Enable the inner app 
     'checklist',
     'nested_inline',
@@ -64,6 +65,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+            'has_group': 'app.templatetags.templatetagname',
+
+            }
         },
     },
 ]
@@ -118,6 +123,20 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+#Email server
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_FROM = 'testshrms@outlook.com'
+EMAIL_HOST_USER = 'testshrms@outlook.com'
+EMAIL_HOST_PASSWORD = 'testsinghealth_rms1.1'
+
+CRONJOBS = [
+    ('0 0 * * *', 'app.notify_service.handle'),
+]
+#############################################################
 
 #############################################################
 # SRC: https://devcenter.heroku.com/articles/django-assets

@@ -25,4 +25,6 @@ staticfiles/*
 !staticfiles/.gitkeep 
 .vscode/symbols.json
 
+media/*
+
 

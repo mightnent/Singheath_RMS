@@ -9,41 +9,30 @@
       <div class="sidebar-wrapper">
         
         <div class="logo">
-          <a href="{%url 'home' %}">
+          <a href="{%url 'tenant' %}">
             <img src= "{% static '/assets/img/images/Singhealth-logo.png' %}" alt="Singhealth Logo" class="sidebarLogo">
           </a>
         </div>
 
         <ul class="nav">
         {% if request.user.is_authenticated %}
-          <li class="{% if '/' == request.path %} active {% endif %} ">
-            <a href="{%url 'newAudit' %}">
-              <img src = "{% static '/assets/img/images/add_circle_outline-24px.svg' %}" alt="New Audit" class="sidebarIcon">
-              <p>New Audit</p>
-            </a>
-          </li>
-          {% comment %} <li class="{% if 'audit' in request.path %} active {% endif %}">
+           <li class="{% if 'audit' in request.path %} active {% endif %}">
             <a href="{%url 'manageAudit' %}">
               <img src = "{% static '/assets/img/images/edit-24px.svg' %}" alt="Manage Audit" class="sidebarIcon">
-              <p>Manage Audit</p>
+              <p>Manage Non-compliance</p>
             </a>
-          </li> {% endcomment %}
+          </li> 
           <li>
             <a href="{%url 'manageTenant' %}" >
               <img src = "{% static '/assets/img/images/switch_account-24px.svg' %}" alt="Manage Tenant" class="sidebarIcon">
-              <p>Manage Tenants</p>
+              <p>View Audits</p>
             </a>
           </li>
-          <!-- <li>
-            <a href="{% url 'performance' %}" >
-              <img src = "{% static '/assets/img/images/insights-24px.svg' %}" alt="Performance" class="sidebarIcon">
-              <p>Performance</p>
-            </a>
-          </li> -->
+          
           <li>
-            <a href="{% url 'request' %}" >
+            <a href="{% url 'notifications' %}" >
               <img src = "{% static '/assets/img/images/notification_important-24px.svg' %}" alt="Request" class="sidebarIcon">
-              <p>Request</p>
+              <p>Notifications</p>
             </a>
           </li>
          

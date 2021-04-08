@@ -1,19 +1,31 @@
 from django.shortcuts import render,redirect
 from .models import ChecklistInstance
+from django.contrib.auth.models import User,Group
 
 
 # Create your views here.
 def audit(request):
     
     if request.method == 'POST':
+        
         data = request.POST
         photo = request.FILES.get('photo')
+        print(request.FILES)
         checklist_type = data['checklist_type']
         section = data['section_title']
         subsection = data['subsection_title']
         question = data['question']
         question_id = data['question_id']
-        tenant_location = data['tenant_location']
+        tenant = data['tenant']
+        checklist_id = data['checklist_id']
+        page = data['page']
+
+        if(page==''):
+            page = "1"
+
+        auditor = request.user.username
+        tenant_location = request.user.groups.all()[1]
+
         comment = data['comment']
         if(data['submit'] == "FAIL"):
             score = 0
@@ -21,12 +33,23 @@ def audit(request):
             score = 1
         else:
             score = -1
-        page = request.GET['page']
-        print(page)
-        checklistInstance = ChecklistInstance(checklist_type=checklist_type,section=section,subsection=subsection,question=question,question_id=question_id,tenant_location=tenant_location,comment=comment,score=score,photo=photo)
         
-        checklistInstance.save()
-        return redirect('/audit/fnb-checklist?page=2')
+        int_page = int(page) + 1
+        new_page = str(int_page)
 
-def create(request):
-    pass
+        if ChecklistInstance.objects.filter(checklist_id=checklist_id,page=page).exists():
+            row = ChecklistInstance.objects.get(checklist_id=checklist_id,page=page)
+            row.comment = comment
+            row.photo = photo
+            row.save()
+        else:
+
+            checklistInstance = ChecklistInstance(checklist_type=checklist_type,section=section,subsection=subsection,question=question,question_id=question_id,tenant_location=tenant_location,comment=comment,score=score,photo=photo,auditor=auditor,tenant=tenant,checklist_id=checklist_id,page=page)
+            
+            checklistInstance.save()
+        if checklist_type=="FnB":
+            return redirect('/new-audit/fnb-checklist?page='+new_page)
+        elif checklist_type=="Covid":
+            return redirect('/new-audit/covid-checklist?page='+new_page)
+        elif checklist_type=="Non-FnB":
+            return redirect('/new-audit/non-fnb-checklist?page='+new_page)
