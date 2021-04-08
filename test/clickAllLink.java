@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class clickAllLink {
 	final static String admin_username = "admin";
     final static String admin_password = "password1.1";
+	String auditor_user = "testAuditor1";
 		
 	public static void main(String[] args) throws InterruptedException {		
 
@@ -26,7 +27,7 @@ public class clickAllLink {
         WebElement password = driver.findElement(By.name("password"));
         WebElement submit_button = driver.findElement(By.cssSelector("button[name='login']"));
 
-        username.sendKeys(admin_username);
+        username.sendKeys(auditor_username);
         password.sendKeys(admin_password);
         submit_button.click();
         
