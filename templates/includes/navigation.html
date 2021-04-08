@@ -23,15 +23,9 @@
 
             {% if user.is_authenticated %}
             <ul class="navbar-nav ml-auto">
-              <!-- <li class="search-bar input-group">
-                <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split" ></i>
-                  <span class="d-lg-none d-md-block">Search</span>
-                </button>
-              </li> -->
               <li class="dropdown nav-item">
                 <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div class="notification d-none d-lg-block d-xl-block"></div>
-                  <!-- <i class="tim-icons icon-sound-wave"></i> -->
                   <img src= "{% static '/assets/img/images/notifications_none-24px.svg' %}" alt="Notification Icon" class="notifIcon">
                   <p class="d-lg-none">
                     Notifications
@@ -56,8 +50,6 @@
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
-                  <!-- <li class="nav-link"><a href="/page-user.html" class="nav-item dropdown-item">Profile</a></li>
-                  <li class="dropdown-divider"></li> -->
                   <li class="nav-link"><a href="{% url 'logout' %}" class="nav-item dropdown-item">Log out</a></li>
                 </ul>
               </li>
