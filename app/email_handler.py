@@ -31,7 +31,7 @@ class EmailHandler:
         )
         email.attach_alternative(msg_html, "text/html")
         email.mixed_subtype = "related"
-        with open(finders.find("assets/img/images/Singhealth-logo.png"), mode='rb') as f:
+        with open(finders.find("assets/img/Singhealth-logo.png"), mode='rb') as f:
             image = MIMEImage(f.read())
             image.add_header('Content-ID', "<logo>")
             email.attach(image)
@@ -61,7 +61,7 @@ class EmailHandler:
         )
         email.attach_alternative(msg_html, "text/html")
         email.mixed_subtype = "related"
-        with open(finders.find("assets/img/images/Singhealth-logo.png"), mode='rb') as f:
+        with open(finders.find("assets/img/Singhealth-logo.png"), mode='rb') as f:
             image = MIMEImage(f.read())
             image.add_header('Content-ID', "<logo>")
             email.attach(image)
@@ -92,7 +92,7 @@ class EmailHandler:
         )
         email.attach_alternative(msg_html, "text/html")
         email.mixed_subtype = "related"
-        with open(finders.find("assets/img/images/Singhealth-logo.png"), mode='rb') as f:
+        with open(finders.find("assets/img/Singhealth-logo.png"), mode='rb') as f:
             image = MIMEImage(f.read())
             image.add_header('Content-ID', "<logo>")
             email.attach(image)
