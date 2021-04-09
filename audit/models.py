@@ -18,7 +18,7 @@ class ChecklistInstance(models.Model):
     photo = models.ImageField(upload_to='photos/%Y/%m/%d', height_field=None, width_field=None, max_length=None,blank=True)
     auditor = models.CharField(max_length=50)
     date = models.DateField(default = date.today())
-    date_due = models.DateField(blank = True)
+    date_due = models.DateField(blank = True,null=True)
     page = models.CharField(max_length=3)
 
     def __str__(self):        
