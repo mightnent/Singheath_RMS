@@ -23,6 +23,17 @@ class ChecklistInstance(models.Model):
 
     def __str__(self):        
         return str(self.checklist_id)
+
+class ScoreTable(models.Model):
+    tenant_location = models.CharField(max_length=50)
+    tenant = models.CharField(max_length=50)
+    score = models.IntegerField()
+    total = models.IntegerField()
+    checklist_id = models.IntegerField()
+    date = models.DateField(default = date.today())
+
+    def __str__(self):        
+        return str(self.checklist_id)
     
     
     

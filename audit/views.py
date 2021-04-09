@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import ChecklistInstance
+from .models import *
 from django.contrib.auth.models import User,Group
 
 
@@ -51,6 +51,14 @@ def audit(request):
                 checklistInstance = ChecklistInstance(checklist_type=checklist_type,section=section,subsection=subsection,question=question,question_id=question_id,tenant_location=tenant_location,comment=comment,score=score,photo=photo,auditor=auditor,tenant=tenant,checklist_id=checklist_id,page=page)
             
             checklistInstance.save()
+
+        if ScoreTable.objects.filter(checklist_id=checklist_id).exists():
+            pass
+        else:
+            if score == -1:
+                pass
+            scoreTable = ScoreTable(tenant_location=tenant_location,checklist_id=checklist_id,score=score,total=1,tenant = tenant)
+            scoreTable.save()
         if checklist_type=="FnB":
             return redirect('/new-audit/fnb-checklist?page='+new_page)
         elif checklist_type=="Covid":
