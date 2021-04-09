@@ -34,7 +34,7 @@ def login_view(request):
                 if group == "auditor":
                     return redirect("/")
                 else:
-                    return render(request,'tenant.html')
+                    return redirect("tenant")
             else:    
                 msg = 'Invalid credentials'    
         else:

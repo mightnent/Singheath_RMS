@@ -14,8 +14,8 @@ admin.site.site_title = "SingHealth RMS Admin";
 
 urlpatterns = [
     path('admin/', admin.site.urls),          # Django admin route
+    path("", include("app.urls")),
     path("", include("authentication.urls")), # Auth routes - login / register
-    path("", include("app.urls")),             # UI Kits Html files
     path("new-audit/",include("checklist.urls")),
     path("audit/",include("audit.urls")),
     path("notifications/",include("notifications.urls"))

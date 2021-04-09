@@ -126,7 +126,12 @@ def request(request):
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['tenant'])
 def tenant(request):
-    return render(request,'tenant.html')
+    username = request.user.username
+    this_tenant = Tenant.objects.get(business_name=username)
+    context = {
+        'lease_end_date' : this_tenant.lease_end_date,
+    }
+    return render(request,'tenant.html',context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['tenant'])
