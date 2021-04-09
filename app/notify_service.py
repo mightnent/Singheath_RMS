@@ -15,7 +15,7 @@ def handle():
 def _getDateExp(date_now, num_months):
     date_exp_month = date_now.month + num_months
     date_exp_year = date_now.year
-    if (date_exp_year > 12):
+    if (date_exp_month > 12):
         date_exp_month -= 12
         date_exp_year += 1
     return (date_exp_month, date_exp_year)
