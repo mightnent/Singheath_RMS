@@ -51,13 +51,22 @@ def audit(request):
                 checklistInstance = ChecklistInstance(checklist_type=checklist_type,section=section,subsection=subsection,question=question,question_id=question_id,tenant_location=tenant_location,comment=comment,score=score,photo=photo,auditor=auditor,tenant=tenant,checklist_id=checklist_id,page=page)
             
             checklistInstance.save()
-
+        total = 1
         if ScoreTable.objects.filter(checklist_id=checklist_id).exists():
-            pass
+            row = ScoreTable.objects.get(checklist_id=checklist_id)
+            if score == -1:
+                #for the sake of score table, dont need to differentiate na and fail
+                score = 0
+                total = 0
+            row.score += score
+            row.total += total
+            row.save()
+
         else:
             if score == -1:
-                pass
-            scoreTable = ScoreTable(tenant_location=tenant_location,checklist_id=checklist_id,score=score,total=1,tenant = tenant)
+                total = 0
+                score = 0
+            scoreTable = ScoreTable(tenant_location=tenant_location,checklist_id=checklist_id,score=score,total=total,tenant = tenant)
             scoreTable.save()
         if checklist_type=="FnB":
             return redirect('/new-audit/fnb-checklist?page='+new_page)
