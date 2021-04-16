@@ -2,7 +2,6 @@
 """
 Copyright (c) 2019 - present AppSeed.us
 """
-
 from authentication.decorators import allowed_user
 from django.core.paginator import EmptyPage,PageNotAnInteger,Paginator
 from django.contrib.auth.decorators import login_required
@@ -15,13 +14,62 @@ from audit.models import *
 import checklist.views as checkListViews
 from django.urls import reverse
 from urllib.parse import urlencode
-from django.db.models import Avg, Max, Min
+from django.db.models import Avg, Max, Min,F
 from .email_handler import EmailHandler
+import datetime
+import statistics
 
 
 @login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor'])
 def index(request):
-    return render(request,'index.html')
+    today = datetime.datetime.now()
+    scoreTable = ScoreTable.objects.filter(num_visited=F('page_num'),date__year=today.year)
+    month_list = [[]for i in range(13)]
+    
+    for stb in scoreTable:
+        frac = stb.score / stb.total
+        if stb.date.month == 1:            
+            month_list[1].append(frac)
+        elif stb.date.month == 2:
+            month_list[2].append(frac)
+        elif stb.date.month == 3:
+            month_list[3].append(frac)
+        elif stb.date.month == 4:
+            month_list[4].append(frac)
+        elif stb.date.month == 5:
+            month_list[5].append(frac)
+        elif stb.date.month == 6:
+            month_list[6].append(frac)
+        elif stb.date.month == 7:
+            month_list[7].append(frac)
+        elif stb.date.month == 8:
+            month_list[8].append(frac)
+        elif stb.date.month == 9:
+            month_list[9].append(frac)
+        elif stb.date.month == 10:
+            month_list[10].append(frac)
+        elif stb.date.month == 11:
+            month_list[11].append(frac)
+        elif stb.date.month == 12:
+            month_list[12].append(frac)
+
+    institution_data = []
+    
+    for i in month_list:
+        try:
+            montly_mean = round(statistics.mean(i)*100)
+            institution_data.append(montly_mean)
+        except:
+            institution_data.append(0)
+    
+    
+    print(institution_data)
+    context={
+        'institution_data':institution_data,
+    }
+        
+    return render(request,'index.html',context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
