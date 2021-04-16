@@ -31,6 +31,8 @@ class ScoreTable(models.Model):
     total = models.IntegerField()
     checklist_id = models.IntegerField()
     date = models.DateField(default = date.today())
+    num_visited = models.IntegerField()
+    page_num = models.IntegerField()
 
     def __str__(self):        
         return str(self.checklist_id)
