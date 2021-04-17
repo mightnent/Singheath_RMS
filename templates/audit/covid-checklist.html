@@ -1,0 +1,208 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} FnB Checklist {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="{% static 'assets/css/checklist.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block content %}
+<form action='{% url 'audit' %}' method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<input type="hidden" name="checklist_type" value = "Covid"/>
+<input type="hidden" name="tenant" value = "{{tenant}}"/>
+<input type="hidden" name="page" value = "{{request.GET.page}}"/>
+<input type="hidden" name="checklist_id" value = "{{checklist_id}}"/>
+
+<div class="row">
+    {% if current_checklist %}
+    {% for ck in current_checklist %}
+    <div class="col-12">
+        <div>                               
+            <h1>
+            {{ck.section}}
+            </h1>
+            <input type="hidden" name="section_title" value = "{{ck.section}}"/>
+                     
+            <h2>
+            {{current_checklist.subsection}}
+            </h2>
+            <input type="hidden" name="subsection_title" value = "{{ck.subsection}}"/>
+               
+        </div>
+        <div class="card">
+
+            <div class="card-body">
+                <p class="question-text">{{ck.question}}</p>
+                <input type="hidden" name="question" value = "{{ck.question}}"/>
+                <input type="hidden" name="question_id" value = "{{ck.question_id}}"/>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            
+            <div class="card-header">
+                <p class="comment-inactive">comment</p>
+            </div>
+            <div class="card-body">
+                <input name = "comment" class="comment" value="{{ck.comment}}"/>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    {%if ck.photo%}
+    <div class="col-12">
+        <img src = "{{ck.photo.url}}"/>
+    </div>
+    {% endif %}
+    <div class="col-12" style="height:40px;">
+        <input name="photo" type="file" id="actual-btn" onchange="preview(this);" hidden/>
+        <label for="actual-btn">Replace Photo</label>
+        <script>
+            function preview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                    $('#image').attr('src', e.target.result);
+                    };
+
+                reader.readAsDataURL(input.files[0]);
+                }
+            }   
+        </script>
+    </div>
+
+</div>
+{% endfor %}
+
+    
+    {% else%}
+    {% for obj in page_obj %}
+    <div class="col-12">
+        <div>                               
+            {% for sub in subsection %}
+                {% if obj.level_id == sub.id %}
+                    {% for sec in section %}
+                        {% if sub.level_id == sec.id %}
+                            <h1>
+                            {{sec.title}}
+                            </h1>
+                            <input type="hidden" name="section_title" value = "{{sec.title}}"/>
+                        {% endif %}
+                    {% endfor %}
+                    <h2>
+                    {{sub.title}}
+                    </h2>
+                    <input type="hidden" name="subsection_title" value = "{{sub.title}}"/>
+                {% endif %}
+            {% endfor %}            
+        </div>
+        <div class="card">
+
+            <div class="card-body">
+                <p class="question-text">{{obj.qn_text}}</p>
+                <input type="hidden" name="question" value = "{{obj.qn_text}}"/>
+                <input type="hidden" name="question_id" value = "{{obj.id}}"/>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            
+            <div class="card-header">
+                <p class="comment-inactive">comment</p>
+            </div>
+            <div class="card-body">
+                <input name = "comment" class="comment"/>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <img id="image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-12" style="height:40px;">
+        <input name="photo" type="file" id="actual-btn" onchange="preview(this);" hidden/>
+        <label for="actual-btn">Upload Photo</label>
+        <script>
+            function preview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                    $('#image').attr('src', e.target.result);
+                    };
+
+                reader.readAsDataURL(input.files[0]);
+                }
+            }   
+        </script>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-12 datefield">
+        <input type="date" name="date_due" placeholder="When Should Tenant Rectify By">
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="row">
+    <div class="col-4">
+        <button class="button bg-danger bw audit" type="submit" name="submit" value="FAIL">FAIL</button>
+    </div>
+    <div class="col-4">
+        <button class="button bg-light audit" type="submit" name="submit" value="NA">N.A.</button>
+    </div>
+    <div class="col-4">
+        <button class="button bg-success bw audit" type="submit" name="submit" value="PASS">PASS</button>
+    </div>
+</div>
+
+
+</form>
+
+{% if not page_obj.has_next %}
+<div class="container">
+    <a href="{%url 'home'%}" class="done">Done</a>
+</div>
+{% endif %}
+
+<div class="container left-right">
+
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="previous">&laquo; previous</a>
+        {% else %}
+            <a class="previous gray" >&laquo; previous</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="next">next &raquo;</a>
+
+        {% endif %}
+  
+</div>
+{% endblock content %}
