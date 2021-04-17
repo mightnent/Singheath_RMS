@@ -11,7 +11,7 @@
 {% block content %}
 <form action='{% url 'audit' %}' method="POST" enctype="multipart/form-data">
 {% csrf_token %}
-<input type="hidden" name="checklist_type" value = "FnB"/>
+<input type="hidden" name="checklist_type" value = "Non-FnB"/>
 <input type="hidden" name="tenant" value = "{{tenant}}"/>
 <input type="hidden" name="page" value = "{{request.GET.page}}"/>
 <input type="hidden" name="checklist_id" value = "{{checklist_id}}"/>
@@ -63,12 +63,25 @@
 <div class="row">
     {%if ck.photo%}
     <div class="col-12">
-        <img src = "{{ck.photo.url}}"/>
+        <img id="image" src = "{{ck.photo.url}}"/>
     </div>
     {% endif %}
     <div class="col-12" style="height:40px;">
-        <input name="photo" type="file" id="actual-btn" hidden/>
+        <input name="photo" type="file" id="actual-btn" onchange="preview(this);" hidden/>
         <label for="actual-btn">Replace Photo</label>
+        <script>
+            function preview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                    $('#image').attr('src', e.target.result);
+                    };
+
+                reader.readAsDataURL(input.files[0]);
+                }
+            }   
+        </script>
     </div>
 
 </div>
@@ -123,11 +136,28 @@
 
     </div>
 </div>
-
+<div class="row">
+    <div class="col-12">
+        <img id="image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" />
+    </div>
+</div>
 <div class="row">
     <div class="col-12" style="height:40px;">
-        <input name="photo" type="file" id="actual-btn" hidden/>
+        <input name="photo" type="file" id="actual-btn" onchange="preview(this);" hidden/>
         <label for="actual-btn">Upload Photo</label>
+        <script>
+            function preview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                    $('#image').attr('src', e.target.result);
+                    };
+
+                reader.readAsDataURL(input.files[0]);
+                }
+            }   
+        </script>
     </div>
 
 </div>
