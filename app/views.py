@@ -24,7 +24,12 @@ import statistics
 @allowed_user(allowed_roles=['auditor'])
 def index(request):
     today = datetime.datetime.now()
-    scoreTable = ScoreTable.objects.filter(num_visited=F('page_num'),date__year=today.year)
+    #tenant_location must be the same as user group
+    tenant_location = request.user.groups.all()[1]
+    scoreTable = ScoreTable.objects.filter(tenant_location=tenant_location).filter(num_visited=F('page_num'),date__year=today.year)
+    
+    checklistTable = ChecklistInstance.objects.filter(checklist_id__in = [x.checklist_id for x in scoreTable]).exclude(comment__exact='').order_by('-date')[:5]
+
     month_list = [[]for i in range(13)]
     
     for stb in scoreTable:
@@ -63,10 +68,10 @@ def index(request):
         except:
             institution_data.append(0)
     
-    
-    print(institution_data)
+    #slicing because month starts from 1
     context={
-        'institution_data':institution_data,
+        'institution_data':institution_data[1:],
+        'checklistTable':checklistTable,
     }
         
     return render(request,'index.html',context)
@@ -100,6 +105,7 @@ def createNewAudit(request):
         
         try:
             last_id = ChecklistInstance.objects.all().aggregate(Max('checklist_id'))
+            print(last_id)
             new_id = last_id.get('checklist_id__max') + 1
         except :
             new_id = 1

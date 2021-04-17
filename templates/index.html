@@ -29,20 +29,15 @@
           </thead>
 
           <tbody>
+            {% for ck in checklistTable %}
             <tr>
               <td class="text-center">
-                Kopitiam
+                {{ck.tenant}}
               <td class="text-center">
-                2 Mar
+                {{ck.date_due}}
               </td>
             </tr>
-            <tr>
-              <td class="text-center">
-                Subway
-              <td class="text-center">
-                25 Mar
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
