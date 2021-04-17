@@ -89,7 +89,8 @@ def audit(request):
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])    
 def newAuditView(request):
-    tenants = Tenant.objects.all()
+    tenant_location = request.user.groups.all()[1]
+    tenants = Tenant.objects.filter(institution=tenant_location)
     checklists = CheckList.objects.all()
     context = {
         'tenants':tenants,
@@ -134,7 +135,8 @@ def manageAuditView(request):
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
 def manageTenantView(request):
-    tenants = Tenant.objects.all()
+    tenant_location = request.user.groups.all()[1]
+    tenants = Tenant.objects.filter(institution=tenant_location)
     context = {
         'tenants':tenants,       
     }
@@ -147,7 +149,7 @@ def createTenantView(request):
     if(request.method == 'POST'):
         data = request.POST
         name = data['name']
-        institution = data['institution']
+        institution = request.user.groups.all()[1]
         business_name = data['business_name']
         lease_end_date = data['lease_end_date']
         UEN = data['uen']
