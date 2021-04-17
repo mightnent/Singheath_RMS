@@ -6,34 +6,34 @@
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}">
     <style>
         .module h2, .module caption, .inline-group h2 {
-            background: #f68b1e /*#79aec8*/;
+            background: #FFAC31 /*#79aec8*/;
         }
 
         .button, input[type="submit"], input[type="button"], .submit-row input, a.button {
-            background: #f68b1e /*#79aec8*/;
+            background: #FFAC31 /*#79aec8*/;
             transition: background-color;
             transition-duration: 0.2s;
         }
 
             .button.default, input[type="submit"].default, .submit-row input.default {
-                background: #d2722e /*#417690*/;
+                background: #f39100 /*#417690*/;
             }
 
         div.breadcrumbs {
-            background: #f68b1e /*#79aec8*/;
-            color: #000;
+            background: #FFAC31 /*#79aec8*/;
+            color: #5e7380;
         }
 
         #header {
-            background: #d2722e /*#417690*/;
+            background: #F36F38  /*#417690*/;
         }
 
         .selector-chosen h2 {
-            background: #f68b1e !important;
+            background: #FFAC31 !important;
         }
 
         .object-tools a:hover, .object-tools a:focus {
-            background-color: #d2722e /*#417690*/;
+            background-color: #f39100  /*#417690*/;
         }
 
         a:focus, a:hover {
@@ -41,12 +41,12 @@
         }
 
         div.breadcrumbs a:focus, div.breadcrumbs a:hover {
-            color: blue;
+            color: #81adb3;
         }
 
         #user-tools a:focus, #user-tools a:hover {
-            color: blue;
-            border-bottom-color: blue;
+            color: #606d6f;
+            border-bottom-color: #606d6f;
         }
 
         a {
@@ -63,7 +63,7 @@
         .button:hover, 
         input[type="submit"]:hover, 
         input[type="button"]:hover {
-            background: #de7914;
+            background: #F99F19;
         }
 
         .button.default:active,
@@ -72,7 +72,7 @@
         input[type="submit"].default:focus,
         .button.default:hover,
         input[type="submit"].default:hover {
-            background: #bd6424;
+            background: #da8200;
         }
 
         #branding h1, #branding h1 a:link, #branding h1 a:visited {
@@ -150,14 +150,14 @@
     {% endblock messages %}
 
     <!-- Content -->
-    <div id="content" class="{% block coltype %}colM{% endblock %}">
+    <div id="content" class="{% block coltype %}colM{% endblock %}" style="margin-left: auto; margin-right: auto;">
         {% block pretitle %}{% endblock %}
         {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
         {% block content %}
         {% block object-tools %}{% endblock %}
         {{ content }}
         {% endblock %}
-        {% block sidebar %}{% endblock %}
+        <!-- {% block sidebar %}{% endblock %} -->
         <br class="clear">
     </div>
     <!-- END Content -->

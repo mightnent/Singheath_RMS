@@ -63,6 +63,110 @@
 
 {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
 
+{% if request.path|first in "/admin/checklist/checklist" %}
+<style>
+  .nested-inline-bottom-border {
+    display: none;
+  }
+
+  .inline-group {
+    border: none;
+  }
+
+  .module {
+    background: none !important;
+  }
+
+  .form-row {
+    border: none !important;
+  }
+
+  span.delete {
+    float: right;
+  }
+
+  .submit-row {
+    background-color: #f8f8f8;
+  }
+
+  .accordion-container {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+
+  .accordion-header {
+    background-color: #ffd889;
+    padding: 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+
+  .accordion-header::before {
+    content: "\276F";
+    margin-right: 10px;
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+
+  .collapsed::before {
+    transform: rotate(90deg);
+  }
+
+  .Subsection {
+    background-color: #dcfedb;
+  }
+  
+  .Question {
+    background-color: #eee;
+  }
+
+  .accordion-header:hover, .accordion-header:focus {
+    background-color: #ffcb61;
+  } 
+
+  .Subsection:hover, .Subsection:focus {
+    background-color: #affcac;
+  }
+
+  .Question:hover, .Question:focus {
+    background-color: #d6d6d6;
+  }
+
+</style>
+<script type="text/javascript">
+var lastCall = -1;
+(function($) {
+    $(document).ready(function() {
+      $("#section_set-group").on("click", ".accordion-header", function() {
+        var now = Date.now();
+        if (lastCall + 150 < now) {
+          lastCall = now;
+          $(this).next(".accordion-content").slideToggle(300);
+          if ($(this).hasClass("collapsed")) {
+            $(this).removeClass("collapsed");
+          } else {
+            $(this).addClass("collapsed");
+          }
+          if ($(this).parent().hasClass("last-related")) {
+            $(this).next().next().slideToggle(300);
+          }
+        }
+      })
+    });
+})(django.jQuery);
+</script>
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function() {
+      $("span.delete").click(function(e) {
+        e.stopPropagation();
+      })
+    });
+})(django.jQuery);
+</script>
+{% endif %}
+
 {% block admin_change_form_document_ready %}
     <script type="text/javascript"
             id="django-admin-form-add-constants"

@@ -26,7 +26,7 @@ class Subsection(models.Model):
     
 
 class Question(models.Model):
-    qn_text = models.CharField(max_length=2000)
+    qn_text = models.TextField(max_length=2000)
     level = models.ForeignKey('Subsection',on_delete=models.CASCADE)
 
     def __str__(self):
