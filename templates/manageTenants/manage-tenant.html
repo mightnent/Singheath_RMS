@@ -16,22 +16,25 @@
 
 <h1>Manage Tenant</h1>
 
+<form action="{%url 'viewAuditbyTenant'%}" method="POST">
+{% csrf_token %}
 <div class="ExistingTenant">
     <h2>Existing Tenants</h2>
     <hr class= "solidDivider">
     <div class="custom-sel" style="width:100%;">
-        <select id="tenants">
+        <select id="tenants" name ='tenant'>
             <option selected disabled>Choose Tenant... </option>
             {% if tenants %}
             {% for tenant in tenants %}
-            <option value = "{{tenant.business_name}}">{{tenant.business_name}}</option>
+                <option value = "{{tenant.business_name}}">{{tenant.business_name}}</option>
             {% endfor %}
             {% endif %}
         </select>
     </div>
 </div>
-<button onclick="location.href='viewAudits'" class="Btn" type="button" id='b1'>Search</button>
-
+<button class="Btn" type="submit" id='b1'>Search</button>
+<!-- <button onclick="location.href='viewAudits'" class="Btn" type="button" id='b1'>Search</button> -->
+</form>
 
 <div class="NewTenant">
     <h2>New Tenant</h2>

@@ -17,7 +17,6 @@
 <h1>View Audits</h1>
 
 <div class="row">
-      
     <div class="col-12">
       <div class="card ">
         <div class="card-header">
@@ -35,7 +34,7 @@
                     Checklist Type
                   </th>
                   <th class="text-center">
-                    Type
+                    Score
                   </th>
                   <th class="text-center">
                     Status
@@ -44,28 +43,25 @@
               </thead>
               <tbody>
                 {% for c in checklistInstances %}
-                {% if c.tenant == "Kopitiam" %}
-                {% for s in scoreTable %}
-                
                 <tr>
                   <td>
-                    {{ c.date}}
+                    {{ c.date }}
                   </td>
                   <td>
                     {{ c.checklist_type }}
                   </td>
                   <td>
-                      {{ s.score}}
-                  </td>>
+                    {% for s in scoreTable %}
+                      {% if c.checklist_id == s.checklist_id %}
+                        {{ s.checklist_id}}
+                      {% endif %}
+                    {% endfor %}
+                  </td>
                   <td>
                       <center><button class="btn btn-fill btn-primary"> Edit </button></center>
                   </td>
                 </tr>
-                {% endfor %}
-                {% endif %}
-                {% endfor %}
-                
-                
+                {% endfor %}     
                 
               </tbody>
             </table>
@@ -74,40 +70,5 @@
       </div>
     </div>
   </div>
-
-<!-- <form action="{%url 'createNewAudit'%}" method="POST">
-{% csrf_token %}
-<div class="SelectTenant">
-    <h2>Select Tenant</h2>
-    <hr class= "solidDivider">
-    <div class="custom-sel" style="width:100%;">
-        <select class="tenants" name="tenant">
-            <option selected="true" disabled="disabled">Tenants</option>
-            {% if tenants%}
-            {% for tenant in tenants %}
-                <option value={{tenant.business_name}}>{{tenant.business_name}}</option>
-            {% endfor %}
-            {% endif %}
-        </select>
-    </div>
-</div>
-
-<div class="SelectChecklist">
-    <h2>Select Audit Checklist</h2>
-    <hr class= "solidDivider">
-    <div class="custom-sel" style="width:100%;">
-        <select name="checklist">
-            <option selected="true" disabled="disabled">Checklists</option>
-            {% for checklist in checklists %}
-            <option value="{{checklist.title}}">{{checklist.title}}</option>
-            {% endfor %}
-        </select>
-    </div>
-</div>
-
-
-<button class="createBtn" type="submit" id='b1'>Create</button>
-</form> -->
-
 
 {% endblock content %}

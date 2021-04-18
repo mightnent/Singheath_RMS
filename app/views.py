@@ -113,20 +113,41 @@ def createTenantView(request):
             EmailHandler.send_new_tenant_email(email=email, login_link=request.build_absolute_uri("/login"), gen_password=gen_password, owner_name=name, username=business_name)
             return redirect('/manage-tenant')
 
+
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
-def viewAudits(request):
-    tenants = Tenant.objects.all()
-    checklists = CheckList.objects.all()
-    checklistInstance = ChecklistInstance.objects.all()
-    scoreTable = ScoreTable
+def viewAuditbyTenant(request):
+    if(request.method == 'POST'):
+        data = request.POST
+        tenant = data['tenant']
+
+    checklistInstance = ChecklistInstance.objects.filter(tenant=tenant)
+    scoreTable = ScoreTable.objects.filter(tenant=tenant)
     context = {
-        'tenants':tenants,
-        'checklists' :checklists,
         'checklistInstances' :checklistInstance,
+        'tenant':tenant,
         'scoreTable' :scoreTable
     }
+
     return render(request,'manageTenants/viewAudits.html',context)
+
+# @login_required(login_url="/login/")
+# @allowed_user(allowed_roles=['auditor'])
+# def viewAuditbyTenant(request):
+#     checklistInstance = ChecklistInstance.objects.all()
+#     # checklists = CheckList.objects.all()
+#     # checklistInstance = ChecklistInstance.objects.filter(tenant=tenant)
+#     # scoreTable = ScoreTable
+#     context = {
+#        'tenant':tenant,
+#         # 'checklists' :checklists,
+#         # 'checklistInstances' :checklistInstance,
+#         # 'scoreTable' :scoreTable
+#     }
+#     return render(request,'manageTenants/viewAudits.html',context)
+
+
+    
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])    

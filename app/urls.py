@@ -20,13 +20,15 @@ urlpatterns = [
 
     path('create-new-audit',views.createNewAudit,name='createNewAudit'),
 
+    # path('search-audit', views.searchAuditView, name='searchAuditView'),
+
     path('manage-audit', views.manageAuditView, name='manageAudit'),
 
     path('manage-tenant',views.manageTenantView, name="manageTenant"),
 
     path('create-tenant',views.createTenantView, name='createTenant'),
 
-    path('viewAudits', views.viewAudits, name='viewAudits'),
+    path('view-audit-by-tenant', views.viewAuditbyTenant, name='viewAuditbyTenant'),
 
     path('request', views.request, name='request'),
 
@@ -35,6 +37,7 @@ urlpatterns = [
     path('viewaudit', views.viewaudit, name='viewaudit'),
 
     path("managenonompliance", views.managenoncompliance, name='managenoncompliance')
+
 
 
 ]
