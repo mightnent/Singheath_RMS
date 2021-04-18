@@ -26,7 +26,7 @@ urlpatterns = [
 
     path('create-tenant',views.createTenantView, name='createTenant'),
 
-    path('performance', views.performance, name='performance'),
+    path('viewAudits', views.viewAudits, name='viewAudits'),
 
     path('request', views.request, name='request'),
 

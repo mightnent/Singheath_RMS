@@ -85,7 +85,7 @@ def manageTenantView(request):
         'tenants':tenants,       
     }
     
-    return render(request,"manage-tenant.html",context)
+    return render(request,'manageTenants/manage-tenant.html',context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
@@ -115,13 +115,30 @@ def createTenantView(request):
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
-def performance(request):
-    return render(request,"performanceGraph.html")
+def viewAudits(request):
+    tenants = Tenant.objects.all()
+    checklists = CheckList.objects.all()
+    checklistInstance = ChecklistInstance.objects.all()
+    scoreTable = ScoreTable
+    context = {
+        'tenants':tenants,
+        'checklists' :checklists,
+        'checklistInstances' :checklistInstance,
+        'scoreTable' :scoreTable
+    }
+    return render(request,'manageTenants/viewAudits.html',context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])    
 def request(request):
     return render(request,"request.html")
+
+
+
+
+
+
+# Allowed roles: tenant
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['tenant'])
