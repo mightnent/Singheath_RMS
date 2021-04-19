@@ -176,7 +176,7 @@ def performance(request):
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])    
-def request(request):
+def attention(request):
     return render(request,"request.html")
 
 @login_required(login_url="/login/")
@@ -193,6 +193,21 @@ def tenant(request):
 @allowed_user(allowed_roles=['tenant'])
 def viewaudit(request):
     return render(request,'viewaudit.html')
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor'])
+def tenantInfo(request):
+    
+    if(request.method=='POST'):
+        tenant = request.POST['tenant']
+    #filter out all the records that's completed for the tenant
+    scoreTable = ScoreTable.objects.filter(tenant=tenant).filter(num_visited=F('page_num'))
+    checklistTable = ChecklistInstance.objects.filter(checklist_id__in = [x.checklist_id for x in scoreTable]).exclude(date_due__isnull=True)
+
+    context = {
+        'scoreTable':scoreTable,
+    }
+    return render(request,'tenant-info.html',context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['tenant'])

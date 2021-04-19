@@ -15,12 +15,14 @@
 {% block content %}
 
 <h1>Manage Tenant</h1>
-
+<form method = "POST" action="{%url 'tenantInfo'%}">
+{% csrf_token %}
 <div class="ExistingTenant">
     <h2>Existing Tenants</h2>
     <hr class= "solidDivider">
     <div class="custom-sel" style="width:100%;">
-        <select id="tenants">
+    
+        <select id="tenants" name="tenant">
             <option selected disabled>Choose Tenant... </option>
             {% if tenants %}
             {% for tenant in tenants %}
@@ -28,10 +30,11 @@
             {% endfor %}
             {% endif %}
         </select>
+    
     </div>
 </div>
-<button class="Btn" type="button" id='b1'>Search</button>
-
+<button class="Btn" type="submit" id='b1'>Search</button>
+</form>
 
 <div class="NewTenant">
     <h2>New Tenant</h2>

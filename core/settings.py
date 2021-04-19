@@ -31,11 +31,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_crontab',
+    'mathfilters',
     'app',  # Enable the inner app 
     'checklist',
     'nested_inline',
     'audit',
-    'notifications'
+    'notifications',
+    
 ]
 
 MIDDLEWARE = [

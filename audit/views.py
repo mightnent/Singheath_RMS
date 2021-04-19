@@ -52,12 +52,14 @@ def audit(request):
             
             checklistInstance.save()
         total = 1
+        non_compliance = False
         if ScoreTable.objects.filter(checklist_id=checklist_id).exists():
             row = ScoreTable.objects.get(checklist_id=checklist_id)
             if score == -1:
                 #for the sake of score table, dont need to differentiate na and fail
                 score = 0
                 total = 0
+            
             page_num = int(page)
             row.score += score
             row.total += total
@@ -66,11 +68,13 @@ def audit(request):
             row.save()
 
         else:
+            if score == 0:
+                non_compliance = True
             if score == -1:
                 total = 0
                 score = 0
             page_num = int(page)
-            scoreTable = ScoreTable(tenant_location=tenant_location,checklist_id=checklist_id,score=score,total=total,tenant = tenant,num_visited=1,page_num=page_num)
+            scoreTable = ScoreTable(tenant_location=tenant_location,checklist_id=checklist_id,score=score,total=total,tenant = tenant,num_visited=1,page_num=page_num, checklist_type=checklist_type,non_compliance=non_compliance)
             scoreTable.save()
         if checklist_type=="FnB":
             return redirect('/new-audit/fnb-checklist?page='+new_page)

@@ -27,12 +27,14 @@ class ChecklistInstance(models.Model):
 class ScoreTable(models.Model):
     tenant_location = models.CharField(max_length=50)
     tenant = models.CharField(max_length=50)
+    checklist_type = models.CharField(max_length=50)
     score = models.IntegerField()
     total = models.IntegerField()
     checklist_id = models.IntegerField()
     date = models.DateField(default = date.today())
     num_visited = models.IntegerField()
     page_num = models.IntegerField()
+    non_compliance = models.BooleanField(default=False)
 
     def __str__(self):        
         return str(self.checklist_id)

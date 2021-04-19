@@ -28,11 +28,13 @@ urlpatterns = [
 
     path('performance', views.performance, name='performance'),
 
-    path('request', views.request, name='request'),
+    path('attention', views.attention, name='attention'),
 
     path('tenant', views.tenant, name='tenant'),
 
     path('viewaudit', views.viewaudit, name='viewaudit'),
+
+    path('tenant-info',views.tenantInfo,name='tenantInfo'),
 
     path("managenonompliance", views.managenoncompliance, name='managenoncompliance')
 
