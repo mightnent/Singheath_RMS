@@ -42,12 +42,18 @@
                 <td class="text-center">
                   {{ck.date_due}}
                 </td>
+                <form method='POST' action="{%url 'appeal'%}">
+                {% csrf_token %}
+                <input type="hidden" name="qn" value = "{{ck.id}}"/>
                 <td>
-                  <center><button style="border-radius: 5px;background-color: yellow; border:none;"> Appeal </button></center>
+                  <center><button type="submit" style="border-radius: 5px;background-color: yellow; border:none;"> Appeal </a></center>
                 </td>
+                </form>
+
                 <td>
                   <center><button style="border-radius: 5px;background-color: lightgreen; border:none;"> Rectify </button></center>
                 </td>
+                
             </tr>
           {% endfor %}
           </tbody>

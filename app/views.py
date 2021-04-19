@@ -11,6 +11,7 @@ from django.contrib.auth.models import User,Group
 from .models import Tenant
 from checklist.models import *
 from audit.models import *
+from notifications.models import *
 import checklist.views as checkListViews
 from django.urls import reverse
 from urllib.parse import urlencode
@@ -177,7 +178,11 @@ def performance(request):
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])    
 def attention(request):
-    return render(request,"request.html")
+    appealTable = AppealAlert.objects.all()
+    context = {
+        'appealTable' : appealTable
+    }
+    return render(request,"attention.html",context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['tenant'])
@@ -195,7 +200,21 @@ def tenant(request):
         'checklistTable' : checklistTable,
         'scoreTable' : scoreTable
     }
-    return render(request,'tenant.html',context)
+    return render(request,'tenant/tenant.html',context)
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['tenant'])
+def appeal(request):
+    if(request.method=='POST'):
+        this_id = request.POST['qn']
+    print(this_id)
+
+    row = ChecklistInstance.objects.get(id=this_id)
+    context={
+        'row':row,
+    }
+
+    return render(request,'tenant/appeal.html',context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['tenant'])

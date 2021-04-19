@@ -1,0 +1,65 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+
+{% block title %} Attention {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<!-- <link href="{% static 'assets/css/black-dashboard.css' %}" rel="stylesheet" /> -->
+<link href="{% static 'assets/css/request.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
+
+
+{% block content %}
+
+
+{% comment %} <div class="request">
+    <h2>Kopitiam</h2>
+    <hr class= "solidDivider">
+    <ul class="requestList">
+        <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mike John responded to your email</a></li>
+        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">You have 5 more tasks</a></li>
+        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Your friend Michael is in town</a></li>
+        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another notification</a></li>
+        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another one</a></li>
+    </ul>
+</div> {% endcomment %}
+<h1>Appeals</h1>
+<hr class= "solidDivider">
+{% if appealTable %}
+<form method="POST" action="{%url 'appeal-reply'%}">
+{% csrf_token %}
+{% for appeal in appealTable %}
+<input type="hidden" name="row_id" value = "{{appeal.id}}"/>
+<input type="hidden" name="comment" value = "{{appeal.comment}}"/>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+           
+            <div class="card-body">
+                <h5>{{appeal.tenant}}</h5>
+                <p>Checklist type{{appeal.checklist_type}}</p>
+                <p>Original due date: {{appeal.original_date}}</p>
+                <p>Reason for appeal: {{appeal.reason}}</p>
+                <p>Proposed new date: {{appeal.new_date}}</p>
+            </div>           
+            <div class="col-6">
+                <button type="submit" name="submit" class="button bg-danger" value="appeal-reject">Reject</button>
+            </div>
+            <div class="col-6">
+                <button type="submit" name="submit" class="button bg-success" value="appeal-approve">Approve</button>
+            </div>
+        </div>
+    </div>
+            
+</div>
+</form>
+{% endfor %}
+{% else %}
+<h2 style="color:#ADAFB0">No Appeals</h2>
+{% endif %}
+
+
+{% endblock content %}

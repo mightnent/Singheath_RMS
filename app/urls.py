@@ -36,6 +36,8 @@ urlpatterns = [
 
     path('tenant-info',views.tenantInfo,name='tenantInfo'),
 
+    path('appeal',views.appeal,name='appeal'),
+
     path("managenonompliance", views.managenoncompliance, name='managenoncompliance')
 
 
