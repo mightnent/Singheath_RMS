@@ -183,9 +183,17 @@ def attention(request):
 @allowed_user(allowed_roles=['tenant'])
 def tenant(request):
     username = request.user.username
+   
     this_tenant = Tenant.objects.get(business_name=username)
+    scoreTable = ScoreTable.objects.filter(tenant=username).filter(num_visited=F('page_num'))
+    scoreTableCompliance = scoreTable.filter(non_compliance=True)
+    
+
+    checklistTable = ChecklistInstance.objects.filter(checklist_id__in = [x.checklist_id for x in scoreTableCompliance]).filter(date_due__isnull=False)
     context = {
         'lease_end_date' : this_tenant.lease_end_date,
+        'checklistTable' : checklistTable,
+        'scoreTable' : scoreTable
     }
     return render(request,'tenant.html',context)
 
@@ -202,7 +210,6 @@ def tenantInfo(request):
         tenant = request.POST['tenant']
     #filter out all the records that's completed for the tenant
     scoreTable = ScoreTable.objects.filter(tenant=tenant).filter(num_visited=F('page_num'))
-    checklistTable = ChecklistInstance.objects.filter(checklist_id__in = [x.checklist_id for x in scoreTable]).exclude(date_due__isnull=True)
 
     context = {
         'scoreTable':scoreTable,
