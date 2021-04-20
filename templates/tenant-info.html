@@ -1,10 +1,13 @@
 {% extends "layouts/base.html" %}
 {% load mathfilters  %}
+{% load static %}
 
 {% block title %} Tenant Info {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<link href="{% static 'assets/css/auditInfo.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -13,13 +16,15 @@
       <div class="col-12">
         <div class="card ">
           <div class="card-header">
-            <h4 class="card-title"> <span style="font-size:2em;">Audits</span></h4>
+            <h2>{{tenant}} Audits</span></h2>
+            <hr class= "solidDivider">
           </div>
           <div class="card-body">
             <div class="table-responsive">
               <table class="table tablesorter " id="">
                 <thead class=" text-primary">
                   <tr>
+                    <th>ID</th>
                     <th>
                       Date
                     </th>
@@ -37,6 +42,7 @@
                 <tbody>
                     {% for stb in scoreTable %}
                   <tr>
+                    <td>{{stb.checklist_id}}</td>
                     <td>
                     {% comment %} date {% endcomment %}
                       {{ stb.date }}
@@ -49,18 +55,26 @@
                     <td class="text-center">
                       {{ stb.score|div:stb.total|mul:100|floatformat:0 }}
                     </td>
-                    {% comment %} Status {% endcomment %}
-                    <td class="text-center">
-                        {% if stb.non_compliance %}
-                            <span style="color:red;">
-                            Needs Rectification
-                            </span>
-                        {% else %}
-                            <span style="color:green;">
-                            Complete
-                            </span>
-                        {% endif %}
-                    </td>
+                    <form method = "POST" action="{%url 'auditInfo'%}">
+                    {% csrf_token %} 
+                    <input type="hidden" name="tenant" value = "{{stb.tenant}}"/>
+                    <input type="hidden" name="id" value = "{{stb.checklist_id}}"/>
+                    <input type="hidden" name="ck_type" value = "{{stb.checklist_type}}"/>
+                      {% comment %} Status {% endcomment %}
+                      <td class="text-center">
+                        <button class="Btn" type="submit" id='b1'>
+                          {% if stb.non_compliance %}
+                              <span style="color:red;">
+                              Needs Rectification
+                              </span>
+                          {% else %}
+                              <span style="color:green;">
+                              Complete
+                              </span>
+                          {% endif %}
+                        </button>
+                      </td>
+                    </form>
                     
                     
                   </tr>

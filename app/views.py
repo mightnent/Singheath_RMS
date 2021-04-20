@@ -247,8 +247,29 @@ def tenantInfo(request):
 
     context = {
         'scoreTable':scoreTable,
+        'tenant':tenant
     }
     return render(request,'tenant-info.html',context)
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor'])
+def auditInfo(request):
+    
+    if(request.method=='POST'):
+        tenant = request.POST['tenant']
+        this_id = request.POST['id']
+        this_type = request.POST['ck_type']
+    print(this_type)
+    #filter out all the records that's completed for the tenant
+    scoreTable = ScoreTable.objects.filter(tenant=tenant).filter(num_visited=F('page_num')).filter(checklist_id = this_id)
+    checklistTable = ChecklistInstance.objects.filter(checklist_id=this_id).filter(score =- -1)
+
+    context = {
+        'scoreTable':scoreTable,
+        'checklistTable':checklistTable,
+        'type':this_type
+    }
+    return render(request,'audit-info.html',context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['tenant'])

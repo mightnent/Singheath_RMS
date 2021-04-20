@@ -1,0 +1,15 @@
+.secHeader{
+    background-color:#F36F38;
+    padding: 10px;
+}
+
+h3{
+    margin-bottom: 15px;
+    border-bottom: 0.5px solid #F36F38;
+}
+
+.solidDivider{
+    border-top: 3px solid #F36F38;
+    margin-top: -25px;
+    margin-bottom: 20px;
+}

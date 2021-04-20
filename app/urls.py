@@ -35,6 +35,8 @@ urlpatterns = [
     path('viewaudit', views.viewaudit, name='viewaudit'),
 
     path('tenant-info',views.tenantInfo,name='tenantInfo'),
+    
+    path('audit-info',views.auditInfo,name='auditInfo'),
 
     path('appeal',views.appeal,name='appeal'),
 
