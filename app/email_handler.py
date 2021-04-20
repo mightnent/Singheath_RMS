@@ -3,8 +3,9 @@ from os import remove
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives, get_connection
 from django.conf import settings
+from datetime import date
 from email.mime.image import MIMEImage
-from audit.models import ChecklistInstance
+from audit.models import ChecklistInstance, ScoreTable
 from django.contrib.staticfiles import finders
 import xlsxwriter
 
@@ -79,7 +80,6 @@ class EmailHandler:
             email.attach(image)
         email.send()
 
-
     """
     Sends email to tenant whose lease is expiring
     """
@@ -110,6 +110,72 @@ class EmailHandler:
             email.attach(image)
         email.send() 
 
+    """
+    Sends notification email to tenant when a new audit is performed
+    """
+    @staticmethod
+    def notify_audit_performed(owner_email, audit_link, owner_name, checklist_id):
+        checklist_objects = ChecklistInstance.objects.filter(checklist_id=checklist_id)
+        scoreTable = ScoreTable.objects.filter(checklist_id=checklist_id)[0]
+        base = checklist_objects[0]
+        auditor_name = base.auditor
+        score_percentage = "{:0.2f}".format((scoreTable.score / scoreTable.total)*100)
+        closest_date = EmailHandler._getClosestDate(checklist_objects)
+
+        subject = "New Audit Performed"
+        message = f"This email is to notify you that {auditor_name} has performed a {base.checklist_type} audit."
+        context = {
+            'view_audit_link': audit_link,
+            'auditor_name': auditor_name,
+            'owner_name': owner_name,
+            'checklist_type': base.checklist_type,
+            'is_noncompliance': date(date.today().year+2, 12, 30) != closest_date,
+            'score_percentage': score_percentage,
+            'closest_date': closest_date,
+            'logo_name': "logo"
+        }
+        msg_html = render_to_string("email_templates/notify_audit_performed.html", context)
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=message,
+            from_email=settings.EMAIL_HOST_USER,
+            to=[owner_email]
+        )
+        email.attach_alternative(msg_html, "text/html")
+        email.mixed_subtype = "related"
+        with open(finders.find("assets/img/Singhealth-logo.png"), mode='rb') as f:
+            image = MIMEImage(f.read())
+            image.add_header('Content-ID', "<logo>")
+            email.attach(image)
+        email.send()
+
+    """
+    Sends notification email to tenant with upcoming non-compliance deadline
+    """
+    @staticmethod
+    def notify_non_compliance_deadline(owner_email, owner_name, connection):
+        subject = "Upcoming Non-compliance Rectification Deadline"
+        message = f"This email is to notify you of outstanding non-compliance item(s) that require rectification by tomorrow."
+        context = {
+            'owner_name': owner_name,
+            'logo_name': "logo"
+        }
+        msg_html = render_to_string("email_templates/non_compliance_reminder.html", context)
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=message,
+            from_email=settings.EMAIL_HOST_USER,
+            to=[owner_email],
+            connection=connection
+        )
+        email.attach_alternative(msg_html, "text/html")
+        email.mixed_subtype = "related"
+        with open(finders.find("assets/img/Singhealth-logo.png"), mode='rb') as f:
+            image = MIMEImage(f.read())
+            image.add_header('Content-ID', "<logo>")
+            email.attach(image)
+        email.send()
+    
     """
     Creates excel version of checklist
     """
@@ -204,3 +270,16 @@ class EmailHandler:
                 worksheet.write(row, 0, "Total")
                 worksheet.write_formula(row, 1, f'=SUM(B{score_section_start}:B{row})')
                 ### END FINAL OVERALL SCORE SECTION
+
+    """
+    Get closest non-compliance date
+    """
+    @staticmethod
+    def _getClosestDate(checklist_object):
+        today = date.today()
+        latest = date(today.year+2, 12, 30)
+        for i in checklist_object:
+            if (i.date_due):
+                if (i.date_due - today) < (latest - today):
+                    latest = i.date_due
+        return latest

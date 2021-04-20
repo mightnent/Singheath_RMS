@@ -34,30 +34,8 @@ def index(request):
     
     for stb in scoreTable:
         frac = stb.score / stb.total
-        if stb.date.month == 1:            
-            month_list[1].append(frac)
-        elif stb.date.month == 2:
-            month_list[2].append(frac)
-        elif stb.date.month == 3:
-            month_list[3].append(frac)
-        elif stb.date.month == 4:
-            month_list[4].append(frac)
-        elif stb.date.month == 5:
-            month_list[5].append(frac)
-        elif stb.date.month == 6:
-            month_list[6].append(frac)
-        elif stb.date.month == 7:
-            month_list[7].append(frac)
-        elif stb.date.month == 8:
-            month_list[8].append(frac)
-        elif stb.date.month == 9:
-            month_list[9].append(frac)
-        elif stb.date.month == 10:
-            month_list[10].append(frac)
-        elif stb.date.month == 11:
-            month_list[11].append(frac)
-        elif stb.date.month == 12:
-            month_list[12].append(frac)
+        if isinstance(stb.date.month, int) and 1 <= stb.date.month <= 12:
+            month_list[stb.date.month].append(frac)
 
     institution_data = []
     

@@ -1,0 +1,36 @@
+{% extends "email_templates/email_base.html" %}
+
+{% block content %}
+
+<tr>
+    <td class="wrapper">
+        <table role="presentation" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>
+                    <p>Dear {{ owner_name }}</p>
+                    <br />
+                    <p>
+                        This email is to notify you that {{ auditor_name }} has performed a {{ checklist_type }} audit.<br />
+                    </p>
+                    <br />
+                    <p>
+                        Your score for the audit is {{ score_percentage }}%.<br />
+                        {% if is_noncompliance %}
+                        There are non-compliance items requiring rectification.
+                        The closest due date is {{ closest_date }}.
+                        {% endif %}
+                    </p>
+                    <br />
+                    <p>
+                        You can login to the system <a href="{{ view_audit_link }}">here</a> for more details. <br />
+                    </p>
+                    <br />
+                    <p>
+                        This is an auto-generated email, please do not reply to this email.<br />
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+{% endblock content %}
