@@ -14,5 +14,9 @@ urlpatterns = [
 
     path('appeal-alert',views.appealAlert,name="appeal-alert"),
 
-    path('appeal-reply',views.appealReply,name='appeal-reply')
+    path('appeal-reply',views.appealReply,name='appeal-reply'),
+
+    path('rectification-alert',views.rectificationAlert,name='rectification-alert'),
+
+    path('rectification-reply',views.rectificationReply,name='rectification-reply')
 ]

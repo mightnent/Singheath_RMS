@@ -179,8 +179,11 @@ def performance(request):
 @allowed_user(allowed_roles=['auditor'])    
 def attention(request):
     appealTable = AppealAlert.objects.all()
+    rectificationAlert = RectificationAlert.objects.all()
+    rectificationTable = RectificationTable.objects.filter(row_id__in = [x.row_id for x in rectificationAlert])
     context = {
-        'appealTable' : appealTable
+        'appealTable' : appealTable,
+        'rectificationTable' : rectificationTable
     }
     return render(request,"attention.html",context)
 
@@ -215,6 +218,18 @@ def appeal(request):
     }
 
     return render(request,'tenant/appeal.html',context)
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['tenant'])
+def rectification(request):
+    if(request.method=='POST'):
+        this_id = request.POST['qn']
+    row = ChecklistInstance.objects.get(id=this_id)
+    context={
+        'row':row,
+    }
+
+    return render(request,'tenant/rectification.html',context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['tenant'])

@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {% load static %}
 
-{% block title %} Appeal {% endblock %} 
+{% block title %} Rectification {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
@@ -9,7 +9,7 @@
 {% endblock stylesheets %}
 
 {% block content %}
-<form action="{% url 'appeal-alert' %}" method="POST" enctype="multipart/form-data">
+<form action="{% url 'rectification-alert' %}" method="POST" enctype="multipart/form-data">
 {% csrf_token %}
 {% if row %}
 <input type="hidden" name="comment" value = "{{row.comment}}"/>
@@ -69,7 +69,7 @@
             <div class="card">
                 
                 <div class="card-body">
-                    <p class="question-text">Original rectification due date: {{row.date_due}}</p>
+                    <p class="question-text">Date due: {{row.date_due}}</p>
                 </div>
                 
 
@@ -83,10 +83,10 @@
             <div class="card">
                 
                 <div class="card-header">
-                    <p class="comment-inactive">Reason of appeal</p>
+                    <p class="comment-inactive">Update</p>
                 </div>
                 <div class="card-body">
-                    <input name = "reason" class="comment"/>
+                    <input name = "update" class="comment"/>
                 </div>
 
             </div>
@@ -95,25 +95,19 @@
     </div>
 
     <div class="row">
-        <div class="col-12">
-            <div class="card">
-                
-                <div class="card-header">
-                    <p class="comment-inactive">Proposed Rectification Date</p>
-                </div>
-                <div class="col-12 datefield" style="margin:12px;">
-                    <input type="date" name="new_date" placeholder="When Should Tenant Rectify By">
-                </div>
-
-            </div>
-
+        <div class="col-12" style="height:40px;">
+            <input name="photo" type="file" id="actual-btn" hidden/>
+            <label for="actual-btn">Upload Photo</label>
         </div>
+
     </div>
+
+    
 {% endif %}
 
     <div class="row">
         <div class="col-12">
-            <button class="button done-special" type="submit" name="submit" value="appeal">Appeal</button>
+            <button class="button done-special" type="submit" name="submit" value="rectify">Rectify</button>
         </div>
     </div>
 

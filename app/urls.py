@@ -38,6 +38,8 @@ urlpatterns = [
 
     path('appeal',views.appeal,name='appeal'),
 
+    path('rectification',views.rectification,name='rectification'),
+
     path("managenonompliance", views.managenoncompliance, name='managenoncompliance')
 
 

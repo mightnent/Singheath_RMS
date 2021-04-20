@@ -14,3 +14,8 @@ class AppealAlert(models.Model):
     reason = models.CharField(max_length=1000)
     row_id = models.IntegerField()
     checklist_type = models.CharField(max_length=50)
+
+class RectificationAlert(models.Model):
+    date_created = models.DateField(default = date.today())
+    row_id = models.IntegerField()
+  

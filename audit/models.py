@@ -38,6 +38,20 @@ class ScoreTable(models.Model):
 
     def __str__(self):        
         return str(self.checklist_id)
+
+class RectificationTable(models.Model):
+    date_created = models.DateField(default = date.today())
+    date_due = models.DateField()
+    comment = models.CharField(max_length=1000)
+    tenant = models.CharField(max_length=50)
+    update = models.CharField(max_length=1000)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d', height_field=None, width_field=None, max_length=None,blank=True)
+    row_id = models.IntegerField()
+    checklist_type = models.CharField(max_length=50)
+    # pending = 0
+    # rejected = -1
+    # approved = 1
+    status = models.IntegerField()
     
     
     

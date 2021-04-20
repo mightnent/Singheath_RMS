@@ -63,7 +63,6 @@ def appealAlert(request):
     return redirect('tenant')
 
 def appealReply(request):
- 
     if request.method=="POST":
         data = request.POST
         row_id = data['row_id']
@@ -76,4 +75,42 @@ def appealReply(request):
             content = "Your appeal for issue: " + data['comment']+" has been rejected. Please rectify ASAP"
             new_notif = Notification(content = content)
             new_notif.save()
+    return redirect('attention')
+
+def rectificationAlert(request):
+    if request.method == 'POST':
+        data = request.POST
+        photo = request.FILES.get('photo')
+        row_id = data['row_id']
+        update = data['update']
+        date_due = data['date_due']
+        date_due = datetime.strptime(date_due,'%B %d, %Y').date()
+        comment = data['comment']
+        checklist_type = data['checklist_type']
+        tenant = request.user.username
+        rectificationAlert = RectificationAlert(row_id=row_id)
+        rectificationAlert.save()
+        rectificationTable= RectificationTable(photo=photo,row_id=row_id,update=update,date_due=date_due,comment=comment,checklist_type=checklist_type,tenant=tenant,status=0)
+        rectificationTable.save()
+    return redirect('tenant')
+
+def rectificationReply(request):
+    if request.method=="POST":
+        data = request.POST
+        row_id = data['row_id']
+        rectificationAlert = RectificationAlert.objects.get(id=row_id)
+        rectificationTable = RectificationTable.objects.get(row_id=rectificationAlert.row_id)
+        RectificationAlert.objects.filter(id=row_id).delete()
+        if data['submit'] == "rectification-approve":
+            content = "Your rectification for issue: " + data['comment']+" has been approved."
+            new_notif = Notification(content = content)
+            new_notif.save()
+            rectificationTable.status = 1
+            rectificationTable.save()
+        elif data['submit'] == "rectification-reject":
+            content = "Your rectification for issue: " + data['comment']+" has been rejected. Please rectify ASAP"
+            new_notif = Notification(content = content)
+            new_notif.save()
+            rectificationTable.status = -1
+            rectificationTable.save()
     return redirect('attention')

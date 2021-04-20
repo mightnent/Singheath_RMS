@@ -14,18 +14,6 @@
 
 {% block content %}
 
-
-{% comment %} <div class="request">
-    <h2>Kopitiam</h2>
-    <hr class= "solidDivider">
-    <ul class="requestList">
-        <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mike John responded to your email</a></li>
-        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">You have 5 more tasks</a></li>
-        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Your friend Michael is in town</a></li>
-        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another notification</a></li>
-        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another one</a></li>
-    </ul>
-</div> {% endcomment %}
 <h1>Appeals</h1>
 <hr class= "solidDivider">
 {% if appealTable %}
@@ -61,5 +49,40 @@
 <h2 style="color:#ADAFB0">No Appeals</h2>
 {% endif %}
 
+<h1>Rectification</h1>
+<hr class= "solidDivider">
+{% if rectificationTable %}
+<form method="POST" action="{%url 'rectification-reply'%}">
+{% csrf_token %}
+{% for rect in rectificationTable %}
+<input type="hidden" name="row_id" value = "{{rect.id}}"/>
+<input type="hidden" name="comment" value = "{{rect.comment}}"/>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+           
+            <div class="card-body">
+                <h5>{{rect.tenant}}</h5>
+                <p>Checklist type: {{rect.checklist_type}}</p>
+                <p>Original due date: {{rect.date_due}}</p>
+                <p>Issue: {{rect.comment}}</p>
+                <p>Updates: {{rect.update}}</p>
+                <img src = "{{rect.photo.url}}"/>
+            </div>           
+            <div class="col-6">
+                <button type="submit" name="submit" class="button bg-danger" value="rectification-reject">Reject</button>
+            </div>
+            <div class="col-6">
+                <button type="submit" name="submit" class="button bg-success" value="rectification-approve">Approve</button>
+            </div>
+        </div>
+    </div>
+            
+</div>
+</form>
+{% endfor %}
+{% else %}
+<h2 style="color:#ADAFB0">No Rectifications</h2>
+{% endif %}
 
 {% endblock content %}
