@@ -281,6 +281,9 @@ def managenoncompliance(request):
 @allowed_user(allowed_roles=['auditor'])
 def export_checklist(request):
     checkbox_result = request.POST.getlist("checklists[]")
-    #insert export function here
+    current_user = request.user
+    for index in checkbox_result:
+        EmailHandler.checklist_export(current_user.username, current_user.email, index)
+    
     context = {}
     return JsonResponse(context)

@@ -26,10 +26,10 @@
                     <th class="text-center">
                     </th>
                     <th class="text-center">
-                      Date
+                      Type
                     </th>
                     <th class="text-center">
-                      Type
+                      Date
                     </th>
                     <th class="text-center">
                       Score(%)
@@ -149,7 +149,7 @@
             checklists.push($(this).val());
           }
         })
-        alert(checklists);
+        //alert(checklists);
         $.ajax({
           type: "POST",
           url: "{% url 'export_checklist' %}",
