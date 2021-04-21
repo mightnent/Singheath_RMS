@@ -1,13 +1,54 @@
 {% extends "layouts/base.html" %}
+{% load static %}
 
 {% block title %} Login {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<style>
+  .main-panel > .content {
+    padding: 40px 280px;
+  }
+
+  .logo > img {
+    width: 25%;
+    display: block;
+    margin: 0 auto 30px;
+  }
+
+  .card {
+    box-shadow: 0 0 20px 1px rgba(243, 111, 56, 0.1);
+  }
+
+  @media screen and (max-width: 991px) {
+    .main-panel .content {
+      padding: 40px 120px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+  .main-panel .content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .logo > img {
+    width: 30%;
+  }
+}
+
+.form-control {
+  transition: border-color 0.2s ease-in-out;
+}
+
+
+</style>
+{% endblock stylesheets %}
+
 
 {% block content %}
 
-        <div class="row">
+        <div class="row" style="justify-content: center;">
           <div class="col-md-8">
             <div class="card">
 
@@ -16,13 +57,16 @@
                 {% csrf_token %} 
 
                 <div class="card-header">
-                  <h5 class="title">Login</h5>
+                  <div class="logo">
+                    <img src= "{% static '/assets/img/Singhealth-logo.png' %}" alt="Singhealth Logo">
+                  </div>
+                  <h4 style="text-align: center; color: #F36F38" class="title">Welcome to Singhealth RMS</h5>
 
                   <h6 class="card-category">
                       {% if msg %}
                         <span class="text-danger">{{ msg | safe }}</span>
                       {% else %}
-                        Add your credentials
+                        <!-- Add your credentials -->
                       {% endif %}  
                   </h6>
                 </div>
@@ -31,7 +75,7 @@
 
                     <div class="row">
 
-                      <div class="col-md-3 px-md-1">
+                      <div style="width: 100%">
                         <div class="form-group">
                           <label>Username</label>
                           {{ form.username }}
@@ -41,7 +85,7 @@
                     </div>
                     <div class="row">
 
-                      <div class="col-md-3 px-md-1">
+                      <div style="width: 100%">
                         <div class="form-group">
                           <label>Password</label>
                           {{ form.password }}
@@ -52,7 +96,7 @@
                     
                 </div>
                 <div class="card-footer">
-                  <button type="submit" name="login" class="btn btn-fill btn-primary">Login</button>
+                  <button style="background-color: #F36F38; width:100%" type="submit" name="login" class="btn btn-fill btn-primary">Login</button>
                   {% comment %} &nbsp; &nbsp;
                   Don't have an account? <a href="{% url 'register' %}" class="text-primary">Create</a> {% endcomment %}
                 </div>

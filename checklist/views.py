@@ -1,9 +1,13 @@
+from app.models import Tenant
 from authentication.decorators import allowed_user
 from django.core.paginator import EmptyPage,PageNotAnInteger,Paginator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from audit.models import *
+from django.contrib import messages
+from django.urls import reverse
+from app.email_handler import EmailHandler
 
 
 tenant = ""
@@ -125,3 +129,19 @@ def nonfnb(request):
     }   
 
     return render(request,'audit/non-fnb-checklist.html',context)
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor'])
+def completeAudit(request):
+    global tenant
+    global checklist_id
+
+    if request.GET.get('tenant') != None:
+        tenant = request.GET.get('tenant')
+    if request.GET.get('id') != None:
+        checklist_id = request.GET.get('id')
+
+    tenant_email = Tenant.objects.get(business_name = tenant, institution = request.user.groups.all()[1]).email
+    EmailHandler.notify_audit_performed(tenant_email, request.build_absolute_uri("/viewaudit"), tenant, checklist_id)
+    messages.info(request, "Audit successfully completed")
+    return redirect(reverse("newAudit"))
