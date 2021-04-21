@@ -79,6 +79,16 @@ def index(request):
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
+def navigation(request):
+    username = request.user.username
+    print(username)
+    context = {
+        'username':username
+    }
+    return render(request,'navigation.html',context)
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor'])
 def audit(request):
     form = AuditForm()
     print(form)
