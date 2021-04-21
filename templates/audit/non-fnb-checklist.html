@@ -125,6 +125,22 @@
 </div>
 
 <div class="row">
+    <div class="col-12">
+        <div class="card">
+            
+            <div class="card-header">
+                <p class="comment-inactive">Rectification Date</p>
+            </div>
+            <div class="col-12 datefield" style="margin:12px;">
+                <input type="date" name="date_due" placeholder="When Should Tenant Rectify By" required/>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
     <div class="col-12" style="height:40px;">
         <input name="photo" type="file" id="actual-btn" hidden/>
         <label for="actual-btn">Upload Photo</label>
@@ -132,11 +148,6 @@
 
 </div>
 
-<div class="row">
-    <div class="col-12 datefield">
-        <input type="date" name="date_due" placeholder="When Should Tenant Rectify By">
-    </div>
-</div>
 
 {% endfor %}
 {% endif %}

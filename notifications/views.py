@@ -53,28 +53,38 @@ def appealAlert(request):
         reason = data['reason']
         original_date = data['date_due']
         original_date = datetime.strptime(original_date,'%B %d, %Y').date()
-        # original_date = original_date.strftime('%Y-%m-%d')
-        # original_date = original_date.strptime()
         comment = data['comment']
         checklist_type = data['checklist_type']
         tenant = request.user.username
         appealAlert = AppealAlert(new_date=new_date,reason=reason,original_date=original_date,comment=comment,tenant=tenant,row_id=row_id,checklist_type=checklist_type)
         appealAlert.save()
+        checklistInstance = ChecklistInstance.objects.get(id=row_id)
+        checklistInstance.appeal_status = 0
+        checklistInstance.save()
     return redirect('tenant')
 
 def appealReply(request):
     if request.method=="POST":
         data = request.POST
         row_id = data['row_id']
-        AppealAlert.objects.filter(id=row_id).delete()
+        #appeal_id = data['appeal_id']
+        new_date = data['new_date']
+        new_date = datetime.strptime(new_date,'%B %d, %Y').date()
+        checklistInstance = ChecklistInstance.objects.get(id=row_id)
+        AppealAlert.objects.filter(row_id=row_id).delete()
         if data['submit'] == "appeal-approve":
             content = "Your appeal for issue: " + data['comment']+" has been approved."
             new_notif = Notification(content = content)
             new_notif.save()
+            checklistInstance.appeal_status = 1
+            checklistInstance.date_due = new_date
+            checklistInstance.save()
         elif data['submit'] == "appeal-reject":
             content = "Your appeal for issue: " + data['comment']+" has been rejected. Please rectify ASAP"
             new_notif = Notification(content = content)
             new_notif.save()
+            checklistInstance.appeal_status = -1
+            checklistInstance.save()
     return redirect('attention')
 
 def rectificationAlert(request):
@@ -92,25 +102,34 @@ def rectificationAlert(request):
         rectificationAlert.save()
         rectificationTable= RectificationTable(photo=photo,row_id=row_id,update=update,date_due=date_due,comment=comment,checklist_type=checklist_type,tenant=tenant,status=0)
         rectificationTable.save()
+        checklistInstance = ChecklistInstance.objects.get(id=row_id)
+        checklistInstance.rect_status=0
+        checklistInstance.save()
     return redirect('tenant')
 
 def rectificationReply(request):
     if request.method=="POST":
         data = request.POST
         row_id = data['row_id']
-        rectificationAlert = RectificationAlert.objects.get(id=row_id)
+        #rect_id = data['rect_id']
+        rectificationAlert = RectificationAlert.objects.get(row_id=row_id)
+        checklistInstance = ChecklistInstance.objects.get(id=row_id)
         rectificationTable = RectificationTable.objects.get(row_id=rectificationAlert.row_id)
-        RectificationAlert.objects.filter(id=row_id).delete()
+        RectificationAlert.objects.filter(row_id=row_id).delete()
         if data['submit'] == "rectification-approve":
             content = "Your rectification for issue: " + data['comment']+" has been approved."
             new_notif = Notification(content = content)
             new_notif.save()
             rectificationTable.status = 1
+            checklistInstance.rect_status = 1
             rectificationTable.save()
+            checklistInstance.save()
         elif data['submit'] == "rectification-reject":
             content = "Your rectification for issue: " + data['comment']+" has been rejected. Please rectify ASAP"
             new_notif = Notification(content = content)
             new_notif.save()
             rectificationTable.status = -1
+            checklistInstance.rect_status = -1
             rectificationTable.save()
+            checklistInstance.save()
     return redirect('attention')

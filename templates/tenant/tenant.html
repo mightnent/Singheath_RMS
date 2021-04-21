@@ -35,6 +35,7 @@
 
           <tbody>
           {% for ck in checklistTable %}
+          {% if ck.rect_status != 1 %}
             <tr>
                 <td class="text-center">
                    {{ck.comment}}
@@ -42,6 +43,16 @@
                 <td class="text-center">
                   {{ck.date_due}}
                 </td>
+                {% if ck.appeal_status == 0 %}
+                <td class="text-center">
+                   Pending
+                </td>
+                {% elif ck.appeal_status == -1%}
+                <td class="text-center">
+                   Rejected
+                </td>
+                
+                {% else %}
                 <form method='POST' action="{%url 'appeal'%}">
                 {% csrf_token %}
                 <input type="hidden" name="qn" value = "{{ck.id}}"/>
@@ -49,6 +60,12 @@
                   <center><button type="submit" style="border-radius: 5px;background-color: yellow; border:none;"> Appeal </a></center>
                 </td>
                 </form>
+                {% endif %}
+                {% if ck.rect_status == 0 %}
+                <td class="text-center">
+                   Pending
+                </td>
+                {% else %}
                 <form method="POST" action="{%url 'rectification'%}">
                 {% csrf_token %}
                 <input type="hidden" name="qn" value = "{{ck.id}}"/>
@@ -56,9 +73,14 @@
                   <center><button style="border-radius: 5px;background-color: lightgreen; border:none;"> Rectify </button></center>
                 </td>
                 </form>
+                {% endif %}
                 
             </tr>
+          
+          
+          {% endif %}
           {% endfor %}
+          
           </tbody>
         </table>
       </div>

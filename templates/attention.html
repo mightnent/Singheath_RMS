@@ -20,8 +20,10 @@
 <form method="POST" action="{%url 'appeal-reply'%}">
 {% csrf_token %}
 {% for appeal in appealTable %}
-<input type="hidden" name="row_id" value = "{{appeal.id}}"/>
+<input type="hidden" name="appeal_id" value = "{{appeal.id}}"/>
+<input type="hidden" name="row_id" value = "{{appeal.row_id}}"/>
 <input type="hidden" name="comment" value = "{{appeal.comment}}"/>
+<input type="hidden" name="new_date" value = "{{appeal.new_date}}"/>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -55,7 +57,8 @@
 <form method="POST" action="{%url 'rectification-reply'%}">
 {% csrf_token %}
 {% for rect in rectificationTable %}
-<input type="hidden" name="row_id" value = "{{rect.id}}"/>
+<input type="hidden" name="row_id" value = "{{rect.row_id}}"/>
+<input type="hidden" name="rect_id" value = "{{rect.id}}"/>
 <input type="hidden" name="comment" value = "{{rect.comment}}"/>
 <div class="row">
     <div class="col-12">
@@ -67,7 +70,9 @@
                 <p>Original due date: {{rect.date_due}}</p>
                 <p>Issue: {{rect.comment}}</p>
                 <p>Updates: {{rect.update}}</p>
+                {% if rect.photo %}
                 <img src = "{{rect.photo.url}}"/>
+                {% endif %}
             </div>           
             <div class="col-6">
                 <button type="submit" name="submit" class="button bg-danger" value="rectification-reject">Reject</button>

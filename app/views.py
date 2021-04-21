@@ -194,10 +194,10 @@ def tenant(request):
    
     this_tenant = Tenant.objects.get(business_name=username)
     scoreTable = ScoreTable.objects.filter(tenant=username).filter(num_visited=F('page_num'))
-    scoreTableCompliance = scoreTable.filter(non_compliance=True)
-    
+    scoreTableCompliance = scoreTable.filter(non_compliance=True)  
 
     checklistTable = ChecklistInstance.objects.filter(checklist_id__in = [x.checklist_id for x in scoreTableCompliance]).filter(date_due__isnull=False)
+  
     context = {
         'lease_end_date' : this_tenant.lease_end_date,
         'checklistTable' : checklistTable,

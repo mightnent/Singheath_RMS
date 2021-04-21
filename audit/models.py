@@ -20,6 +20,11 @@ class ChecklistInstance(models.Model):
     date = models.DateField(default = date.today())
     date_due = models.DateField(blank = True,null=True)
     page = models.CharField(max_length=3)
+    # pending = 0
+    # rejected = -1
+    # approved = 1
+    appeal_status = models.IntegerField(null=True)
+    rect_status = models.IntegerField(null=True)
 
     def __str__(self):        
         return str(self.checklist_id)
