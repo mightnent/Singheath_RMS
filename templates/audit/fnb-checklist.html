@@ -63,12 +63,25 @@
 <div class="row">
     {%if ck.photo%}
     <div class="col-12">
-        <img src = "{{ck.photo.url}}"/>
+        <img id="image" src = "{{ck.photo.url}}"/>
     </div>
     {% endif %}
     <div class="col-12" style="height:40px;">
-        <input name="photo" type="file" id="actual-btn" hidden/>
+        <input name="photo" type="file" id="actual-btn" onchange="preview(this);" hidden/>
         <label for="actual-btn">Replace Photo</label>
+        <script>
+            function preview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                    $('#image').attr('src', e.target.result);
+                    };
+
+                reader.readAsDataURL(input.files[0]);
+                }
+            }   
+        </script>
     </div>
 
 </div>
@@ -132,7 +145,7 @@
                 <p class="comment-inactive">Rectification Date</p>
             </div>
             <div class="col-12 datefield" style="margin:12px;">
-                <input type="date" name="date_due" placeholder="When Should Tenant Rectify By" required/>
+                <input type="date" name="date_due" placeholder="When Should Tenant Rectify By" />
             </div>
 
         </div>
@@ -141,9 +154,32 @@
 </div>
 
 <div class="row">
+    <div class="col-12">
+        <div id="show-card">
+        <img id="image" src="" />
+        </div>
+    </div>
+</div>
+<div class="row">
     <div class="col-12" style="height:40px;">
-        <input name="photo" type="file" id="actual-btn" hidden/>
+      
+        <input name="photo" type="file" id="actual-btn" onchange="preview(this);" hidden/>
         <label for="actual-btn">Upload Photo</label>
+        <script>
+            function preview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                    $('#image').attr('src', e.target.result);
+                    $('#show-card').addClass("card");
+                    };
+
+                reader.readAsDataURL(input.files[0]);
+                }
+            }   
+        </script>
+ 
     </div>
 
 </div>
@@ -153,7 +189,7 @@
 {% endfor %}
 {% endif %}
 
-<div class="row">
+<div class="row" id="FNP">
     <div class="col-4">
         <button class="button bg-danger bw audit" type="submit" name="submit" value="FAIL">FAIL</button>
     </div>
@@ -169,9 +205,19 @@
 </form>
 
 {% if not page_obj.has_next %}
-<div class="container">
-    <a href="{%url 'home'%}" class="done">Done</a>
+<div class="container" id="target">
 </div>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>
+    $("button").click(function(){
+        var $target = $("#target"),
+        str = "<a href=\"{%url 'home'%}\" class=\"done\">Done</a>",
+        html = $.parseHTML(str);
+        $target.append(html);
+        $("#FNP").remove();
+    }); 
+    
+</script>
 {% endif %}
 
 <div class="container left-right">

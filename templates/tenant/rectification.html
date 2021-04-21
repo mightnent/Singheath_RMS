@@ -95,9 +95,32 @@
     </div>
 
     <div class="row">
+        <div class="col-12">
+            <div id="show-card">
+            <img id="image" src="" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12" style="height:40px;">
-            <input name="photo" type="file" id="actual-btn" hidden/>
+        
+            <input name="photo" type="file" id="actual-btn" onchange="preview(this);" hidden/>
             <label for="actual-btn">Upload Photo</label>
+            <script>
+                function preview(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                        $('#image').attr('src', e.target.result);
+                        $('#show-card').addClass("card");
+                        };
+
+                    reader.readAsDataURL(input.files[0]);
+                    }
+                }   
+            </script>
+    
         </div>
 
     </div>
