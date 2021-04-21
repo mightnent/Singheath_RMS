@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_crontab',
     'mathfilters',
     'app',  # Enable the inner app 
     'checklist',
@@ -136,9 +135,6 @@ EMAIL_FROM = 'testshrms@outlook.com'
 EMAIL_HOST_USER = 'testshrms@outlook.com'
 EMAIL_HOST_PASSWORD = 'testsinghealth_rms1.1'
 
-CRONJOBS = [
-    ('0 0 * * *', 'app.notify_service.handle'),
-]
 #############################################################
 
 #############################################################
