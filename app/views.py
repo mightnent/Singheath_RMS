@@ -19,6 +19,7 @@ from django.db.models import Avg, Max, Min,F
 from .email_handler import EmailHandler
 import datetime
 import statistics
+from django.http import JsonResponse
 
 
 @login_required(login_url="/login/")
@@ -275,3 +276,11 @@ def auditInfo(request):
 @allowed_user(allowed_roles=['tenant'])
 def managenoncompliance(request):
     return render(request,'managenoncompliance.html')
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor'])
+def export_checklist(request):
+    checkbox_result = request.POST.getlist("checklists[]")
+    #insert export function here
+    context = {}
+    return JsonResponse(context)

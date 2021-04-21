@@ -42,7 +42,9 @@ urlpatterns = [
 
     path('rectification',views.rectification,name='rectification'),
 
-    path("managenonompliance", views.managenoncompliance, name='managenoncompliance')
+    path("managenonompliance", views.managenoncompliance, name='managenoncompliance'),
+
+    path("ajax/exportchecklist", views.export_checklist, name="export_checklist")
 
 
 ]
