@@ -1,6 +1,5 @@
-.secHeader{
-    background-color:#F36F38;
-    padding: 10px;
+h1{
+    margin: 0px;
 }
 
 h3{
@@ -8,8 +7,34 @@ h3{
     border-bottom: 0.5px solid #F36F38;
 }
 
+.card-body{
+    padding-top: 0px;
+}
+
+.secHeader{
+    background-color:#F36F38;
+    padding: 10px;
+}
+
 .solidDivider{
     border-top: 3px solid #F36F38;
-    margin-top: -25px;
-    margin-bottom: 20px;
+    margin: 0px;
+}
+
+.qnBody{
+    border-bottom: 0.5px solid #F36F38;
+}
+
+.Btn{
+    background-color:#b3f1af;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+.Btn:hover{
+    background-color: #26E317;
+}
+
+#b2{
+    float: right;
 }
