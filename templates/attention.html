@@ -8,6 +8,7 @@
 {% block stylesheets %}
 <!-- <link href="{% static 'assets/css/black-dashboard.css' %}" rel="stylesheet" /> -->
 <link href="{% static 'assets/css/request.css' %}" rel="stylesheet" />
+<link href="{% static 'assets/css/attention.css' %}" rel="stylesheet" />
 {% endblock stylesheets %}
 
 
@@ -29,21 +30,36 @@
         <div class="card">
            
             <div class="card-body">
-                <h5>{{appeal.tenant}}</h5>
-                <p>Checklist type{{appeal.checklist_type}}</p>
-                <p>Original due date: {{appeal.original_date}}</p>
-                <p>Reason for appeal: {{appeal.reason}}</p>
-                <p>Proposed new date: {{appeal.new_date}}</p>
+                <h3>{{appeal.tenant}}</h3>
+                <table class="table tablesorter " id="">
+                    <thead class=" text-primary">
+                        <tr>
+                          <th class="text-center">Checklist type</th>
+                          <th class="text-center">Original due date</th>
+                          <th class="text-center">Proposed new date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">{{appeal.checklist_type}}</td>
+                            <td class="text-center">{{appeal.original_date}}</td>
+                            <td class="text-center">{{appeal.new_date}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="reasonDiv">
+                    <div class="appealHeader">Reason for appeal:</div>
+                    <div class="reason">{{appeal.reason}}</div>
+                </div>
+                <div class="btnRow">
+                    <button type="submit" name="submit" class="btnReject" value="appeal-reject">Reject</button>
+                </div>
+                <div class="btnRow">
+                    <button type="submit" name="submit" class="btnApprove" value="appeal-approve">Approve</button>
+                </div>  
             </div>           
-            <div class="col-6">
-                <button type="submit" name="submit" class="button bg-danger" value="appeal-reject">Reject</button>
-            </div>
-            <div class="col-6">
-                <button type="submit" name="submit" class="button bg-success" value="appeal-approve">Approve</button>
-            </div>
         </div>
-    </div>
-            
+    </div>     
 </div>
 </form>
 {% endfor %}
@@ -65,24 +81,40 @@
         <div class="card">
            
             <div class="card-body">
-                <h5>{{rect.tenant}}</h5>
-                <p>Checklist type: {{rect.checklist_type}}</p>
-                <p>Original due date: {{rect.date_due}}</p>
-                <p>Issue: {{rect.comment}}</p>
-                <p>Updates: {{rect.update}}</p>
+                <h3>{{rect.tenant}}</h3>
+                <table class="table tablesorter " id="">
+                    <tbody>
+                        <tr>
+                            <td class="text-center">Checklist type:</td>
+                            <td class="text-center">{{rect.checklist_type}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Original due date:</td>
+                            <td class="text-center">{{rect.date_due}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Issue:</td>
+                            <td class="text-center">{{rect.comment}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Updates:</td>
+                            <td class="text-center">{{rect.update}}</td>
+                        </tr>
+                    </tbody>
+                </table>
                 {% if rect.photo %}
                 <img src = "{{rect.photo.url}}"/>
                 {% endif %}
+
+                <div class="btnRow">
+                    <button type="submit" name="submit" class="btnReject" value="rectification-reject">Reject</button>
+                </div>
+                <div class="btnRow">
+                    <button type="submit" name="submit" class="btnApprove" value="rectification-approve">Approve</button>
+                </div>
             </div>           
-            <div class="col-6">
-                <button type="submit" name="submit" class="button bg-danger" value="rectification-reject">Reject</button>
-            </div>
-            <div class="col-6">
-                <button type="submit" name="submit" class="button bg-success" value="rectification-approve">Approve</button>
-            </div>
         </div>
     </div>
-            
 </div>
 </form>
 {% endfor %}
