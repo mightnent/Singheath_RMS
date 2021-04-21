@@ -40,9 +40,7 @@ urlpatterns = [
 
     path('rectification',views.rectification,name='rectification'),
 
-    path("managenonompliance", views.managenoncompliance, name='managenoncompliance'),
-
-    path('navigation', views.navigation, name='navigation')
+    path("managenonompliance", views.managenoncompliance, name='managenoncompliance')
 
 
 ]

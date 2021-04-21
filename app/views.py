@@ -24,6 +24,7 @@ import statistics
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
 def index(request):
+    username = request.user.username
     today = datetime.datetime.now()
     #tenant_location must be the same as user group
     tenant_location = request.user.groups.all()[1]
@@ -73,19 +74,10 @@ def index(request):
     context={
         'institution_data':institution_data[1:],
         'checklistTable':checklistTable,
+        'username':username
     }
         
     return render(request,'index.html',context)
-
-@login_required(login_url="/login/")
-@allowed_user(allowed_roles=['auditor'])
-def navigation(request):
-    username = request.user.username
-    print(username)
-    context = {
-        'username':username
-    }
-    return render(request,'navigation.html',context)
 
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
@@ -211,7 +203,8 @@ def tenant(request):
     context = {
         'lease_end_date' : this_tenant.lease_end_date,
         'checklistTable' : checklistTable,
-        'scoreTable' : scoreTable
+        'scoreTable' : scoreTable,
+        'username': username
     }
     return render(request,'tenant/tenant.html',context)
 
