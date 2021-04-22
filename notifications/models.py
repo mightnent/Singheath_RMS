@@ -4,6 +4,7 @@ from datetime import date
 class Notification(models.Model):
     date_created = models.DateField(default=date.today())
     content = models.CharField(max_length = 250)
+    tenant = models.CharField(max_length=50,default="0")
 
 class AppealAlert(models.Model):
     date_created = models.DateField(default = date.today())

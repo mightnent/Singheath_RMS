@@ -32,18 +32,21 @@
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                  {% if notifications %}
-                  {% for n in notifications %}
-                      <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">{{n.content}}</a></li>
+                  {% if appealTable %}
+                  {% for a in appealTable %}
+                      <li class="nav-link"><a href="{% url 'attention' %}" class="nav-item dropdown-item">Appeal from {{a.tenant}}</a></li>
                   {% endfor %}
                   {%else%}
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">No notifications</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">No appeals</a></li>
                   {% endif %}
-                  <!-- <li class="nav-link"><a href="#" class="nav-item dropdown-item">Mike John responded to your email</a></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">You have 5 more tasks</a></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Your friend Michael is in town</a></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another notification</a></li>
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Another one</a></li> -->
+
+                  {% if rectificationTable%}
+                  {% for r in rectificationTable %}
+                      <li class="nav-link"><a href="{% url 'attention' %}" class="nav-item dropdown-item">Rectification from {{r.tenant}}</a></li>
+                  {% endfor %}
+                  {%else%}
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">No rectifications</a></li>
+                  {% endif %}
                 </ul>
               </li>
               <li class="dropdown nav-item">
@@ -52,11 +55,9 @@
                     <img src="{% static 'assets/img/anime3.png' %}" alt="Profile Photo">
                   </div>
                   <b class="caret d-none d-lg-block d-xl-block"></b>
-                  {% if request.user.is_authenticated %}
                   <p class="d-lg-none">
-                    {{request.user.username}} Log out
+                    {{request.user.username}}
                   </p>
-                  {% endif %}
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link"><a href="{% url 'logout' %}" class="nav-item dropdown-item">Log out</a></li>

@@ -1,0 +1,56 @@
+.btnRow{
+    display: inline-block;
+    width: 49%;
+}
+.btnReject{
+    display:block;
+    width: 80%;
+    background-color:#fc7070;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+}
+
+.btnReject:hover{
+    background-color: #ff0505;
+}
+
+.btnApprove{
+    display: block;
+    width: 80%;
+    background-color:#b3f1af;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+}
+
+.btnApprove:hover{
+    background-color: #26E317;
+}
+
+.reasonDiv{
+    display: flex;
+}
+.appealHeader{
+    display: inline-block;
+    width: 30%;
+    align-items: stretch;
+    text-align: center;
+    font-weight: 500;
+    color: black;
+    padding-right: 7px;
+}
+.reason{
+    display: inline-block;
+    width: 60%;
+    align-items: stretch;
+    font-weight: 400;
+    color: black;
+    padding-left: 7px;
+} 

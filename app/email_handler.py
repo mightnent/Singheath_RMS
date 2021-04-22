@@ -5,7 +5,7 @@ from django.core.mail import EmailMultiAlternatives, get_connection
 from django.conf import settings
 from datetime import date
 from email.mime.image import MIMEImage
-from audit.models import ChecklistInstance, ScoreTable
+from audit.models import ChecklistInstance, ScoreTable, RectificationTable
 from django.contrib.staticfiles import finders
 import xlsxwriter
 
@@ -193,6 +193,7 @@ class EmailHandler:
                 subsection_header = workbook.add_format({'bold': 1, 'bg_color': "#ccffcc", 'border': 1})
                 table_cell = workbook.add_format({'border': 1, 'text_wrap': True})
                 score_footer = workbook.add_format({'bold': 1, 'bg_color': "#999999", 'border': 1, 'align': 'right'})
+                rectification_header = workbook.add_format({'bold': 1, 'bg_color': "#D9D9D9", 'border': 1, 'text_wrap': True})
                 ### END SET FORMATTING OPTIONS
 
 
@@ -210,6 +211,7 @@ class EmailHandler:
                 row += 1
                 ### END WRITE GENERAL DATA
                 section_dict = {}
+                section_score = []
                 ## GET SECTIONS AND SUBSECTIONS
                 for instance in checklist_queryset:
                     if (instance.section not in section_dict):
@@ -220,8 +222,8 @@ class EmailHandler:
                 
                 row += 1
                 ### WRITE MAIN CONTENTS
-                for section_no, (section_name, section_data) in enumerate(section_dict.items(), 1):
-                    worksheet.write(row, 0, f'{section_no}: {section_name}', section_header)
+                for (section_name, section_data) in section_dict.items():
+                    worksheet.write(row, 0, section_name, section_header)
                     worksheet.write(row, 1, 'Result', section_header)
                     worksheet.write(row, 2, 'Comments (if any)', section_header)
                     row += 1
@@ -237,25 +239,55 @@ class EmailHandler:
                             worksheet.write(row, 0, data.question, table_cell)
                             worksheet.write(row, 1, data.score, table_cell)
                             worksheet.write(row, 2, data.comment, table_cell)
-                            # CREATE IMAGE SHEET
-                            if (data.photo):
-                                sheetImage = workbook.add_worksheet(f"imageForA{row+1}")
+                            # CREATE IMAGE/RECTIFICATION SHEET
+                            if (data.photo) or (data.date_due):
+                                sheetImage = workbook.add_worksheet(f"rectificationThreadForA{row+1}")
+                                rectification_row = 0
                                 sheetImage.set_column(0, 0, 13)
-                                scale = 400/data.photo.height
-                                sheetImage.write(0, 0, "Date taken: ", bold)
-                                sheetImage.write(0, 1, data.date.strftime("%d %B %Y"))
-                                sheetImage.insert_image(1, 0, "."+data.photo.url, {'x_scale': scale, 'y_scale': scale})
-                                sheetImage.write(11, 0, "Comment: ", bold)
-                                sheetImage.write(11, 1, data.comment)
-                            # END CREATE IMAGE SHEET
+                                sheetImage.merge_range(rectification_row, 0, rectification_row, 2, data.question, rectification_header)
+                                rectification_row += 1
+                                sheetImage.write(rectification_row, 0, "Date taken: ", bold)
+                                sheetImage.write(rectification_row, 1, data.date.strftime("%d %B %Y"))
+                                rectification_row += 1
+                                if (data.photo):
+                                    scale = 200/data.photo.height
+                                    sheetImage.insert_image(rectification_row, 0, "."+data.photo.url, {'x_scale': scale, 'y_scale': scale})
+                                    rectification_row += 11
+
+                                if (data.comment):
+                                    sheetImage.write(rectification_row, 0, "Comment: ", bold)
+                                    sheetImage.write(rectification_row, 1, data.comment)
+                                    rectification_row += 1
+                               
+                                rectification_row += 2
+                                # RECTIFICATION FOLLOW UPS
+                                rectificationTableData = RectificationTable.objects.filter(row_id = data.id).order_by("date_created")
+                                if len(rectificationTableData) > 0:
+                                    sheetImage.write(rectification_row, 0, "Tenant Follow ups", bold)
+                                    rectification_row += 1
+                                    for i in rectificationTableData:
+                                        sheetImage.write(rectification_row, 0, "Date: ", bold)
+                                        sheetImage.write(rectification_row, 1, i.date_created.strftime("%d %B %Y"))
+                                        rectification_row += 1
+                                        if (i.photo):
+                                            scale = 200/i.photo.height
+                                            sheetImage.insert_image(rectification_row, 0, "."+i.photo.url, {'x_scale': scale, 'y_scale': scale})
+                                            rectification_row += 11
+                                        if (i.update):
+                                            sheetImage.write(rectification_row, 0, "Comment: ", bold)
+                                            sheetImage.write(rectification_row, 1, i.comment)
+                                            rectification_row += 1
+                                        rectification_row += 2
+                                # END RECTIFICATION FOLLOW UPS
+                            # END CREATE IMAGE/RECTIFICATION SHEET
                             row += 1
                         ## END FOR EACH SECTION
 
                     ## WRITE SCORE FOOTER
                     worksheet.write(row, 0, "Score: ", score_footer)
                     worksheet.write_formula(row, 1, f'=SUM(B{start_row}:B{row})', score_footer)
-                    row += 1
-                    row += 1 # give empty line
+                    section_score.append(row+1)
+                    row += 2
                     ## END WRITE SCORE FOOTER
                 ### END WRITE MAIN CONTENTS
 
@@ -263,9 +295,9 @@ class EmailHandler:
                 worksheet.write(row, 0, "Overall score: ", bold)
                 row += 1
                 score_section_start = row + 1
-                for section_name, section_data in section_dict.items():
+                for section_no, (section_name, section_data) in enumerate(section_dict.items()):
                     worksheet.write(row, 0, section_name)
-                    worksheet.write(row, 1, 10)
+                    worksheet.write_formula(row, 1, f"B{section_score[section_no]}")
                     row += 1
                 worksheet.write(row, 0, "Total")
                 worksheet.write_formula(row, 1, f'=SUM(B{score_section_start}:B{row})')

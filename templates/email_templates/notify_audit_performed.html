@@ -10,7 +10,19 @@
                     <p>Dear {{ owner_name }}</p>
                     <br />
                     <p>
-                        This email is to notify you of outstanding non-compliance item(s) that require rectification by <b>tomorrow</b>.<br />
+                        This email is to notify you that {{ auditor_name }} has performed a {{ checklist_type }} audit.<br />
+                    </p>
+                    <br />
+                    <p>
+                        Your score for the audit is {{ score_percentage }}%.<br />
+                        {% if is_noncompliance %}
+                        There are non-compliance items requiring rectification.
+                        The closest due date is {{ closest_date }}.
+                        {% endif %}
+                    </p>
+                    <br />
+                    <p>
+                        You can login to the system <a href="{{ view_audit_link }}">here</a> for more details. <br />
                     </p>
                     <br />
                     <p>

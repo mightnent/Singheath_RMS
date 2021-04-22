@@ -1,0 +1,68 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Audit Info {% endblock %} 
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="{% static 'assets/css/auditInfo.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="col-lg-12 col-md-12">
+    <div class="card ">
+      <div class="card-header">
+        <h1> {{type}} Checklist</h1>
+        <hr class= "solidDivider">
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter " id="">
+            {% for ck in checklistTable %}
+            <thead>
+              <tr>
+                  <th>{{ ck.section }}</th>
+              </tr>
+              <tr>
+                <th class="text-center">
+                    {{ ck.subsection }}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="qnBody">
+              <tr>
+                <td class="text-center">
+                    Question
+                <td class="text-center">
+                    {{ ck.question }}
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                    Score
+                <td class="text-center">
+                    {{ ck.score }}
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                    Comments
+                <td class="text-center">
+                    {{ ck.comment }}
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                    Due date
+                <td class="text-center">
+                    {{ ck.date_due }}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -19,6 +19,7 @@ from django.db.models import Avg, Max, Min,F
 from .email_handler import EmailHandler
 import datetime
 import statistics
+from django.http import JsonResponse
 
 
 @login_required(login_url="/login/")
@@ -225,6 +226,7 @@ def tenantInfo(request):
 
     context = {
         'scoreTable':scoreTable,
+        'tenant':tenant
     }
     return render(request,'tenant-info.html',context)
 
@@ -232,3 +234,48 @@ def tenantInfo(request):
 @allowed_user(allowed_roles=['tenant'])
 def managenoncompliance(request):
     return render(request,'managenoncompliance.html')
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor'])
+def auditInfo(request):
+
+    if(request.method=='POST'):
+        tenant = request.POST['tenant']
+        this_id = request.POST['id']
+        this_type = request.POST['ck_type']
+    print(this_type)
+    #filter out all the records that's completed for the tenant
+    scoreTable = ScoreTable.objects.filter(tenant=tenant).filter(num_visited=F('page_num')).filter(checklist_id = this_id)
+    checklistTable = ChecklistInstance.objects.filter(checklist_id=this_id).filter(score =- -1)
+
+    context = {
+        'scoreTable':scoreTable,
+        'checklistTable':checklistTable,
+        'type':this_type
+    }
+    return render(request,'audit-info.html',context)
+
+@allowed_user(allowed_roles=['auditor'])
+def export_checklist(request):
+    checkbox_result = request.POST.getlist("checklists[]")
+    #insert export function here
+    current_user = request.user
+    for index in checkbox_result:
+        EmailHandler.checklist_export(current_user.username, current_user.email, index)
+
+    context = {}
+    return JsonResponse(context)
+
+
+def notifications(request):
+    return {'notifications': Notification.objects.all()}
+
+def appealNotif(request):
+    appealTable = AppealAlert.objects.all()
+    rectificationAlert = RectificationAlert.objects.all()
+    rectificationTable = RectificationTable.objects.filter(row_id__in = [x.row_id for x in rectificationAlert])
+    context = {
+        'appealTable' : appealTable,
+        'rectificationTable' : rectificationTable
+    }
+    return context 
