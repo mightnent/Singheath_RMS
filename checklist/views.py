@@ -64,8 +64,8 @@ def covid(request):
     
 
     #empty checklist templates
-    checklist = CheckList.objects.filter(id=2)
-    section = Section.objects.filter(level_id=2)
+    checklist = CheckList.objects.filter(id=3)
+    section = Section.objects.filter(level_id=3)
     subsection = Subsection.objects.filter(level_id__in=section)
     question = Question.objects.filter(level_id__in=subsection).order_by("id")
     paginator = Paginator(question,1)
@@ -102,8 +102,8 @@ def nonfnb(request):
     
 
     #empty checklist templates
-    checklist = CheckList.objects.filter(id=3)
-    section = Section.objects.filter(level_id=3)
+    checklist = CheckList.objects.filter(id=2)
+    section = Section.objects.filter(level_id=2)
     subsection = Subsection.objects.filter(level_id__in=section)
     question = Question.objects.filter(level_id__in=subsection).order_by("id")
 
