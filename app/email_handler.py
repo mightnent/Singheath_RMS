@@ -275,7 +275,7 @@ class EmailHandler:
                                             rectification_row += 11
                                         if (i.update):
                                             sheetImage.write(rectification_row, 0, "Comment: ", bold)
-                                            sheetImage.write(rectification_row, 1, i.comment)
+                                            sheetImage.write(rectification_row, 1, i.update)
                                             rectification_row += 1
                                         rectification_row += 2
                                 # END RECTIFICATION FOLLOW UPS
