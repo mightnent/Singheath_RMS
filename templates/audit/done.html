@@ -1,0 +1,25 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %} Done {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="{% static 'assets/css/checklist.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="row" style="margin-top:40%">
+    <div class="col-12" style="text-align:center;">
+        <div>
+            <h2>End of Checklist</h2>
+        </div>
+        <div class="container" id="target">
+
+            <a href="{%url 'complete-checklist'%}" class="done">Done</a>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

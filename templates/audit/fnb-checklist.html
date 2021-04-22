@@ -15,7 +15,9 @@
 <input type="hidden" name="tenant" value = "{{tenant}}"/>
 <input type="hidden" name="page" value = "{{request.GET.page}}"/>
 <input type="hidden" name="checklist_id" value = "{{checklist_id}}"/>
-
+{% if not page_obj.has_next %}
+<input type="hidden" name="lastpage" value = "T"/>
+{% endif %}
 <div class="row">
     {% if current_checklist %}
     {% for ck in current_checklist %}
@@ -203,22 +205,6 @@
 
 
 </form>
-
-{% if not page_obj.has_next %}
-<div class="container" id="target">
-</div>
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script>
-    $("button").click(function(){
-        var $target = $("#target"),
-        str = "<a href=\"{%url 'complete-checklist'%}\" class=\"done\">Done</a>",
-        html = $.parseHTML(str);
-        $target.append(html);
-        $("#FNP").remove();
-    }); 
-    
-</script>
-{% endif %}
 
 <div class="container left-right">
 

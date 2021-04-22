@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from .models import *
 from django.contrib.auth.models import User,Group
+from authentication.decorators import allowed_user
+from django.contrib.auth.decorators import login_required
 
-
-# Create your views here.
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor'])
 def audit(request):
     
     if request.method == 'POST':
@@ -19,6 +21,10 @@ def audit(request):
         checklist_id = data['checklist_id']
         page = data['page']
         date_due = data['date_due']
+        try:
+            last_page = data['lastpage']
+        except:
+            pass
 
         if(page==''):
             page = "1"
@@ -33,10 +39,9 @@ def audit(request):
             score = 1
         else:
             score = -1
-        
-        int_page = int(page) + 1
-        new_page = str(int_page)
 
+        print(page)
+        #save to checklistinstance db
         if ChecklistInstance.objects.filter(checklist_id=checklist_id,page=page).exists():
             row = ChecklistInstance.objects.get(checklist_id=checklist_id,page=page)
             row.comment = comment
@@ -51,6 +56,8 @@ def audit(request):
                 checklistInstance = ChecklistInstance(checklist_type=checklist_type,section=section,subsection=subsection,question=question,question_id=question_id,tenant_location=tenant_location,comment=comment,score=score,photo=photo,auditor=auditor,tenant=tenant,checklist_id=checklist_id,page=page)
             
             checklistInstance.save()
+        
+        #save to scoretable db
         total = 1
         non_compliance = False
         if ScoreTable.objects.filter(checklist_id=checklist_id).exists():
@@ -66,7 +73,6 @@ def audit(request):
             row.page_num = page_num
             row.num_visited +=1
             row.save()
-
         else:
             if score == 0:
                 non_compliance = True
@@ -76,9 +82,25 @@ def audit(request):
             page_num = int(page)
             scoreTable = ScoreTable(tenant_location=tenant_location,checklist_id=checklist_id,score=score,total=total,tenant = tenant,num_visited=1,page_num=page_num, checklist_type=checklist_type,non_compliance=non_compliance)
             scoreTable.save()
-        if checklist_type=="FnB":
-            return redirect('/new-audit/fnb-checklist?page='+new_page)
-        elif checklist_type=="Covid":
-            return redirect('/new-audit/covid-checklist?page='+new_page)
-        elif checklist_type=="Non-FnB":
-            return redirect('/new-audit/non-fnb-checklist?page='+new_page)
+        
+        try:
+            if last_page == "T":
+                print(last_page)
+                return redirect('done')
+        except:
+                int_page = int(page) + 1
+                new_page = str(int_page)
+
+                #html
+                if checklist_type=="FnB":
+                    return redirect('/new-audit/fnb-checklist?page='+new_page)
+                elif checklist_type=="Covid":
+                    return redirect('/new-audit/covid-checklist?page='+new_page)
+                elif checklist_type=="Non-FnB":
+                    return redirect('/new-audit/non-fnb-checklist?page='+new_page)
+
+@login_required(login_url="/login/")
+@allowed_user(allowed_roles=['auditor'])    
+def done(request):
+    return render(request,'audit/done.html')
+            

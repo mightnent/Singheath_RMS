@@ -16,11 +16,11 @@
 
 <h1>New Audit</h1>
 
-{% if messages %}
+{% comment %} {% if messages %}
     <div class="alert alert-success" style="background-color: #d1e7dd; border: 1px solid #badbcc; color: #0f5132">
         &#10004;	Audit successfully completed
     </div>
-{% endif %}
+{% endif %} {% endcomment %}
 <form action="{%url 'createNewAudit'%}" method="POST">
 {% csrf_token %}
 <div class="SelectTenant">
