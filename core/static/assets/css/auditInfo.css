@@ -38,4 +38,17 @@ h3{
 
 #b2{
     float: right;
-} 
+}
+
+.exportBtn{
+    background-color:#b3f1af;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: large;
+    float: right;
+}
+
+.exportBtn:hover{
+    background-color: #26E317;
+}
