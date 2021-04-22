@@ -86,3 +86,48 @@ label {
     display: block;
     text-align: center;
 }
+
+.col-12{
+    padding: 0px;
+}
+
+label{
+    display: flex;
+    width: 95%;
+    margin: -10px auto;
+    justify-content: center;
+}
+
+.col-4{
+    display: flex;
+    justify-content: space-around;
+}
+.audit{
+    border-radius: 5px;
+}
+.Btn-pass{
+    background-color:#b3f1af;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: 20px;
+    font-weight: 500;
+    width: 80px;
+    height: 40px;
+}
+.Btn-pass:hover{
+    background-color: #26E317;
+}
+.Btn-fail{
+    background-color:#fc7070;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: 20px;
+    font-weight: 500;
+    width: 80px;
+    height: 40px;
+}
+.Btn-fail:hover{
+    background-color: #ff0505;
+}
