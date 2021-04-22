@@ -16,13 +16,29 @@
 
 <h1>Notifications</h1>
 
-<div class="request">
-    <hr class= "solidDivider">
-    <ul class="requestList">
-        {% for n in notifications %}
-        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">{{n.content}}</a></li>
-        {% endfor %}
-    </ul>
+<div class="row">
+      
+    <div class="col-12">
+      <div class="card ">
+        <div class="card-header">
+          <h4 class="card-title"> <span style="font-size:2em;">Audits</span></h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table tablesorter " id="">
+                {% for n in notifications %}
+                <tbody>
+                    <tr>
+                        <td>{{n.content}}</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 

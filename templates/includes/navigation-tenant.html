@@ -1,6 +1,11 @@
 <!-- Static assets -->
 {% load static %}
 
+{% block stylesheets %}
+<!-- <link href="{% static 'assets/css/black-dashboard.css' %}" rel="stylesheet" /> -->
+<link href="{% static 'assets/css/navigation.css' %}" rel="stylesheet" />
+{% endblock stylesheets %}
+
       <!-- Navbar -->
       <nav class="navbar sticky-top navbar-expand-lg navbar-absolute bg-white">
         <div class="container-fluid">
@@ -31,14 +36,36 @@
                     Notifications
                   </p>
                 </a>
+
                 <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                  {% if notifications %}
-                  {% for n in notifications %}
-                      <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">{{n.content}}</a></li>
-                  {% endfor %}
-                  {%else%}
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">No notifications</a></li>
-                  {% endif %}
+                  <div class="row">
+        
+                    <div>
+                      <div class="card ">
+                        <div class="card-body" id="navBar">
+                          <div class="table-responsive">
+                            <table class="table tablesorter " id="">
+                                {% if notifications %}
+                                {% for n in notifications %}
+                                <tbody>
+                                    <tr>
+                                      <td id='notifText'><a href="{% url 'notifications' %}">{{n.content}}</a></td>
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+                                {%else%}
+                                <tbody>
+                                  <tr>
+                                      <td>No notification</td>
+                                  </tr>
+                              </tbody>
+                                {% endif %}
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </ul>
               </li>
               <li class="dropdown nav-item">

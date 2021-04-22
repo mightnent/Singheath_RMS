@@ -1,0 +1,18 @@
+.dropdown-menu{
+    min-width: 20rem;
+    margin: 0px -0.5rem;
+    background-color: transparent;
+}
+
+.navbar .dropdown.show .dropdown-menu, .navbar .dropdown .dropdown-menu {
+    margin: 0px 0.5rem;
+}
+
+#navBar{
+    background-color: #F36F38;
+}
+
+
+#notifText{
+    color: #FFFFFF!important;
+}
