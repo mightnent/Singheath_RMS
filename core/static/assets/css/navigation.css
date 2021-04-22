@@ -4,6 +4,10 @@
     background-color: transparent;
 }
 
+
+.dropdown-menu .dropdown-item {
+    color: #000000;
+}
 .navbar .dropdown.show .dropdown-menu, .navbar .dropdown .dropdown-menu {
     margin: 0px 0.5rem;
 }
