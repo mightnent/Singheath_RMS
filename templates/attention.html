@@ -32,25 +32,27 @@
             <div class="card-body">
                 <h3>{{appeal.tenant}}</h3>
                 <table class="table tablesorter " id="">
-                    <thead class=" text-primary">
-                        <tr>
-                          <th class="text-center">Checklist type</th>
-                          <th class="text-center">Original due date</th>
-                          <th class="text-center">Proposed new date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">{{appeal.checklist_type}}</td>
-                            <td class="text-center">{{appeal.original_date}}</td>
-                            <td class="text-center">{{appeal.new_date}}</td>
-                        </tr>
-                    </tbody>
+                    <colgroup>
+                        <col span="1" style="width: 50%;">
+                        <col span="1" style="width: 50%;">
+                     </colgroup>
+                    <tr>
+                        <td class="text-center">Checklist type:</td>
+                        <td class="text-center">{{appeal.checklist_type}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Original due date:</td>
+                        <td class="text-center">{{appeal.original_date}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Proposed new date:</td>
+                        <td class="text-center">{{appeal.new_date}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">Reason for appeal:</td>
+                        <td class="text-center">{{appeal.reason}}</td>
+                    </tr>
                 </table>
-                <div class="reasonDiv">
-                    <div class="appealHeader">Reason for appeal:</div>
-                    <div class="reason">{{appeal.reason}}</div>
-                </div>
                 <div class="btnRow">
                     <button type="submit" name="submit" class="btnReject" value="appeal-reject">Reject</button>
                 </div>
@@ -84,6 +86,10 @@
                 <h3>{{rect.tenant}}</h3>
                 <table class="table tablesorter " id="">
                     <tbody>
+                        <colgroup>
+                            <col span="1" style="width: 50%;">
+                            <col span="1" style="width: 50%;">
+                         </colgroup>
                         <tr>
                             <td class="text-center">Checklist type:</td>
                             <td class="text-center">{{rect.checklist_type}}</td>
