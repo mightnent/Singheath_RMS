@@ -32,12 +32,20 @@
                   </p>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-                  {% if notifications %}
-                  {% for n in notifications %}
-                      <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">{{n.content}}</a></li>
+                  {% if appealTable %}
+                  {% for a in appealTable %}
+                      <li class="nav-link"><a href="{% url 'attention' %}" class="nav-item dropdown-item">Appeal from {{a.tenant}}</a></li>
                   {% endfor %}
                   {%else%}
-                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">No notifications</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">No appeals</a></li>
+                  {% endif %}
+
+                  {% if rectificationTable%}
+                  {% for r in rectificationTable %}
+                      <li class="nav-link"><a href="{% url 'attention' %}" class="nav-item dropdown-item">Rectification from {{r.tenant}}</a></li>
+                  {% endfor %}
+                  {%else%}
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">No rectifications</a></li>
                   {% endif %}
                 </ul>
               </li>

@@ -21,6 +21,19 @@ import datetime
 import statistics
 
 
+def notifications(request):
+    return {'notifications': Notification.objects.all()}
+   
+def appealNotif(request):
+    appealTable = AppealAlert.objects.all()
+    rectificationAlert = RectificationAlert.objects.all()
+    rectificationTable = RectificationTable.objects.filter(row_id__in = [x.row_id for x in rectificationAlert])
+    context = {
+        'appealTable' : appealTable,
+        'rectificationTable' : rectificationTable
+    }
+    return context
+
 @login_required(login_url="/login/")
 @allowed_user(allowed_roles=['auditor'])
 def index(request):
