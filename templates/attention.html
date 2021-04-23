@@ -18,9 +18,9 @@
 <h1>Appeals</h1>
 <hr class= "solidDivider">
 {% if appealTable %}
+{% for appeal in appealTable %}
 <form method="POST" action="{%url 'appeal-reply'%}">
 {% csrf_token %}
-{% for appeal in appealTable %}
 <input type="hidden" name="appeal_id" value = "{{appeal.id}}"/>
 <input type="hidden" name="row_id" value = "{{appeal.row_id}}"/>
 <input type="hidden" name="comment" value = "{{appeal.comment}}"/>
@@ -28,7 +28,6 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-           
             <div class="card-body">
                 <h3>{{appeal.tenant}}</h3>
                 <table class="table tablesorter " id="">
