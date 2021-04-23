@@ -103,6 +103,12 @@ def rectificationAlert(request):
         tenant = request.user.username
         rectificationAlert = RectificationAlert(row_id=row_id)
         rectificationAlert.save()
+        if(RectificationTable.objects.filter(row_id=row_id).exists()):
+            row = RectificationTable.objects.get(row_id=row_id)
+            row.photo = photo
+            row.update = update
+            row.status = 0
+            row.save()
         rectificationTable= RectificationTable(photo=photo,row_id=row_id,update=update,date_due=date_due,comment=comment,checklist_type=checklist_type,tenant=tenant,status=0)
         rectificationTable.save()
         checklistInstance = ChecklistInstance.objects.get(id=row_id)
