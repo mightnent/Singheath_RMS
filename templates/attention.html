@@ -75,9 +75,10 @@
 <h1>Rectification</h1>
 <hr class= "solidDivider">
 {% if rectificationTable %}
+{% for rect in rectificationTable %}
 <form method="POST" action="{%url 'rectification-reply'%}">
 {% csrf_token %}
-{% for rect in rectificationTable %}
+
 <input type="hidden" name="row_id" value = "{{rect.row_id}}"/>
 <input type="hidden" name="rect_id" value = "{{rect.id}}"/>
 <input type="hidden" name="comment" value = "{{rect.comment}}"/>
