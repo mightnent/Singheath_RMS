@@ -90,6 +90,7 @@
                           <label>Password</label>
                           {{ form.password }}
                         </div>
+                        <input id="cBox" type="checkbox" onclick="myFunction()"> Show Password
                       </div>
 
                     </div>
@@ -111,4 +112,15 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script>
+  function myFunction() {
+    var x = document.getElementById("pw");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+  </script>
+{% endblock javascripts %}
