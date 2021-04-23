@@ -1,3 +1,6 @@
+import java.sql.Timestamp;
+import java.util.Date;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,8 +32,10 @@ public class sendBroadcast {
 		Thread.sleep(1000);
 
 		// Send broadcast message
+		Date date = new Date();
+		Timestamp timestamp = new Timestamp(date.getTime());
 		WebElement compName = driver.findElement(By.name("content"));
-		compName.sendKeys("Annual spring cleaning in two weeks");
+		compName.sendKeys("Broadcast selenium test at " + timestamp);
 		Thread.sleep(1000);
 		driver.findElement(By.name("content")).submit();
 		driver.get("http://13.250.116.16:8000/logout");
