@@ -236,7 +236,6 @@ def managenoncompliance(request):
     return render(request,'managenoncompliance.html')
 
 @login_required(login_url="/login/")
-@allowed_user(allowed_roles=['auditor'])
 def auditInfo(request):
 
     if(request.method=='POST'):
