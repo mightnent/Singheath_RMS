@@ -259,6 +259,7 @@ def export_checklist(request):
     #insert export function here
     current_user = request.user
     for index in checkbox_result:
+        print("exporting email")
         EmailHandler.checklist_export(current_user.username, current_user.email, index)
 
     context = {}

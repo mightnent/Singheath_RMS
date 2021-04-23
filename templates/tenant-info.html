@@ -87,7 +87,7 @@
             </div>
           </div>
         </div>
-        <button class="exportBtn">Export</button>
+        <button id="b2" class="exportBtn">Export</button>
       </div>
     </div>
 
@@ -141,21 +141,22 @@
         }
     });
     const btn = document.querySelector('#b2');
-    btn.addEventListener('click', (event) => {
-        //alert("AJAX Sent");
+    btn.onclick = function() {
+        alert("Exporting Checklists. Please Check your email");
         var checklists = [];
         $("input[name='export_id[]']").each(function (){
           if($(this).is(':checked')){
             checklists.push($(this).val());
           }
         })
-        //alert(checklists);
+        
         $.ajax({
           type: "POST",
           url: "{% url 'export_checklist' %}",
           data: {'checklists': checklists}
         })
-    });
+        
+    };
 
 
   </script>
