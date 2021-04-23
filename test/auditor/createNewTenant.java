@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class createNewTenant {
 	final static String admin_password = "password1.1";
+	static String admin_user = "admin";
 	static String auditor_user = "testAuditor1";
 
 	public static void main(String[] args) throws InterruptedException {
@@ -48,8 +49,23 @@ public class createNewTenant {
 		WebElement leaseDate = driver.findElement(By.name("lease_end_date"));
 		leaseDate.sendKeys("02062024");
 		Thread.sleep(500);
-//        WebElement create_button = driver.findElement(By.cssSelector("button[id='b1']"));
-//        create_button.click();
+        WebElement create_button = driver.findElement(By.cssSelector("button[id='b1']"));
+        create_button.click();
 		driver.findElement(By.name("lease_end_date")).submit();
+		
+		driver.get("http://13.250.116.16:8000/admin");
+		
+		WebElement username2 = driver.findElement(By.name("username"));
+		WebElement password2 = driver.findElement(By.name("password"));
+		WebElement submit_button2 = driver.findElement(By.xpath("//input[@type='submit' and @value='Log in']"));
+		
+		username2.sendKeys(admin_user);
+		password2.sendKeys(admin_password);
+		submit_button2.click();
+		Thread.sleep(500);
+		
+		driver.findElement(By.linkText("Tenants")).click();
+		Thread.sleep(500);
+		driver.findElement(By.linkText("GongCha")).click();
 	}
 }
