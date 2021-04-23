@@ -94,3 +94,52 @@ You can login with tester:password1.1
 6. Created model for tenant, checklistinstance
 7. Migrated to psql
 8. Hosted on AWS
+
+## Changelog for 30 Mar 2021
+1. Added notification app into project
+
+## Changelog for 07 Apr 2021
+1. Fished up on checklist implementation
+2. Explored on how to use the graph in demo js
+3. Merged email handler branch. Can now send email to notify on lease end dates
+
+## Changelog for 08 Apr 2021
+1. Merged PR on tenant page html and associated backend code
+2. Updated views in the app directory
+
+## Changelog for 09 Apr 2021
+1. More fixes on email handler
+2. Some minor fixes in checklist models
+3. Created a new model to keep track of scores
+
+## Changelog for 15 Apr 2021
+1. Made some backend code associated with the scoretable
+
+## Changelog for 16 Apr 2021
+1. Added a way to confirm if checklist is done
+2. Made backend to calculate overall institution scores based on individual months
+3. Passed the above data into front end for the graphs to render. 
+
+## Changelog for 17 Apr 2021
+1. Restrict auditors to view only institution data based on his/her assigned security group
+2. Add in tracking for non-compliance
+
+## Changelog for 19 Apr 2021
+1. Done up the search for tenant feature
+2. Did up front end and backend for non-compliance
+3. Did up appeal system and rectification system
+
+## Changelog for 21 Apr 2021
+1. Bug fixes on appeal and rectification system, rendering better on front end
+2. Added preview javascript so uploaded photos can be viewed in real time
+
+## Changelog for 22 Apr 2021
+1. Refined the done button when checklist finishes
+2. Added in email handler functions to send email after finishing a checklist audit
+3. Will now auto send email to notify of rectication date
+4. Various css changes
+
+## Changelog for 23 Apr 2021
+1. Various bug fixes
+2. Deploy final version to AWS
+3. We done!!!
