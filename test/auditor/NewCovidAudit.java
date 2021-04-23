@@ -42,8 +42,6 @@ public class NewCovidAudit {
 		// Q1 - pass
         WebElement pass_button1 = driver.findElement(By.cssSelector("button[value='PASS']"));
         pass_button1.click();
-//		WebElement nextButton = driver.findElement(By.className("next"));
-//		driver.navigate().to(nextButton.getAttribute("href"));
 		Thread.sleep(1000);
 		
 		//Q2 -pass
@@ -67,6 +65,14 @@ public class NewCovidAudit {
         pass_button4.click();
 		Thread.sleep(1000);
 
+		// Test previous and next button
+        WebElement previousButton = driver.findElement(By.className("previous"));
+        driver.navigate().to(previousButton.getAttribute("href"));
+        Thread.sleep(1000);
+        WebElement nextButton = driver.findElement(By.className("next"));
+        driver.navigate().to(nextButton.getAttribute("href"));
+        Thread.sleep(1000);
+        
 		// Q5 - NA
 		WebElement comment5 = driver.findElement(By.name("comment"));
 		comment5.sendKeys("N.A");
@@ -82,13 +88,6 @@ public class NewCovidAudit {
         pass_button6.click();
 		Thread.sleep(1000);
 
-		// Test previous and next button
-//        WebElement previousButton = driver.findElement(By.className("previous"));
-//        driver.navigate().to(previousButton.getAttribute("href"));
-//        Thread.sleep(1000);
-//        WebElement nextButton = driver.findElement(By.className("next"));
-//        driver.navigate().to(nextButton.getAttribute("href"));
-//        Thread.sleep(1000);
 		WebElement doneButton = driver.findElement(By.className("done"));
 		driver.navigate().to(doneButton.getAttribute("href"));
 	}

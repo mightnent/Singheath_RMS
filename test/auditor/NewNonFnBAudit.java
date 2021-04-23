@@ -68,6 +68,14 @@ public class NewNonFnBAudit {
 		pass_button4.click();
 		Thread.sleep(1000);
 		
+		// Test previous and next button
+		WebElement previousButton = driver.findElement(By.className("previous"));
+		driver.navigate().to(previousButton.getAttribute("href"));
+		Thread.sleep(1000);
+		WebElement nextButton = driver.findElement(By.className("next"));
+		driver.navigate().to(nextButton.getAttribute("href"));
+		Thread.sleep(1000);
+		
 		// Q5 - pass
 		WebElement pass_button5 = driver.findElement(By.cssSelector("button[value='PASS']"));
 		pass_button5.click();
