@@ -131,17 +131,26 @@
                       {{ stb.score|div:stb.total|mul:100|floatformat:0 }}
                     </td>
                     {% comment %} Status {% endcomment %}
-                    <td class="text-center">
-                        {% if stb.non_compliance %}
-                            <span style="color:red;">
-                            Needs Rectification
-                            </span>
-                        {% else %}
+                    <form method = "POST" action="{%url 'auditInfo'%}">
+                      {% csrf_token %} 
+                      <input type="hidden" name="tenant" value = "{{stb.tenant}}"/>
+                      <input type="hidden" name="id" value = "{{stb.checklist_id}}"/>
+                      <input type="hidden" name="ck_type" value = "{{stb.checklist_type}}"/>
+                        {% comment %} Status {% endcomment %}
+                        <td class="text-center">
+                          <button class="Btn" type="submit" id='b1'>
+                            {% if stb.non_compliance %}
+                                <span style="color:red;">
+                                Needs Rectification
+                                </span>
+                            {% else %}
                             <span style="color:green;">
-                            Complete
-                            </span>
-                        {% endif %}
-                    </td>
+                              Complete
+                              </span>
+                            {% endif %}
+                          </button>
+                        </td>
+                      </form>
                     
                     
                   </tr>
