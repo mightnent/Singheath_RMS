@@ -268,7 +268,11 @@ def export_checklist(request):
 
 
 def notifications(request):
-    return {'notifications': Notification.objects.all()}
+    tenant = request.user.username
+    notifications = Notification.objects.filter(tenant__in=[tenant,"0"]).order_by('-id')
+    for n in notifications:
+        print(n.content)
+    return {'notifications': notifications}
 
 def appealNotif(request):
     appealTable = AppealAlert.objects.all()
