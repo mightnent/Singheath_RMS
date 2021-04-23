@@ -10,10 +10,11 @@ from audit.models import *
 import checklist.views as checkListViews
 from django.urls import reverse
 from urllib.parse import urlencode
-from django.db.models import Avg, Max, Min
+from django.db.models import Avg, Max, Min, Sum
 from .forms import NotificationForm
 from .models import *
 from datetime import datetime
+
 
 # Create your views here.
 @login_required(login_url="/login/")
@@ -114,23 +115,31 @@ def rectificationReply(request):
         data = request.POST
         row_id = data['row_id']
         rectificationAlert = RectificationAlert.objects.get(row_id=row_id)
-        checklistInstance = ChecklistInstance.objects.get(id=row_id)
+        checklistInstanceRow = ChecklistInstance.objects.get(id=row_id)
+        checklistInstance = ChecklistInstance.objects.filter(checklist_id = checklistInstanceRow.checklist_id)
+        scoreTableRow = ScoreTable.objects.get(checklist_id=checklistInstanceRow.checklist_id)
         rectificationTable = RectificationTable.objects.get(row_id=rectificationAlert.row_id)
         RectificationAlert.objects.filter(row_id=row_id).delete()
         if data['submit'] == "rectification-approve":
             content = "Your rectification for issue: " + data['comment']+" has been approved."
-            new_notif = Notification(content = content,tenant=checklistInstance.tenant)
+            new_notif = Notification(content = content,tenant=checklistInstanceRow.tenant)
             new_notif.save()
             rectificationTable.status = 1
-            checklistInstance.rect_status = 1
+            checklistInstanceRow.rect_status = 1
             rectificationTable.save()
-            checklistInstance.save()
+            checklistInstanceRow.save()
+            print(checklistInstance.exclude(date_due__isnull=True).count())
+            print(checklistInstance.aggregate(Sum('rect_status')).get('rect_status__sum'))
+            if checklistInstance.exclude(date_due__isnull=True).count() == checklistInstance.aggregate(Sum('rect_status')).get('rect_status__sum'):
+                print("true")
+                scoreTableRow.non_compliance=False
+                scoreTableRow.save()
         elif data['submit'] == "rectification-reject":
             content = "Your rectification for issue: " + data['comment']+" has been rejected. Please rectify ASAP"
-            new_notif = Notification(content = content,tenant=checklistInstance.tenant)
+            new_notif = Notification(content = content,tenant=checklistInstanceRow.tenant)
             new_notif.save()
             rectificationTable.status = -1
-            checklistInstance.rect_status = -1
+            checklistInstanceRow.rect_status = -1
             rectificationTable.save()
-            checklistInstance.save()
+            checklistInstanceRow.save()
     return redirect('attention')
