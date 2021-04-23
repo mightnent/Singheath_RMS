@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class NewCovidAudit {
+public class NewNonFnBAudit {
 	final static String admin_username = "admin";
 	final static String admin_password = "password1.1";
 	static String auditor_user = "testAuditor1";
@@ -32,7 +32,7 @@ public class NewCovidAudit {
 		Select selTenant = new Select(driver.findElement(By.className("tenants")));
 		selTenant.selectByIndex(1);
 		Select selChecklist = new Select(driver.findElement(By.name("checklist")));
-		selChecklist.selectByIndex(3);
+		selChecklist.selectByIndex(2);
 		Thread.sleep(1000);
 		WebElement create_button = driver.findElement(By.cssSelector("button[id='b1']"));
 		create_button.click();
@@ -43,52 +43,67 @@ public class NewCovidAudit {
         WebElement pass_button1 = driver.findElement(By.cssSelector("button[value='PASS']"));
         pass_button1.click();
 		Thread.sleep(1000);
-		
-		//Q2 -pass
-		WebElement pass_button2 = driver.findElement(By.cssSelector("button[value='PASS']"));
+
+		// Q2 - fail
+		WebElement comment2 = driver.findElement(By.name("comment"));
+		comment2.sendKeys("bad");
+		Thread.sleep(1000);
+        WebElement pass_button2 = driver.findElement(By.cssSelector("button[value='FAIL']"));
         pass_button2.click();
 		Thread.sleep(1000);
 		
-		//Q3 -pass
-		WebElement pass_button3 = driver.findElement(By.cssSelector("button[value='PASS']"));
-        pass_button3.click();
+		// Q3 - NA
+		WebElement comment3 = driver.findElement(By.name("comment"));
+		comment3.sendKeys("N.A");
 		Thread.sleep(1000);
-
+		WebElement pass_button3 = driver.findElement(By.cssSelector("button[value='NA']"));
+		pass_button3.click();
+		Thread.sleep(1000);
+		
 		// Q4 - fail
 		WebElement comment4 = driver.findElement(By.name("comment"));
 		comment4.sendKeys("bad");
 		Thread.sleep(1000);
-		WebElement dueDate4 = driver.findElement(By.name("date_due"));
-		dueDate4.sendKeys("15052021");
+		WebElement pass_button4 = driver.findElement(By.cssSelector("button[value='FAIL']"));
+		pass_button4.click();
 		Thread.sleep(1000);
-        WebElement pass_button4 = driver.findElement(By.cssSelector("button[value='FAIL']"));
-        pass_button4.click();
-		Thread.sleep(1000);
-
+		
 		// Test previous and next button
-        WebElement previousButton = driver.findElement(By.className("previous"));
-        driver.navigate().to(previousButton.getAttribute("href"));
-        Thread.sleep(1000);
-        WebElement nextButton = driver.findElement(By.className("next"));
-        driver.navigate().to(nextButton.getAttribute("href"));
-        Thread.sleep(1000);
-        
-		// Q5 - NA
-		WebElement comment5 = driver.findElement(By.name("comment"));
-		comment5.sendKeys("N.A");
+		WebElement previousButton = driver.findElement(By.className("previous"));
+		driver.navigate().to(previousButton.getAttribute("href"));
 		Thread.sleep(1000);
-        WebElement pass_button5 = driver.findElement(By.cssSelector("button[value='NA']"));
-        pass_button5.click();
+		WebElement nextButton = driver.findElement(By.className("next"));
+		driver.navigate().to(nextButton.getAttribute("href"));
 		Thread.sleep(1000);
-
-		// Q6 -PASS
-		WebElement comment6 = driver.findElement(By.name("comment"));
-		comment6.sendKeys("Excellent");
+		
+		// Q5 - pass
+		WebElement pass_button5 = driver.findElement(By.cssSelector("button[value='PASS']"));
+		pass_button5.click();
+		Thread.sleep(1000);
+		
+		// Q6 - pass
 		WebElement pass_button6 = driver.findElement(By.cssSelector("button[value='PASS']"));
-        pass_button6.click();
+		pass_button6.click();
+		Thread.sleep(1000);
+		
+		// Q7 - fail
+		WebElement comment7 = driver.findElement(By.name("comment"));
+		comment7.sendKeys("bad");
+		Thread.sleep(1000);
+		WebElement dueDate7 = driver.findElement(By.name("date_due"));
+		dueDate7.sendKeys("06052021");
+		Thread.sleep(1000);
+		WebElement pass_button7 = driver.findElement(By.cssSelector("button[value='FAIL']"));
+		pass_button7.click();
+		Thread.sleep(1000);
+		
+		// Q8 - pass
+		WebElement pass_button8 = driver.findElement(By.cssSelector("button[value='PASS']"));
+		pass_button8.click();
 		Thread.sleep(1000);
 
 		WebElement doneButton = driver.findElement(By.className("done"));
 		driver.navigate().to(doneButton.getAttribute("href"));
 	}
+
 }
