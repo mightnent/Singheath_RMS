@@ -13,8 +13,8 @@ public class NewFnBAudit {
 
 		System.setProperty("webdriver.chrome.driver", "D:/Joon Kang/chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
-		driver.get("http://localhost:8000/");
-//		driver.get("http://13.250.116.16:8000/");
+//		driver.get("http://localhost:8000/");
+		driver.get("http://13.250.116.16:8000/");
 
 		WebElement username = driver.findElement(By.name("username"));
 		WebElement password = driver.findElement(By.name("password"));
@@ -24,8 +24,8 @@ public class NewFnBAudit {
 		password.sendKeys(admin_password);
 		submit_button.click();
 
-		driver.get("http://localhost:8000/new-audit");
-//		driver.get("http://13.250.116.16:8000/new-audit");
+//		driver.get("http://localhost:8000/new-audit");
+		driver.get("http://13.250.116.16:8000/new-audit");
 		Thread.sleep(1000);
 
 		// Create new checklist
@@ -106,14 +106,6 @@ public class NewFnBAudit {
 		Thread.sleep(1000);
 		
 		
-
-//		// Test previous and next button
-//		WebElement previousButton = driver.findElement(By.className("previous"));
-//		driver.navigate().to(previousButton.getAttribute("href"));
-//		Thread.sleep(1000);
-//		WebElement nextButton = driver.findElement(By.className("next"));
-//		driver.navigate().to(nextButton.getAttribute("href"));
-//		Thread.sleep(1000);
 		WebElement doneButton = driver.findElement(By.className("done"));
 		driver.navigate().to(doneButton.getAttribute("href"));
 	}

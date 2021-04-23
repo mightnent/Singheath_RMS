@@ -4,7 +4,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import string
 import time
-from selenium.webdriver.support.wait import WebDriverWait
 
 alphabet_lower = string.ascii_lowercase
 alphabet_upper = string.ascii_uppercase
