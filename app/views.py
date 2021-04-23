@@ -243,17 +243,15 @@ def auditInfo(request):
         tenant = request.POST['tenant']
         this_id = request.POST['id']
         this_type = request.POST['ck_type']
-    print(this_type)
-    #filter out all the records that's completed for the tenant
-    scoreTable = ScoreTable.objects.filter(tenant=tenant).filter(num_visited=F('page_num')).filter(checklist_id = this_id)
-    checklistTable = ChecklistInstance.objects.filter(checklist_id=this_id).filter(score =- -1)
+        scoreTable = ScoreTable.objects.filter(tenant=tenant).filter(num_visited=F('page_num')).filter(checklist_id = this_id)
+        checklistTable = ChecklistInstance.objects.filter(checklist_id=this_id).exclude(score = -1)
 
-    context = {
-        'scoreTable':scoreTable,
-        'checklistTable':checklistTable,
-        'type':this_type
-    }
-    return render(request,'audit-info.html',context)
+        context = {
+            'scoreTable':scoreTable,
+            'checklistTable':checklistTable,
+            'type':this_type
+        }
+        return render(request,'audit-info.html',context)
 
 @allowed_user(allowed_roles=['auditor'])
 def export_checklist(request):
